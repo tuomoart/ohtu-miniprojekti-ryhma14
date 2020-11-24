@@ -5,6 +5,7 @@ Pakkauksia voisi ohjelmassa olla
    - "cli", komentorivikäyttöliittymälle alipakkaus, jos tarvitsee useampia luokkia
  - "domain", eli toimintalogiikka
  - "dao", eli tallennuksen koodi
+
 seuraavasti:
 
 ![pakkauskaavio](https://raw.githubusercontent.com/tuomoart/ohtu-miniprojekti-ryhma14/main/dokumentaatio/misc/pakkauskaavio-sprintti1.jpg)
@@ -19,6 +20,6 @@ Luokka Lukuvinkkikirjasto, joka on päävastuussa toimintalogiikan tuottamisesta
 
 ### dao - Tallennus
 
-Kannattanee tehdä dao-tyylin mukaisesti rajapinta vinkkien tallennukseen. Tämä tarvinnee tässä vaiheessa metodin lisaa(Kirja) tai lisaa(Vinkki), jonka avulla uusi vinkki lisätään tietokantaan. 
+Kannattanee tehdä dao-tyylin mukaisesti rajapinta vinkkien tallennukseen. Tämä tarvinnee tässä vaiheessa metodin lisaa(Kirja) tai lisaa(Vinkki), jonka avulla uusi vinkki lisätään tietokantaan.
 
 Jos tehdään pysyväistallennus tietokantaan, niin ehdotamme SQLiteä, sillä tämä on entuudestaan tuttu. Siihen pitää rajapinnan toteuttamisen lisäksi luoda ainakin toiminnot taulujen luontiin ja varmaan myös poistamiseen.
