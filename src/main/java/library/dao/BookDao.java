@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package library.dao;
 
 import java.sql.SQLException;
-import domain.Book;
+import library.domain.Book;
 import java.util.List;
 
 /**

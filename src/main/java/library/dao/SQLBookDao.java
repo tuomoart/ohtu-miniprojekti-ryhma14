@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
-import domain.Book;
+package library.dao;
+import library.domain.Book;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,9 +56,8 @@ public class SQLBookDao implements BookDao {
             Book book = new Book(title, author, year, pages, isbn);
             books.add(book);
         }
-        
+        connection.close();
         return books;
-
     }
     
 }
