@@ -5,10 +5,65 @@
  */
 package ui.cli;
 
+import java.util.Scanner;
+
 /**
  *
  * @author hiira
  */
 public class Cli {
+    private Scanner scanner = new Scanner(System.in);
+    
+    public void start() {
+        System.out.println("");
+        System.out.println("Tervetuloa lukuvinkkikirjastoon!");
+        
+        while (true) {
+            System.out.println("");
+            System.out.println("Toiminnot:");
+            System.out.println("");
+            System.out.println("1 - lisää uusi lukuvinkki");
+            System.out.println("2 - listaa kaikki lukuvinkit");
+            System.out.println("-1 - poistu");
+            System.out.println("");
+            
+            System.out.println("Valitse komento (1,2,-1): ");
+            
+            // read user input
+            String input = scanner.nextLine();
+            System.out.println("");
+            
+            if (Integer.valueOf(input) == -1) {
+                //CASE -1: stop the program
+                break;
+                
+            } else if (Integer.valueOf(input) == 1) { 
+                //CASE 1: "Lisää uusi lukuvinkki"
+                System.out.println("Valitse lisättävä vinkkityyppi (1-?):");
+                System.out.println("1 - Kirja");
+                System.out.println("");
+                
+                //read user input
+                int typeOfTip = Integer.valueOf(scanner.nextLine());
+                
+                addTip(typeOfTip);
+                
+            } else if (Integer.valueOf(input) == 2) {
+                //CASE 2: "Listaa kaikki lukuvinkit"
+                //sovelluslogiikan tulosta lukuvinkit -metodi
+                
+            } else {
+                System.out.println("Tuntematon komento.");
+                System.out.println("");
+            }
+        }
+        
+    }
+    
+    public void addTip(int typeOfTip) {
+        if (typeOfTip == 1) {
+            //sovelluslogiikan lisääKirja-metodikutsu
+        }
+    }
     
 }
