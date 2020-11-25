@@ -13,7 +13,7 @@ import library.ui.cli.*;
  */
 public class Main {
     public static void main(String[] args) {
-        Cli cli = new Cli();
+        Cli cli = new RealCli();
         cli.start();
     }
     

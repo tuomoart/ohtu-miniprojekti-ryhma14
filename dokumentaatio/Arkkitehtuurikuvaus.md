@@ -2,7 +2,7 @@ Ehdotamme arkkitehtuurityyliksi kerrosarkkitehtuuria, sillä se lienee useimmill
 
 Pakkauksia voisi ohjelmassa olla
  - "ui", eli käyttöliittymäkoodit
-   - "cli", komentorivikäyttöliittymälle alipakkaus, jos tarvitsee useampia luokkia
+   - "realCli", komentorivikäyttöliittymälle alipakkaus, jos tarvitsee useampia luokkia
  - "domain", eli toimintalogiikka
  - "dao", eli tallennuksen koodi
 
