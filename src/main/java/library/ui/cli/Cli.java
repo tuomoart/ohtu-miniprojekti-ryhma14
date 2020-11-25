@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.cli;
+package library.ui.cli;
 
 import java.util.Scanner;
 import domain.*;
@@ -64,6 +64,7 @@ public class Cli {
     public void addBook(int typeOfTip) {
         if (typeOfTip == 1) {
             // BOOK
+            System.out.println("");
             System.out.println("Anna kirjan tiedot (jos jokin ominaisuus ei ole tiedossa, paina enteriä sen kodalla):");
             System.out.println("");
             
