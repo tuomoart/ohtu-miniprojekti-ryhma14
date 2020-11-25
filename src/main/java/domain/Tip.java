@@ -9,6 +9,20 @@ package domain;
  *
  * @author hiira
  */
-public interface Tip {
+public class Tip {
+    private String title;
+    
+    public Tip(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
     
 }
