@@ -6,3 +6,6 @@ build
 
 # Ignore IntelliJ Idea resources
 .idea
+
+# Ignore database file
+databse.db
