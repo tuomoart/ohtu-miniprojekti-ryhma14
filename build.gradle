@@ -21,7 +21,7 @@ dependencies {
 }
 
 application {
-    mainClass = 'Main'
+    mainClass = 'library.Main'
 }
 
 run {
