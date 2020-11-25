@@ -12,9 +12,10 @@ import java.sql.*;
  */
 public class Database {
     
-    private String databaseAddress = "jdbc:sqlite:database.db";
+    private String databaseAddress;
     
-    public Database() throws SQLException {
+    public Database(String address) throws SQLException {
+        this.databaseAddress = address;
         Connection connection = DriverManager.getConnection(databaseAddress);
         Statement statement = connection.createStatement();
         statement.execute("CREATE TABLE IF NOT EXISTS Books(title VARCHAR, author VARCHAR, year VARCHAR, pages VARCHAR, isbn VARCHAR);");
