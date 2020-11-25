@@ -24,25 +24,26 @@ public class Logic {
         }
     }
     
-    public void addBook(String title, String author, int year, int pages,
+    public boolean addBook(String title, String author, int year, int pages,
             String ISBN) {
         try {
             Book book = new Book(title, author, year, pages, ISBN);
             dao.create(book);
+            return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return false;
         }
     }
     
-    public void printBooks() {
+    public List<Book> getBooks() {
         try {
             List<Book> books = dao.getBooks();
-            
-            for (Book book : books) {
-                System.out.println(book.toString());
-            }
+            return books;
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            List<Book> books = new ArrayList<>();
+            return books;
         }
     }
 }
