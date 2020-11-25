@@ -22,7 +22,7 @@ public class Cli {
         
         while (true) {
             System.out.println("");
-            System.out.println("Toiminnot:");
+            System.out.println("Toiminnot:");            
             System.out.println("");
             System.out.println("1 - lisää uusi lukuvinkki");
             System.out.println("2 - listaa kaikki lukuvinkit");
@@ -45,10 +45,9 @@ public class Cli {
                 System.out.println("1 - Kirja");
                 System.out.println("");
                 
-                //read user input
+                //read user input and add tip
                 int typeOfTip = Integer.valueOf(scanner.nextLine());
-                
-                addBook(typeOfTip);
+                addTip(typeOfTip);
                 
             } else if (Integer.valueOf(input) == 2) {
                 //CASE 2: "Listaa kaikki lukuvinkit"
@@ -62,10 +61,15 @@ public class Cli {
         
     }
     
-    public void addBook(int typeOfTip) {
+    public void addTip(int typeOfTip) {
         if (typeOfTip == 1) {
             // BOOK
-            System.out.println("");
+            addBook();
+        }  
+    }
+    
+    public void addBook() {
+        System.out.println("");
             System.out.println("Anna kirjan tiedot (jos jokin ominaisuus ei ole tiedossa, paina enteriä sen kodalla):");
             System.out.println("");
             
@@ -89,10 +93,6 @@ public class Cli {
             String message = logic.addBook(nameOfBook, author, year, pages, isbn);
             
             System.out.println("\n" + message);
-            
-        }
-        
-        
     }
     
     public void printBooks() {
