@@ -31,8 +31,9 @@ public class SQLBookDao implements BookDao {
             ps.setString(2, book.getAuthor());
             ps.setString(3, book.getYear());
             ps.setString(4, book.getPages());
-            ps.setString(5, book.getISBN());
-            
+            ps.setString(5, book.getISBN());      
+            ps.executeUpdate();
+            connection.close();
         } catch (SQLException e) {
             return false;
         }
