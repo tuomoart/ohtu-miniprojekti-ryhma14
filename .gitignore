@@ -8,4 +8,4 @@ build
 .idea
 
 # Ignore database file
-databse.db
+database.db
