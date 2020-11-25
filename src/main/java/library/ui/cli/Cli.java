@@ -6,7 +6,7 @@
 package library.ui.cli;
 
 import java.util.Scanner;
-import domain.*;
+import library.domain.*;
 /**
  *
  * @author hiira
