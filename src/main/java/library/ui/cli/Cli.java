@@ -21,19 +21,7 @@ public class Cli {
         System.out.println("Tervetuloa lukuvinkkikirjastoon!");
         
         while (true) {
-            System.out.println("");
-            System.out.println("Toiminnot:");            
-            System.out.println("");
-            System.out.println("1 - lisää uusi lukuvinkki");
-            System.out.println("2 - listaa kaikki lukuvinkit");
-            System.out.println("-1 - poistu");
-            System.out.println("");
-            
-            System.out.println("Valitse komento (1,2,-1): ");
-            
-            // read user input
-            String input = scanner.nextLine();
-            System.out.println("");
+            String input = readCommand();
             
             if (input.equals("-1")) {
                 //CASE -1: stop the program
@@ -41,12 +29,9 @@ public class Cli {
                 
             } else if (input.equals("1")) { 
                 //CASE 1: "Lisää uusi lukuvinkki"
-                System.out.println("Valitse lisättävä vinkkityyppi (1-?):");
-                System.out.println("1 - Kirja");
-                System.out.println("");
                 
                 //read user input and add tip
-                int typeOfTip = Integer.valueOf(scanner.nextLine());
+                int typeOfTip = readTypeOfTip();
                 addTip(typeOfTip);
                 
             } else if (input.equals("2")) {
@@ -58,7 +43,31 @@ public class Cli {
                 System.out.println("");
             }
         }
-        
+    }
+
+    public String readCommand() {
+        printCommands();
+        String input = scanner.nextLine();
+        System.out.println("");
+        return input;
+    }
+
+    public void printCommands() {
+        System.out.println("\n"+"Toiminnot:"+"\n");
+        System.out.println(" 1 - lisää uusi lukuvinkki");
+        System.out.println(" 2 - listaa kaikki lukuvinkit");
+        System.out.println("-1 - poistu"+"\n");
+        System.out.println("Valitse komento (1,2,-1):");
+    }
+
+    public int readTypeOfTip() {
+        printTypesOfTip();
+        return Integer.valueOf(scanner.nextLine());
+    }
+
+    public void printTypesOfTip() {
+        System.out.println("Valitse lisättävä vinkkityyppi (1-?):");
+        System.out.println("1 - Kirja"+"\n");
     }
     
     public void addTip(int typeOfTip) {
