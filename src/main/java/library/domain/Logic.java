@@ -17,7 +17,7 @@ public class Logic {
     
     public Logic() {
         try {
-            database = new Database();
+            database = new Database("jdbc:sqlite:database.db");
             dao = new SQLBookDao(database);
         } catch (Exception e) {
             System.out.println(e.getMessage());

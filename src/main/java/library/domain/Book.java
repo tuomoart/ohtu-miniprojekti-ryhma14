@@ -57,11 +57,11 @@ public class Book extends Tip {
     
     @Override
     public String toString() {
-        String result = "Otsikko:" + super.getTitle() + "\n";
+        String result = "Otsikko: " + super.getTitle() + "\n";
         result += "Kirjailija: " + author + "\n";
         result += "Julkaisuvuosi: " + year + "\n";
         result += "Sivuja: " + pages + "\n";
-        result += "ISBN: " + pages;
+        result += "ISBN: " + ISBN;
         
         return result;
     }

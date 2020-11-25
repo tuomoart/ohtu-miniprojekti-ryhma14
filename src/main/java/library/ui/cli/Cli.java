@@ -70,7 +70,7 @@ public class Cli {
     
     public void addBook() {
         System.out.println("");
-            System.out.println("Anna kirjan tiedot (jos jokin ominaisuus ei ole tiedossa, paina enteriä sen kodalla):");
+            System.out.println("Anna kirjan tiedot (jos jokin ominaisuus ei ole tiedossa, paina enteriä sen kohdalla):");
             System.out.println("");
             
             System.out.println("Anna nimeke: ");
@@ -100,6 +100,7 @@ public class Cli {
         
         for (Book book : books) {
             System.out.println(book);
+            System.out.println("");
         }
     }
     
