@@ -78,30 +78,26 @@ public class Cli {
     }
     
     public void addBook() {
-        System.out.println("");
-            System.out.println("Anna kirjan tiedot (jos jokin ominaisuus ei ole tiedossa, paina enteriä sen kohdalla):");
-            System.out.println("");
+        System.out.println("\n"+"Anna kirjan tiedot (jos jokin ominaisuus ei ole tiedossa, paina enteriä sen kohdalla):"+"\n");
+
+        System.out.println("Anna nimeke:");
+        String nameOfBook = scanner.nextLine();
             
-            System.out.println("Anna nimeke: ");
-            String nameOfBook = scanner.nextLine();
+        System.out.println("Anna kirjailija:");
+        String author = scanner.nextLine();
+
+        System.out.println("Anna kirjan julkaisuvuosi:");
+        String year = scanner.nextLine();
             
-            System.out.println("Anna kirjailija: ");
-            String author = scanner.nextLine();
+        System.out.println("Anna kirjan sivumäärä:");
+        String pages = scanner.nextLine();
             
-            System.out.println("Anna kirjan julkaisuvuosi: ");
-            String year = scanner.nextLine();
-            
-            System.out.println("Anna kirjan sivumäärä: ");
-            String pages = scanner.nextLine();
-            
-            System.out.println("Anna ISBN-tunniste: ");
-            String isbn = scanner.nextLine();
-            
-            
-            //add book
-            String message = logic.addBook(nameOfBook, author, year, pages, isbn);
-            
-            System.out.println("\n" + message);
+        System.out.println("Anna ISBN-tunniste:");
+        String isbn = scanner.nextLine();
+        
+        //add book
+        String message = logic.addBook(nameOfBook, author, year, pages, isbn);
+        System.out.println("\n" + message);
     }
     
     public void printBooks() {
