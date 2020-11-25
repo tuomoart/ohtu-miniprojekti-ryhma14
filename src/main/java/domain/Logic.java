@@ -24,7 +24,7 @@ public class Logic {
         }
     }
     
-    public String addBook(String title, String author, int year, int pages,
+    public String addBook(String title, String author, String year, String pages,
             String ISBN) {
         try {
             Book book = new Book(title, author, year, pages, ISBN);
