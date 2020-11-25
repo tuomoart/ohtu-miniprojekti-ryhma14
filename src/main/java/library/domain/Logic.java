@@ -5,7 +5,7 @@
  */
 package library.domain;
 
-import dao.*;
+import library.dao.*;
 import java.util.*;
 /**
  *
