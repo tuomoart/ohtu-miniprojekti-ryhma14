@@ -1,4 +1,4 @@
-package ohtu;
+package library;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
