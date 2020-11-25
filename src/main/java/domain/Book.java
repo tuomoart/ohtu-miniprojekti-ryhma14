@@ -11,11 +11,11 @@ package domain;
  */
 public class Book extends Tip {
     private String author;
-    private int year;
-    private int pages;
+    private String year;
+    private String pages;
     private String ISBN;
     
-    public Book(String title, String author, int year, int pages, String ISBN) {
+    public Book(String title, String author, String year, String pages, String ISBN) {
         super(title);
         this.author = author;
         this.year = year;
@@ -27,11 +27,11 @@ public class Book extends Tip {
         return author;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public int getPages() {
+    public String getPages() {
         return pages;
     }
 
@@ -43,11 +43,11 @@ public class Book extends Tip {
         this.author = author;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
-    public void setPages(int pages) {
+    public void setPages(String pages) {
         this.pages = pages;
     }
 
