@@ -29,8 +29,8 @@ public class SQLBookDao implements BookDao {
                      "VALUES (?, ?, ?, ?, ?");
             ps.setString(1, book.getTitle());
             ps.setString(2, book.getAuthor());
-            ps.setInt(3, book.getYear());
-            ps.setInt(4, book.getPages());
+            ps.setString(3, book.getYear());
+            ps.setString(4, book.getPages());
             ps.setString(5, book.getISBN());
             
         } catch (SQLException e) {
@@ -49,8 +49,8 @@ public class SQLBookDao implements BookDao {
         while (results.next()) {
             String title = results.getString("title");
             String author = results.getString("author");
-            int year = results.getInt("year");
-            int pages = results.getInt("pages");
+            String year = results.getString("year");
+            String pages = results.getString("pages");
             String isbn = results.getString("isbn");
             
             Book book = new Book(title, author, year, pages, isbn);
