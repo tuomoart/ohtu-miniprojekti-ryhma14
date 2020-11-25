@@ -5,6 +5,7 @@
  */
 package library.ui.cli;
 
+import java.util.List;
 import java.util.Scanner;
 import library.domain.*;
 /**
@@ -51,7 +52,7 @@ public class Cli {
                 
             } else if (Integer.valueOf(input) == 2) {
                 //CASE 2: "Listaa kaikki lukuvinkit"
-                //sovelluslogiikan tulosta lukuvinkit -metodi
+                printBooks();
                 
             } else {
                 System.out.println("Tuntematon komento.");
@@ -68,24 +69,37 @@ public class Cli {
             System.out.println("Anna kirjan tiedot (jos jokin ominaisuus ei ole tiedossa, paina enteriä sen kodalla):");
             System.out.println("");
             
-            System.out.print("Anna nimeke: ");
+            System.out.println("Anna nimeke: ");
             String nameOfBook = scanner.nextLine();
             
-            System.out.print("Anna kirjailija: ");
+            System.out.println("Anna kirjailija: ");
             String author = scanner.nextLine();
             
-            System.out.print("Anna kirjan julkaisuvuosi: ");
+            System.out.println("Anna kirjan julkaisuvuosi: ");
             String year = scanner.nextLine();
             
-            System.out.print("Anna kirjan sivumäärä: ");
+            System.out.println("Anna kirjan sivumäärä: ");
             String pages = scanner.nextLine();
             
-            System.out.print("Anna ISBN-tunniste: ");
+            System.out.println("Anna ISBN-tunniste: ");
             String isbn = scanner.nextLine();
+            
             
             //add book
             String message = logic.addBook(nameOfBook, author, year, pages, isbn);
-            System.out.println(message);
+            
+            System.out.println("\n" + message);
+            
+        }
+        
+        
+    }
+    
+    public void printBooks() {
+        List<Book> books = logic.getBooks();
+        
+        for (Book book : books) {
+            System.out.println(book);
         }
     }
     
