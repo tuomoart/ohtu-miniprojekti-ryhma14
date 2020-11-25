@@ -58,7 +58,7 @@ public class Logic {
     
     public boolean textIsValidInteger(String text) {
         if (text.isBlank()) return true;
-        return text.matches("[0-9 ]+");
+        return text.matches("[0-9]+");
     }
     
     
