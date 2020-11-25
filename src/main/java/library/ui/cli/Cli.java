@@ -35,11 +35,11 @@ public class Cli {
             String input = scanner.nextLine();
             System.out.println("");
             
-            if (Integer.valueOf(input) == -1) {
+            if (input.equals("-1")) {
                 //CASE -1: stop the program
                 break;
                 
-            } else if (Integer.valueOf(input) == 1) { 
+            } else if (input.equals("1")) { 
                 //CASE 1: "Lisää uusi lukuvinkki"
                 System.out.println("Valitse lisättävä vinkkityyppi (1-?):");
                 System.out.println("1 - Kirja");
@@ -49,7 +49,7 @@ public class Cli {
                 int typeOfTip = Integer.valueOf(scanner.nextLine());
                 addTip(typeOfTip);
                 
-            } else if (Integer.valueOf(input) == 2) {
+            } else if (input.equals("2")) {
                 //CASE 2: "Listaa kaikki lukuvinkit"
                 printBooks();
                 
