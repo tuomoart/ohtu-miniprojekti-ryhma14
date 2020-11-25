@@ -6,13 +6,14 @@
 package ui.cli;
 
 import java.util.Scanner;
-
+import domain.*;
 /**
  *
  * @author hiira
  */
 public class Cli {
     private Scanner scanner = new Scanner(System.in);
+    private Logic logic = new Logic();
     
     public void start() {
         System.out.println("");
@@ -62,7 +63,38 @@ public class Cli {
     
     public void addTip(int typeOfTip) {
         if (typeOfTip == 1) {
-            //sovelluslogiikan lisääKirja-metodikutsu
+            // BOOK
+            System.out.println("Anna kirjan tiedot (jos jokin ominaisuus ei ole tiedossa, paina enteriä sen kodalla):");
+            System.out.println("");
+            
+            System.out.print("Anna nimeke: ");
+            String nameOfBook = scanner.nextLine();
+            
+            System.out.print("Anna kirjailija: ");
+            String author = scanner.nextLine();
+            
+            int year;
+            try {
+                System.out.print("Anna kirjan julkaisuvuosi: ");
+                year = Integer.valueOf(scanner.nextLine());
+            } catch (Exception e) {
+                System.out.println("Annettu syöte ei ollut numero.");
+            }
+            
+            int pages;
+            try {
+                System.out.print("Anna kirjan sivumäärä: ");
+                pages = Integer.valueOf(scanner.nextLine());
+            } catch (Exception e) {
+                System.out.println("Annettu syöte ei ollut numero.");
+            }
+            
+            System.out.print("Anna ISBN-tunniste: ");
+            String isbn = scanner.nextLine();
+            
+            //add book
+            String message = logic.addBook(nameOfBook, author, year, pages, isbn);
+            System.out.println(message);
         }
     }
     
