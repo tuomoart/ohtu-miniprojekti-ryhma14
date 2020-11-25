@@ -24,15 +24,14 @@ public class Logic {
         }
     }
     
-    public boolean addBook(String title, String author, int year, int pages,
+    public String addBook(String title, String author, int year, int pages,
             String ISBN) {
         try {
             Book book = new Book(title, author, year, pages, ISBN);
             dao.create(book);
-            return true;
+            return "Kirja lisätty";
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
+            return e.getMessage();
         }
     }
     
