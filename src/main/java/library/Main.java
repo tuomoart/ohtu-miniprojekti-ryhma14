@@ -1,5 +1,5 @@
-
-import ui.cli.Cli;
+package library;
+import library.ui.cli.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
