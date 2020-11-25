@@ -24,5 +24,10 @@ public class Tip {
         this.title = title;
     }
     
-    
+    @Override
+    public String toString() {
+        String result = "Otsikko: " + title + "\n";
+        
+        return result;
+    }
 }
