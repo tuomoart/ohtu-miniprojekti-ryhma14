@@ -26,7 +26,7 @@ public class SQLBookDao implements BookDao {
         try {
             Connection connection = database.getConnection();
             PreparedStatement ps = connection.prepareStatement("INSERT INTO Books(title, author, year, pages, isbn) " +
-                     "VALUES (?, ?, ?, ?, ?");
+                     "VALUES (?, ?, ?, ?, ?)");
             ps.setString(1, book.getTitle());
             ps.setString(2, book.getAuthor());
             ps.setString(3, book.getYear());
