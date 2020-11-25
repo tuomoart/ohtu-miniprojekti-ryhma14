@@ -47,7 +47,7 @@ public class Cli {
                 //read user input
                 int typeOfTip = Integer.valueOf(scanner.nextLine());
                 
-                addTip(typeOfTip);
+                addBook(typeOfTip);
                 
             } else if (Integer.valueOf(input) == 2) {
                 //CASE 2: "Listaa kaikki lukuvinkit"
@@ -61,7 +61,7 @@ public class Cli {
         
     }
     
-    public void addTip(int typeOfTip) {
+    public void addBook(int typeOfTip) {
         if (typeOfTip == 1) {
             // BOOK
             System.out.println("Anna kirjan tiedot (jos jokin ominaisuus ei ole tiedossa, paina enteriä sen kodalla):");
@@ -73,21 +73,11 @@ public class Cli {
             System.out.print("Anna kirjailija: ");
             String author = scanner.nextLine();
             
-            int year;
-            try {
-                System.out.print("Anna kirjan julkaisuvuosi: ");
-                year = Integer.valueOf(scanner.nextLine());
-            } catch (Exception e) {
-                System.out.println("Annettu syöte ei ollut numero.");
-            }
+            System.out.print("Anna kirjan julkaisuvuosi: ");
+            String year = scanner.nextLine();
             
-            int pages;
-            try {
-                System.out.print("Anna kirjan sivumäärä: ");
-                pages = Integer.valueOf(scanner.nextLine());
-            } catch (Exception e) {
-                System.out.println("Annettu syöte ei ollut numero.");
-            }
+            System.out.print("Anna kirjan sivumäärä: ");
+            String pages = scanner.nextLine();
             
             System.out.print("Anna ISBN-tunniste: ");
             String isbn = scanner.nextLine();
