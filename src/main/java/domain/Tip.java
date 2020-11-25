@@ -26,7 +26,7 @@ public class Tip {
     
     @Override
     public String toString() {
-        String result = "Otsikko: " + title + "\n";
+        String result = "Otsikko: " + title;
         
         return result;
     }

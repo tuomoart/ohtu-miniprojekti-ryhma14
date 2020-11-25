@@ -61,7 +61,7 @@ public class Book extends Tip {
         result += "Kirjailija: " + author + "\n";
         result += "Julkaisuvuosi: " + year + "\n";
         result += "Sivuja: " + pages + "\n";
-        result += "ISBN: " + pages + "\n";
+        result += "ISBN: " + pages;
         
         return result;
     }
