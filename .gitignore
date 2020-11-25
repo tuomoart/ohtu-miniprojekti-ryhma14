@@ -9,3 +9,4 @@ build
 
 # Ignore database file
 database.db
+testdatabase.db
