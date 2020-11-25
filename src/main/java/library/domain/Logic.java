@@ -27,12 +27,63 @@ public class Logic {
     public String addBook(String title, String author, String year, String pages,
             String ISBN) {
         try {
+            if (!textIsValidAuthorName(author)) {
+                return "Kirjailijan nimi ei saa sisältää numeroita";
+            }
+            
+            if (!textIsValidInteger(year)) {
+                return "Vääränmallinen vuosiluku";
+            }
+            
+            if (!textIsValidInteger(pages)) {
+                return "Vääränmallinen sivumäärä";
+            }
+            
+            if (!textIsValidISBN(ISBN)) {
+                return "Vääränmallinen ISBN";
+            }
+            
             Book book = new Book(title, author, year, pages, ISBN);
             dao.create(book);
             return "Kirja lisätty";
         } catch (Exception e) {
             return e.getMessage();
         }
+    }
+    
+    public boolean textIsValidAuthorName(String text) {
+        if (text.isBlank()) return true;
+        return text.matches("^[ A-Öa-ö]+$");
+    }
+    
+    public boolean textIsValidInteger(String text) {
+        if (text.isBlank()) return true;
+        return text.matches("[0-9 ]+");
+    }
+    
+    
+    /* metodi testaa seuraavat asiat: teksti koostuu vähintään neljästä 
+    väliviivan erottamasta osasta, kaikki merkit viivoja lukuunottamatta
+    ovat numeroita, viivoja ei ole kahta peräkkäin, numeroita on yhteensä
+    väh. kymmenen.
+    */
+    public boolean textIsValidISBN(String text) {
+        if (text.isBlank()) return true;
+        
+        String[] split = text.split("-");
+        
+        if (split.length < 4) return false;
+        
+        int numOfDigits = 0;
+        for (String s : split) {
+            if (!textIsValidInteger(s)) return false;
+            
+            numOfDigits += s.length();
+        }
+        
+        if (numOfDigits < 10) return false;
+        
+        return true;
     }
     
     public List<Book> getBooks() {
