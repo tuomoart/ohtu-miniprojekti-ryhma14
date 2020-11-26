@@ -5,6 +5,8 @@
  */
 package library.domain;
 
+import java.util.Objects;
+
 /**
  *
  * @author hiira
@@ -65,4 +67,33 @@ public class Book extends Tip {
         
         return result;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Book other = (Book) obj;
+        if (!Objects.equals(this.author, other.author)) {
+            return false;
+        }
+        if (!Objects.equals(this.year, other.year)) {
+            return false;
+        }
+        if (!Objects.equals(this.pages, other.pages)) {
+            return false;
+        }
+        if (!Objects.equals(this.ISBN, other.ISBN)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

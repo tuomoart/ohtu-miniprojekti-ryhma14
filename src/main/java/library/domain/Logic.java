@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class Logic {
     private Database database;
-    private SQLBookDao dao;
+    private BookDao dao;
     
     public Logic() {
         try {
@@ -22,6 +22,10 @@ public class Logic {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    public Logic(BookDao dao) {
+        this.dao = dao;
     }
     
     public String addBook(String title, String author, String year, String pages,
@@ -53,7 +57,7 @@ public class Logic {
     
     private boolean textIsValidAuthorName(String text) {
         if (text.isEmpty()) return true;
-        return text.matches("^[ A-Öa-ö]+$");
+        return text.matches("^[ .A-Öa-ö]+$");
     }
     
     private boolean textIsValidInteger(String text) {

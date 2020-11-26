@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'jacoco'
 }
 
 repositories {
@@ -17,6 +18,7 @@ dependencies {
     testCompile 'io.cucumber:cucumber-java:' + cucumberVersion
     testCompile 'io.cucumber:cucumber-junit:' + cucumberVersion
     testCompile 'junit:junit:' + junitVersion
+    testCompile 'org.mockito:mockito-core:3.1.0'
     compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.32.3.2'
 }
 
@@ -26,4 +28,13 @@ application {
 
 run {
     standardInput = System.in
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'library.Main'
+    }
+    baseName = 'bookmarks'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
