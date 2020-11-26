@@ -3,6 +3,6 @@
 ## Sprint 1
 
 - User Storyn laatuvaatimukset täyttyneet
-- Ohjelmakoodi laadukasta ja tarittaessa refaktoroitu
+- Ohjelmakoodi laadukasta ja tarvittaessa refaktoroitu
 - Koodi pushattu githubiin
 - Riittävästi testejä suoritettu
