@@ -5,3 +5,5 @@
 ## Dokumentaatio
 
 [Arkkitehtuurikuvaus](https://github.com/tuomoart/ohtu-miniprojekti-ryhma14/blob/main/dokumentaatio/Arkkitehtuurikuvaus.md)
+
+[Definition of Done](https://github.com/tuomoart/ohtu-miniprojekti-ryhma14/blob/main/dokumentaatio/dod.md)
