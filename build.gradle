@@ -29,3 +29,12 @@ application {
 run {
     standardInput = System.in
 }
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'library.Main'
+    }
+    baseName = 'bookmarks'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
