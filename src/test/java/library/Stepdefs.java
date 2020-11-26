@@ -101,6 +101,17 @@ public class Stepdefs {
         inputs.add("1");
     }
 
+    @When("name {string} is entered")
+    public void enterName(String name) {
+        inputs.add(name);
+        inputs.add("");
+        inputs.add("");
+        inputs.add("");
+        inputs.add("");
+        cli = new StubCli(inputs);
+        cli.start();
+    }
+
     @When("name {string} and author {string} are entered")
     public void enterNameAndAuthor(String name, String author) {
         inputs.add(name);
@@ -108,6 +119,39 @@ public class Stepdefs {
         inputs.add("");
         inputs.add("");
         inputs.add("");
+        cli = new StubCli(inputs);
+        cli.start();
+    }
+
+    @When("name {string} and year {string} are entered")
+    public void enterNameAndYear(String name, String year) {
+        inputs.add(name);
+        inputs.add("");
+        inputs.add(year);
+        inputs.add("");
+        inputs.add("");
+        cli = new StubCli(inputs);
+        cli.start();
+    }
+
+    @When("name {string} and pages {string} are entered")
+    public void enterNameAndPages(String name, String pages) {
+        inputs.add(name);
+        inputs.add("");
+        inputs.add("");
+        inputs.add(pages);
+        inputs.add("");
+        cli = new StubCli(inputs);
+        cli.start();
+    }
+
+    @When("name {string} and isbn {string} are entered")
+    public void enterNameAndISBN(String name, String isbn) {
+        inputs.add(name);
+        inputs.add("");
+        inputs.add("");
+        inputs.add("");
+        inputs.add(isbn);
         cli = new StubCli(inputs);
         cli.start();
     }
