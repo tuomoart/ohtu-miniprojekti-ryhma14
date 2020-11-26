@@ -57,7 +57,7 @@ public class Logic {
     
     private boolean textIsValidAuthorName(String text) {
         if (text.isEmpty()) return true;
-        return text.matches("^[ A-Öa-ö]+$");
+        return text.matches("^[ .A-Öa-ö]+$");
     }
     
     private boolean textIsValidInteger(String text) {

@@ -66,7 +66,7 @@ public class LogicTest {
         logic = new Logic(dao);
         
         someBooks = new ArrayList();
-        someBooks.add(new Book("Book with all data", "AuthorI", "2000", "100", "978-951-98548-9-2"));
+        someBooks.add(new Book("Book with all data", "A. AuthorI", "2000", "100", "978-951-98548-9-2"));
         someBooks.add(new Book("Book with minimal data", "", "", "", ""));
         someBooks.add(new Book("Book with incorrect author", "Author1","","",""));
         someBooks.add(new Book("Book with incorrect year", "Author I", "123S", "", ""));
