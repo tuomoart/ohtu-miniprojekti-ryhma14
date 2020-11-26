@@ -52,12 +52,12 @@ public class Logic {
     }
     
     private boolean textIsValidAuthorName(String text) {
-        if (text.isBlank()) return true;
+        if (text.isEmpty()) return true;
         return text.matches("^[ A-Öa-ö]+$");
     }
     
     private boolean textIsValidInteger(String text) {
-        if (text.isBlank()) return true;
+        if (text.isEmpty()) return true;
         return text.matches("[0-9]+");
     }
     
@@ -68,7 +68,7 @@ public class Logic {
     väh. kymmenen.
     */
     private boolean textIsValidISBN(String text) {
-        if (text.isBlank()) return true;
+        if (text.isEmpty()) return true;
         
         String[] split = text.split("-");
         
