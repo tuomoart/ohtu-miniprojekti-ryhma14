@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class Logic {
     private Database database;
-    private SQLBookDao dao;
+    private BookDao dao;
     
     public Logic() {
         try {
@@ -22,6 +22,10 @@ public class Logic {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    public Logic(BookDao dao) {
+        this.dao = dao;
     }
     
     public String addBook(String title, String author, String year, String pages,
