@@ -51,12 +51,12 @@ public class Logic {
         }
     }
     
-    public boolean textIsValidAuthorName(String text) {
+    private boolean textIsValidAuthorName(String text) {
         if (text.isBlank()) return true;
         return text.matches("^[ A-Öa-ö]+$");
     }
     
-    public boolean textIsValidInteger(String text) {
+    private boolean textIsValidInteger(String text) {
         if (text.isBlank()) return true;
         return text.matches("[0-9]+");
     }
@@ -67,7 +67,7 @@ public class Logic {
     ovat numeroita, viivoja ei ole kahta peräkkäin, numeroita on yhteensä
     väh. kymmenen.
     */
-    public boolean textIsValidISBN(String text) {
+    private boolean textIsValidISBN(String text) {
         if (text.isBlank()) return true;
         
         String[] split = text.split("-");
