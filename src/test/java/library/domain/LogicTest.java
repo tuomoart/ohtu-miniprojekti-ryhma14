@@ -74,6 +74,7 @@ public class LogicTest {
         someBooks.add(new Book("Book with letters in ISBN", "AuthorII", "", "", "ABC-951-98548-9-2"));
         someBooks.add(new Book("Book with too few hyphens in ISBN", "AuthorII", "", "", "978951-98548-92"));
         someBooks.add(new Book("Book with too few numbers in ISBN", "AuthorII", "", "", "9-951-985-92"));
+        someBooks.add(new Book("","","","",""));
     }
     
     @After
@@ -104,6 +105,13 @@ public class LogicTest {
         Book book = someBooks.get(1);
         
         checkThatGetsAdded(book);
+    }
+    
+    @Test
+    public void dontAddBookWithNoTitle() throws Throwable {
+        Book book = someBooks.get(8);
+        
+        checkThatDoesNotGetAdded(book, "Otsikko ei saa olla tyhjä");
     }
     
     @Test
