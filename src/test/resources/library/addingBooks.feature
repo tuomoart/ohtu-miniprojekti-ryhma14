@@ -5,6 +5,11 @@ Feature: As a user I want to be able to add a book using Command Line Interface
         When  name "Sapiens" is entered
         Then  Cli will respond with "Kirja lisätty"
 
+    Scenario: creation of book tip is unsuccessful with empty name
+        Given command new book is selected
+        When  name "" is entered
+        Then  Cli will respond with "Otsikko ei saa olla tyhjä"
+
     Scenario: creation of book tip is successful with valid name and author
         Given command new book is selected
         When  name "Sivullinen" and author "Albert Camus" are entered
