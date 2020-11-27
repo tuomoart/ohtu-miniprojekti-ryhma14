@@ -84,11 +84,12 @@ public class RealCli implements Cli {
     
     @Override
     public void addBook() {
-        System.out.println("\n"+"Anna kirjan tiedot (jos jokin ominaisuus ei ole tiedossa, syötä tyhjä merkkijono):"+"\n");
+        System.out.println("\n"+"Anna kirjan tiedot:"+"\n");
 
         System.out.println("Anna nimeke:");
         String nameOfBook = scanner.nextLine();
-            
+        
+        System.out.println("Jos jokin seuraavista ominaisuuksista ei ole tiedossa, syötä tyhjä merkkijono\n");
         System.out.println("Anna kirjailija:");
         String author = scanner.nextLine();
 
