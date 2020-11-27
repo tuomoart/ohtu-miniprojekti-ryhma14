@@ -9,3 +9,9 @@
 
 [Definition of Done](https://github.com/tuomoart/ohtu-miniprojekti-ryhma14/blob/main/dokumentaatio/dod.md)
 
+
+## Ohjelman käynnistäminen
+
+Ohjelmasta on julkaistu release, jonka lataamalla ohjelman voi suorittaa sijaintikansiossa komennolla:
+
+``java -jar bookmarks.jar``
