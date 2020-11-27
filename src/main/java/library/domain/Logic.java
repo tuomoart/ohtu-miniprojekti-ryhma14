@@ -31,6 +31,10 @@ public class Logic {
     public String addBook(String title, String author, String year, String pages,
             String ISBN) {
         try {
+            if (title.isBlank()) {
+                return "Otsikko ei saa olla tyhjä";
+            }
+            
             if (!textIsValidAuthorName(author)) {
                 return "Kirjailijan nimi ei saa sisältää numeroita";
             }
