@@ -12,6 +12,6 @@
 
 ## Ohjelman käynnistäminen
 
-Ohjelmasta on julkaistu release, jonka lataamalla ohjelman voi suorittaa sijaintikansiossa komennolla:
+Ohjelmasta on julkaistu release, jonka lataamalla ohjelman voi suorittaa ohjelman sijaintikansiossa komennolla:
 
 ``java -jar bookmarks.jar``
