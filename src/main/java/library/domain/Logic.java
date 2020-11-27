@@ -52,8 +52,10 @@ public class Logic {
             }
             
             Book book = new Book(title, author, year, pages, ISBN);
-            dao.create(book);
-            return "Kirja lisätty";
+            if (dao.create(book)) {
+                return "Kirja '" + title + "' lisätty";
+            }
+            return "Ongelma kirjan lisäämisessä";
         } catch (Exception e) {
             return e.getMessage();
         }

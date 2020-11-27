@@ -162,7 +162,7 @@ public class LogicTest {
     }
     
     public void checkThatGetsAdded(Book book) throws Throwable{
-        assertEquals("Kirja lisätty", tryToAdd(book));
+        assertEquals("Kirja '" + book.getTitle() + "' lisätty", tryToAdd(book));
         assertEquals(1, dao.getBooks().size());
         assertEquals(book, dao.getBooks().get(0));
     }
