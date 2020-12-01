@@ -20,6 +20,9 @@ dependencies {
     testCompile 'io.cucumber:cucumber-junit:' + cucumberVersion
     testCompile 'junit:junit:' + junitVersion
     testCompile 'org.mockito:mockito-core:3.1.0'
+    testCompile "org.testfx:testfx-core:4.0.+"
+    testCompile "org.testfx:testfx-junit:4.0.+"    
+    testCompile "org.testfx:openjfx-monocle:jdk-11+26"
     compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.32.3.2'
 }
 
