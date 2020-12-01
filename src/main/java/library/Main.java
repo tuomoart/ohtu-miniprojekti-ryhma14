@@ -1,6 +1,5 @@
 package library;
 import static javafx.application.Application.launch;
-import javafx.stage.Stage;
 import library.ui.gui.*;
 
 /*

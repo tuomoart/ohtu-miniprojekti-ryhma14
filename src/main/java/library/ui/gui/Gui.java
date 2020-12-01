@@ -19,24 +19,18 @@ import javafx.stage.Stage;
  */
 public class Gui extends Application {
     private Stage stage;
-    private Scene searchScene;
+    private SearchView searchView;
     
     @Override
     public void start(Stage stg) {
         this.stage = stg;
+        this.searchView = new SearchView();
+        
         this.stage.setTitle("Lukuvinkkikirjasto");
         
-        createSearchScene();
-        stage.setScene(searchScene);
+        //start the application with the search view
+        stage.setScene(searchView.createSearchScene());
         stage.show();
     }
-    
-    public void createSearchScene() {
-        VBox searchLayout = new VBox();
-        
-        searchLayout.setSpacing(10);
-        searchLayout.getChildren().add(new Label("Hae lukuvinkkikirjastosta"));
-        
-        searchScene = new Scene(searchLayout);
-    }
+
 }
