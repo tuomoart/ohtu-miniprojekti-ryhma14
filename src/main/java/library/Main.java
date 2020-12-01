@@ -1,5 +1,7 @@
 package library;
-import library.ui.cli.*;
+import static javafx.application.Application.launch;
+import javafx.stage.Stage;
+import library.ui.gui.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,8 +15,7 @@ import library.ui.cli.*;
  */
 public class Main {
     public static void main(String[] args) {
-        Cli cli = new RealCli();
-        cli.start();
+        launch(Gui.class);
     }
     
 }
