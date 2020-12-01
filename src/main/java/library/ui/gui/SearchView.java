@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
@@ -22,6 +23,7 @@ public class SearchView {
     private Button addNewTipButton;
     private Button searchLibraryButton;
     private ComboBox tipDropdownlist;
+    private TextField searchBox;
     
     public Scene createSearchScene() {
         VBox searchLayout = new VBox();
@@ -30,6 +32,8 @@ public class SearchView {
         searchLayout.getChildren().add(createMenu());
         searchLayout.getChildren().add(createTitle());
         searchLayout.getChildren().add(createDropDownListForTypeOfTip());
+        searchLayout.getChildren().add(createSearchBox());
+        //searchLayout.getChildren().add(createListOfResults());
         
         return new Scene(searchLayout);
     }
@@ -54,15 +58,31 @@ public class SearchView {
     }
     
     public HBox createDropDownListForTypeOfTip() {
-        HBox layout = new HBox();
+        HBox dropdownlistLayout = new HBox();
         this.tipDropdownlist = new ComboBox();
         
         tipDropdownlist.getItems().addAll("Kirja");
         
-        layout.getChildren().add(new Label("Vinkkityyppi: "));
-        layout.getChildren().add(this.tipDropdownlist);
+        dropdownlistLayout.getChildren().add(new Label("Vinkkityyppi: "));
+        dropdownlistLayout.getChildren().add(this.tipDropdownlist);
         
-        return layout;
+        return dropdownlistLayout;
     }
+    
+    public HBox createSearchBox() {
+        HBox searchBoxLayout = new HBox();
+        this.searchBox = new TextField();
+        
+        searchBoxLayout.getChildren().add(new Label("Hakusana: "));
+        searchBoxLayout.getChildren().add(this.searchBox);
+        
+        return searchBoxLayout;
+    }
+    
+    /*
+    public Label createListOfResults() {
+        
+    }
+    */
         
 }
