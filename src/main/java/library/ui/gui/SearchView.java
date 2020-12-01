@@ -5,10 +5,14 @@
  */
 package library.ui.gui;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 
 /**
  *
@@ -17,13 +21,15 @@ import javafx.scene.layout.*;
 public class SearchView {
     private Button addNewTipButton;
     private Button searchLibraryButton;
+    private ComboBox tipDropdownlist;
     
     public Scene createSearchScene() {
         VBox searchLayout = new VBox();
         
         searchLayout.setSpacing(10);
         searchLayout.getChildren().add(createMenu());
-        searchLayout.getChildren().add(new Label("Hae lukuvinkkiä"));
+        searchLayout.getChildren().add(createTitle());
+        searchLayout.getChildren().add(createDropDownListForTypeOfTip());
         
         return new Scene(searchLayout);
     }
@@ -39,4 +45,24 @@ public class SearchView {
         
         return menu;
     }
+    
+    public Label createTitle() {
+        Label title = new Label("Hae lukuvinkkiä");
+        title.setFont(Font.font("Arial", 20));
+        
+        return title;
+    }
+    
+    public HBox createDropDownListForTypeOfTip() {
+        HBox layout = new HBox();
+        this.tipDropdownlist = new ComboBox();
+        
+        tipDropdownlist.getItems().addAll("Kirja");
+        
+        layout.getChildren().add(new Label("Vinkkityyppi: "));
+        layout.getChildren().add(this.tipDropdownlist);
+        
+        return layout;
+    }
+        
 }
