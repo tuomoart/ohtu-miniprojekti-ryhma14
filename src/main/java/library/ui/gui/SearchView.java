@@ -136,12 +136,8 @@ public class SearchView {
     public HBox createDropDownListForTypeOfTip() {
         HBox dropdownlistLayout = new HBox();
         this.tipDropdownlist = new ComboBox();
-<<<<<<< HEAD
-        
-        dropdownlistLayout.setAlignment(Pos.CENTER);
-=======
 
->>>>>>> c41bedb58633827b855595dbb433c058a3c96029
+        dropdownlistLayout.setAlignment(Pos.CENTER);
         tipDropdownlist.getItems().addAll("Kirja");
 
         dropdownlistLayout.getChildren().add(new Label("Vinkkityyppi: "));
