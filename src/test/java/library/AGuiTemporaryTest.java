@@ -8,6 +8,7 @@ package library;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,7 +30,7 @@ import static org.testfx.matcher.control.LabeledMatchers.hasText;
  *
  * @author tuomoart
  */
-public class GuiTemporaryTest extends ApplicationTest {
+public class AGuiTemporaryTest extends ApplicationTest {
     private Scene scene;
     private Parent rootNode;
     
@@ -39,30 +40,14 @@ public class GuiTemporaryTest extends ApplicationTest {
     
     @Override
     public void start(Stage stage) throws Exception {
-        logic = new Logic(new StubDao());
-        Gui gui = new Gui(logic);
-        gui.format();
+        Gui sovellus = new Gui(new Logic(new StubDao()));
         
-        searchView = gui.getSearchView();
-        creationView = gui.getCreationView();
-        
-        scene = creationView.getCreationScene();
-        rootNode = scene.getRoot();
-        
-        stage.setScene(scene);
-        stage.show();
-        stage.toFront();
+        Application app = Application.class.cast(sovellus);
+        app.start(stage);
     }
     
     @Test
     public void commandNewBookInGui() {
-        Button[] buttons = from(rootNode).lookup(".button").queryAll().toArray(new Button[0]);
-        
-        for (Button b: buttons) {
-            if (b.getText().equals("Lisää uusi lukuvinkki")) {
-                clickOn(b);
-            }
-        }
         
         enterNameInGui("kirjannimi");
         
