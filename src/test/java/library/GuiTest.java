@@ -47,7 +47,7 @@ public class GuiTest extends ApplicationTest {
     
     @BeforeClass
     public static void setupSpec() throws Exception {
-        Boolean headless = false;
+        Boolean headless = true;
         if (headless) {
             System.setProperty("testfx.robot", "glass");
             System.setProperty("testfx.headless", "true");
@@ -73,10 +73,46 @@ public class GuiTest extends ApplicationTest {
         checkThatBookGetsAdded("kirjannimi", "kirjailija", "1999", "100", "978-952-264-438-1");
     }
     
+    @Test
+    public void bookWithInvalidTitleIsNotAdded() {
+        String error = "Otsikko ei saa olla tyhjä";
+        checkThatBookIsNotAdded(error, "", "", "", "", "");
+    }
+    
+    @Test
+    public void bookWithInvalidWriterIsNotAdded() {
+        String error = "Kirjailijan nimi ei saa sisältää numeroita";
+        checkThatBookIsNotAdded(error, "kirjannimi", "k1rj41l1j4", "", "", "");
+    }
+    
+    @Test
+    public void bookWithInvalidYearIsNotAdded() {
+        String error = "Vääränmallinen vuosiluku";
+        checkThatBookIsNotAdded(error, "MAOL", "", "2k20", "", "");
+    }
+    
+    @Test
+    public void bookWithInvalidPagesIsNotAdded() {
+        String error = "Vääränmallinen sivumäärä";
+        checkThatBookIsNotAdded(error, "MAOL", "", "", "sata", "");
+    }
+    
+    @Test
+    public void bookWithInvalidISBNIsNotAdded() {
+        String error = "ISBN tunnus täytyy olla muotoa 'xxxx-xxx-xx-x', jossa x:t ovat numeroita";
+        checkThatBookIsNotAdded(error, "MAOL", "", "", "", "1234567-89-0");
+    }
+    
     private void checkThatBookGetsAdded(String name, String writer, String year, String pages, String isbn) {
         enterValuesForBook(name, writer, year, pages, isbn);
         clickAddInGui();
         AddingRespondsWith("\nKirja '" + name + "' lisätty");
+    }
+    
+    private void checkThatBookIsNotAdded(String errMsg, String name, String writer, String year, String pages, String isbn) {
+        enterValuesForBook(name, writer, year, pages, isbn);
+        clickAddInGui();
+        AddingRespondsWith("\n" + errMsg);
     }
     
     private void enterValuesForBook(String name, String writer, String year, String pages, String isbn) {
