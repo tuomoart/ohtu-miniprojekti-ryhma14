@@ -156,21 +156,21 @@ public class LogicTest {
     public void dontAddBookWithLettersInISBN() throws Throwable {
         Book book = someBooks.get(5);
         
-        checkThatDoesNotGetAdded(book, "Vääränmallinen ISBN");
+        checkThatDoesNotGetAdded(book, "ISBN tunnus täytyy olla muotoa 'xxxx-xxx-xx-x', jossa x:t ovat numeroita");
     }
     
     @Test
     public void dontAddBookWithTooFewHyphensInISBN() throws Throwable {
         Book book = someBooks.get(6);
         
-        checkThatDoesNotGetAdded(book, "Vääränmallinen ISBN");
+        checkThatDoesNotGetAdded(book, "ISBN tunnus täytyy olla muotoa 'xxxx-xxx-xx-x', jossa x:t ovat numeroita");
     }
     
     @Test
     public void dontAddBookWithTooFewNumbers() throws Throwable {
         Book book = someBooks.get(7);
         
-        checkThatDoesNotGetAdded(book, "Vääränmallinen ISBN");
+        checkThatDoesNotGetAdded(book, "ISBN tunnus täytyy olla muotoa 'xxxx-xxx-xx-x', jossa x:t ovat numeroita");
     }
     
     public void checkThatDoesNotGetAdded(Book book, String errMsg) throws Throwable {
