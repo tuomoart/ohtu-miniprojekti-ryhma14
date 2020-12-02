@@ -50,7 +50,8 @@ public class GuiTest extends ApplicationTest {
     
     @BeforeClass
     public static void setupSpec() throws Exception {
-        if (Boolean.getBoolean("headless")) {
+        Boolean headless = true;
+        if (headless) {
             System.setProperty("testfx.robot", "glass");
             System.setProperty("testfx.headless", "true");
             System.setProperty("prism.order", "sw");
@@ -61,8 +62,7 @@ public class GuiTest extends ApplicationTest {
     }
     
     @Test
-    public void commandNewBookInGui() {
-        
+    public void canAddBookWithValidName() {
         enterNameInGui("kirjannimi");
         
         guiRespondsWith("\nKirja 'kirjannimi' lisätty");
