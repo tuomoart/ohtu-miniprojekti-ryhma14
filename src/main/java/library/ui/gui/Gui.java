@@ -46,6 +46,10 @@ public class Gui extends Application {
     public List<String> addBook(String title, String author, String year, String pages, String ISBN) {
         return logic.addBook(title, author, year, pages, ISBN);
     }
+    
+    public Logic getLogic() {
+        return this.logic;
+    }
 
     /* public boolean textIsValidTitle(String text) {
         return !text.isBlank();
