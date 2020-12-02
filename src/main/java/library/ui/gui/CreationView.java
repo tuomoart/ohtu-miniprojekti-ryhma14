@@ -47,7 +47,7 @@ public class CreationView {
     public Scene getCreationScene() {
         // create main layout
         BorderPane mainLayout = new BorderPane();
-        mainLayout.setPrefSize(320,340);
+        mainLayout.setPrefSize(360,420);
         mainLayout.setPadding(new Insets(10,10,10,10));
 
         // create top bar for search, etc.
@@ -65,6 +65,8 @@ public class CreationView {
         VBox adding = new VBox(20);
         adding.setAlignment(Pos.CENTER);
         messageLabel = new Label("");
+        messageLabel.setPrefHeight(100);
+        messageLabel.setPrefHeight(100);
         adding.getChildren().add(messageLabel);
         Button add = getAddButton();
         adding.getChildren().add(add);
