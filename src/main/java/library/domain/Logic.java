@@ -128,13 +128,14 @@ public class Logic {
     }
     
     public List<Book> filteredList(String string) {
+        String haku = string.toLowerCase();
         List<Book> books = getBooks();
         
         books.stream()
-                .filter(b -> b.getAuthor().contains(string) 
-                        || b.getISBN().contains(string) 
-                        || b.getYear().contains(string) 
-                        || b.getPages().contains(string));
+                .filter(b -> b.getAuthor().toLowerCase().contains(haku) 
+                        || b.getISBN().toLowerCase().contains(haku) 
+                        || b.getYear().toLowerCase().contains(haku) 
+                        || b.getPages().toLowerCase().contains(haku));
         
         return books;
     }
