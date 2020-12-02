@@ -38,6 +38,7 @@ public class CreationView {
         }
     };
     private Map<String,TextField> textfields = new HashMap<>();
+    private Label messageLabel;
 
     public CreationView(Gui gui) {
         this.gui = gui;
@@ -46,7 +47,7 @@ public class CreationView {
     public Scene getCreationScene() {
         // create main layout
         BorderPane mainLayout = new BorderPane();
-        mainLayout.setPrefSize(320,320);
+        mainLayout.setPrefSize(360,420);
         mainLayout.setPadding(new Insets(10,10,10,10));
 
         // create top bar for search, etc.
@@ -61,9 +62,15 @@ public class CreationView {
         mainLayout.setCenter(tip);
 
         // create button for adding the tip
+        VBox adding = new VBox(20);
+        adding.setAlignment(Pos.CENTER);
+        messageLabel = new Label("");
+        messageLabel.setPrefHeight(100);
+        messageLabel.setPrefHeight(100);
+        adding.getChildren().add(messageLabel);
         Button add = getAddButton();
-        BorderPane.setAlignment(add,Pos.CENTER);
-        mainLayout.setBottom(add);
+        adding.getChildren().add(add);
+        mainLayout.setBottom(adding);
 
         // create the scene that will be returned
         Scene creationScene = new Scene(mainLayout);
@@ -102,19 +109,30 @@ public class CreationView {
     }
 
     private void addTip() {
+        List<String> messages = new ArrayList<>();
         if (selectedTip.equals("Kirja")) {
-            addBook();
+            messages = addBook();
         }
-        empty();
+        setMessages(messages);
+        if (messages.get(0).contains("lisätty")) {
+            empty();
+        }
     }
 
-    private void addBook() {
+    private List<String> addBook() {
         String name = textfields.get("Nimike").getText();
         String author = textfields.get("Kirjailija").getText();
         String year = textfields.get("Julkaisuvuosi").getText();
         String pages = textfields.get("Sivumäärä").getText();
         String ISBN = textfields.get("ISBN-tunniste").getText();
-        gui.addBook(name, author, year, pages, ISBN);
+        return gui.addBook(name, author, year, pages, ISBN);
+    }
+
+    public void setMessages(List<String> messages) {
+        messageLabel.setText("");
+        for (String message : messages) {
+            messageLabel.setText(messageLabel.getText() + "\n" + message);
+        }
     }
 
     private void empty() {
@@ -141,6 +159,7 @@ public class CreationView {
         for (String infotype : tips.get("Kirja")) {
             bookLayout.getChildren().add(getQuery(infotype));
         }
+        textfields.get("Nimike").setPromptText("pakollinen tieto");
         return bookLayout;
     }
 

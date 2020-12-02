@@ -8,6 +8,9 @@ package library.ui.gui;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import library.domain.Logic;
+
+import java.util.List;
+
 /**
  *
  * @author hiira
@@ -40,8 +43,8 @@ public class Gui extends Application {
         stage.setScene(creationView.getCreationScene());
     }
     
-     public void addBook(String title, String author, String year, String pages, String ISBN) {
-        logic.addBook(title, author, year, pages, ISBN);
+     public List<String> addBook(String title, String author, String year, String pages, String ISBN) {
+        return logic.addBook(title, author, year, pages, ISBN);
     }
 
 }

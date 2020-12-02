@@ -4,6 +4,7 @@ package library.dao;
 import java.sql.SQLException;
 import java.util.List;
 import library.domain.Book;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -19,6 +20,11 @@ public class SQLBookDaoTest {
     @Before
     public void setUp() throws SQLException {
         sqlBookDao = new SQLBookDao(new Database("jdbc:sqlite:testdatabase.db"));
+    }
+
+    @After
+    public void tearDown() {
+        sqlBookDao.clearDatabase();
     }
 
     @Test

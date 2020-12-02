@@ -6,7 +6,6 @@
 package library.dao;
 
 import java.sql.SQLException;
-import library.domain.Book;
 import java.util.List;
 
 /**
@@ -15,8 +14,11 @@ import java.util.List;
  */
 public interface BookDao {
     
-    boolean create(Book book) throws SQLException;
+    boolean create(String title, String author, String year,
+            String pages, String isbn) throws SQLException;
     
-    List<Book> getBooks() throws SQLException;
+    List<List<String>> getBooks() throws SQLException;
+    
+    boolean clearDatabase();
     
 }
