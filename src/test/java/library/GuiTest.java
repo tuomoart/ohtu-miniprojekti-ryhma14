@@ -47,7 +47,7 @@ public class GuiTest extends ApplicationTest {
     
     @BeforeClass
     public static void setupSpec() throws Exception {
-        Boolean headless = true;
+        Boolean headless = false;
         if (headless) {
             System.setProperty("testfx.robot", "glass");
             System.setProperty("testfx.headless", "true");
@@ -76,7 +76,7 @@ public class GuiTest extends ApplicationTest {
     private void checkThatBookGetsAdded(String name, String writer, String year, String pages, String isbn) {
         enterValuesForBook(name, writer, year, pages, isbn);
         clickAddInGui();
-        AddingRespondsWith("\nKirja 'kirjannimi' lisätty");
+        AddingRespondsWith("\nKirja '" + name + "' lisätty");
     }
     
     private void enterValuesForBook(String name, String writer, String year, String pages, String isbn) {
@@ -88,7 +88,7 @@ public class GuiTest extends ApplicationTest {
     }
     
     private void enterValueInGui(String id, String name) {
-        clickOn("#Nimike").write(name);
+        clickOn(id).write(name);
     }
     
     private void clickAddInGui() {
