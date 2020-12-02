@@ -52,7 +52,7 @@ public class Logic {
             }
             
             if (!textIsValidISBN(ISBN)) {
-                messages.add("Vääränmallinen ISBN");
+                messages.add("ISBN tunnus täytyy olla muotoa 'xxxx-xxx-xx-x', jossa x:t ovat numeroita");
             }
             
             if (!messages.isEmpty()) {
