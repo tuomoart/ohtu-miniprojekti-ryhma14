@@ -21,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -57,9 +58,11 @@ public class SearchView {
         table.setItems(flBooks);
         table.getColumns().addAll(authorCol, titleCol, yearCol, pagesCol, isbnCol);
 
-        searchBox.setOnKeyReleased(keyEvent
-                -> {
-            table.setItems(filteredBooks(searchBox.getText()));
+        searchBox.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                table.setItems(filteredBooks(searchBox.getText()));
+            }
         });
 
         final VBox vbox = new VBox();

@@ -5,6 +5,8 @@
  */
 package library.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -56,7 +58,17 @@ public class Book extends Tip {
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
-    
+
+    public List<String> toStringList(Book book) {
+        List<String> strings = new ArrayList();
+        strings.add(book.getTitle());
+        strings.add(book.getAuthor());
+        strings.add(book.getYear());
+        strings.add(book.getPages());
+        strings.add(book.getISBN());
+        return strings;
+    }
+
     @Override
     public String toString() {
         String result = "Otsikko: " + super.getTitle() + "\n";

@@ -20,10 +20,17 @@ public class Gui extends Application {
     private Stage stage;
     private SearchView searchView;
     private CreationView creationView;
+    
+    public Gui(Logic logic) {
+        this.logic = logic;
+    }
+    
+    public Gui() {
+        this.logic = new Logic();
+    }
 
     @Override
     public void start(Stage stg) {
-        logic = new Logic();    // should dependency injection be used here?
         stage = stg;
         searchView = new SearchView(this, logic);
         creationView = new CreationView(this);
@@ -45,6 +52,10 @@ public class Gui extends Application {
     
     public List<String> addBook(String title, String author, String year, String pages, String ISBN) {
         return logic.addBook(title, author, year, pages, ISBN);
+    }
+    
+    public Logic getLogic() {
+        return this.logic;
     }
 
     public boolean textIsValidTitle(String text) {
