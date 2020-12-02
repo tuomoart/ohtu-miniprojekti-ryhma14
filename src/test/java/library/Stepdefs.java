@@ -77,8 +77,10 @@ public class Stepdefs {
             String year = readCommand();
             String pages = readCommand();
             String isbn = readCommand();
-            String message = logic.addBook(nameOfBook, author, year, pages, isbn);
-            print(message);
+            List<String> messages = logic.addBook(nameOfBook, author, year, pages, isbn);
+            for (String message : messages) {
+                print(message);
+            }
         }
 
         @Override
