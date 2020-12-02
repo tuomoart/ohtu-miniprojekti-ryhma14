@@ -27,8 +27,6 @@ public class Gui extends Application {
         //start the application with the search view
         stage.setScene(creationView.getCreationScene());
         stage.show();
-        System.out.println(stage.getWidth());
-        System.out.println(stage.getHeight());
     }
 
     public void switchToSearch() {
