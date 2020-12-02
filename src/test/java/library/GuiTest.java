@@ -70,7 +70,7 @@ public class GuiTest extends ApplicationTest {
     
     @Test
     public void canAddBookWithAllValidData() {
-        
+        checkThatBookGetsAdded("kirjannimi", "kirjailija", "1999", "100", "978-952-264-438-1");
     }
     
     private void checkThatBookGetsAdded(String name, String writer, String year, String pages, String isbn) {
