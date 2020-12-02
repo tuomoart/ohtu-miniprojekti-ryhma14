@@ -131,10 +131,10 @@ public class Logic {
         List<Book> books = getBooks();
         
         books.stream()
-                .filter(b -> b.getAuthor().equals(string) 
-                        || b.getISBN().equals(string) 
-                        || b.getYear().equals(string) 
-                        || b.getPages().equals(string));
+                .filter(b -> b.getAuthor().contains(string) 
+                        || b.getISBN().contains(string) 
+                        || b.getYear().contains(string) 
+                        || b.getPages().contains(string));
         
         return books;
     }
