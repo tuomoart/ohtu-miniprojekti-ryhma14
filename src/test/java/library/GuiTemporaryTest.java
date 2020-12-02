@@ -70,9 +70,6 @@ public class GuiTemporaryTest extends ApplicationTest {
     }
     
     public void enterNameInGui(String name) {
-//        TextField[] fields = from(rootNode).lookup(".textfield").queryAll().toArray(new TextField[0]);
-//        
-//        fields[0].setText(name);
         clickOn("#Nimike").write(name);
         clickOn("#add");
         
