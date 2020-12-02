@@ -53,4 +53,4 @@ Feature: As a user I want to be able to add a book using Command Line Interface
     Scenario: creation of book tip is unsuccessful with valid name and invalid isbn
         Given command new book is selected
         When  name "1984" and isbn "mikä on isbn?" are entered
-        Then  Cli will respond with "Vääränmallinen ISBN"
+        Then  Cli will respond with ""ISBN tunnus täytyy olla muotoa 'xxxx-xxx-xx-x', jossa x:t ovat numeroita""
