@@ -13,18 +13,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 
 import java.util.*;
+import javafx.scene.input.KeyEvent;
 
 /**
  * for getting the javafx scene for adding new tips to the library
  *
  * @author osekeranen
  */
-
 public class CreationView {
 
     private Gui gui;
     private String selectedTip = "Kirja";
-    private Map<String,List<String>> tips = new HashMap<>() {
+    private Map<String, List<String>> tips = new HashMap<>() {
         {
             put("Kirja", new ArrayList<String>() {
                 {
@@ -37,7 +37,7 @@ public class CreationView {
             });
         }
     };
-    private Map<String,TextField> textfields = new HashMap<>();
+    private Map<String, TextField> textfields = new HashMap<>();
     private Label messageLabel;
 
     public CreationView(Gui gui) {
@@ -47,8 +47,8 @@ public class CreationView {
     public Scene getCreationScene() {
         // create main layout
         BorderPane mainLayout = new BorderPane();
-        mainLayout.setPrefSize(360,420);
-        mainLayout.setPadding(new Insets(10,20,10,20));
+        mainLayout.setPrefSize(360, 420);
+        mainLayout.setPadding(new Insets(10, 20, 10, 20));
 
         // create top bar for search, etc.
         Pane top = getTopBar();
@@ -57,8 +57,8 @@ public class CreationView {
         // create vbox for tips
         VBox tip = new VBox(20);
         tip.setAlignment(Pos.CENTER);
-        tip.getChildren().addAll(getTipMenu(),getBookCreationLayout());
-        BorderPane.setAlignment(tip,Pos.BOTTOM_CENTER);
+        tip.getChildren().addAll(getTipMenu(), getBookCreationLayout());
+        BorderPane.setAlignment(tip, Pos.BOTTOM_CENTER);
         mainLayout.setCenter(tip);
 
         // create button for adding the tip
@@ -167,11 +167,21 @@ public class CreationView {
         textfields.get("Nimike").setPromptText("pakollinen tieto");
 
         /* real time error listening - not yet supported */
-        /* textfields.get("Nimike").textProperty().addListener((arg0, oldValue, newValue) -> {
+ /* textfields.get("Nimike").textProperty().addListener((arg0, oldValue, newValue) -> {
             if (true) {
                 textfields.get("Nimike").setStyle("-fx-border-color: red;" + " -fx-border-width: 1.5px");
             }
         }); */
+        textfields.get("Nimike").setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (textfields.get("Nimike").getText().isBlank()) {
+                    textfields.get("Nimike").setStyle("-fx-border-color: red;" + " -fx-border-width: 1.5px");
+                } else {
+                    textfields.get("Nimike").setStyle("-fx-border-color: green;" + " -fx-border-width: 1.5px");
+                }
+            }
+        });
 
         return bookLayout;
     }
@@ -185,7 +195,7 @@ public class CreationView {
         HBox.setHgrow(spacer, Priority.ALWAYS);
         TextField input = new TextField();
         input.setId(infotype);
-        textfields.put(infotype,input);
+        textfields.put(infotype, input);
         query.getChildren().add(input);
         return query;
     }
