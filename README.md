@@ -1,5 +1,6 @@
 # ohtu-miniprojekti-ryhma14
 ![Github Actions](https://github.com/tuomoart/ohtu-miniprojekti-ryhma14/workflows/Java%20CI%20with%20Gradle/badge.svg)
+[![codecov](https://codecov.io/gh/tuomoart/ohtu-miniprojekti-ryhma14/branch/main/graph/badge.svg?token=ERLER9LPI7)](https://codecov.io/gh/tuomoart/ohtu-miniprojekti-ryhma14)
 
 [Backlogs](https://docs.google.com/spreadsheets/d/1_j0GMxQzZxuQtvnp0Q1qjaKo_pBgB3EL9K5jWWytnto/edit?usp=sharing)
 
