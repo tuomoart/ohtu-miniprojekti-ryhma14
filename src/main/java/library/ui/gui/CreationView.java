@@ -48,7 +48,7 @@ public class CreationView {
         // create main layout
         BorderPane mainLayout = new BorderPane();
         mainLayout.setPrefSize(360,420);
-        mainLayout.setPadding(new Insets(10,10,10,10));
+        mainLayout.setPadding(new Insets(10,20,10,20));
 
         // create top bar for search, etc.
         Pane top = getTopBar();
@@ -65,6 +65,7 @@ public class CreationView {
         VBox adding = new VBox(20);
         adding.setAlignment(Pos.CENTER);
         messageLabel = new Label("");
+        messageLabel.setId("messages");
         messageLabel.setPrefHeight(100);
         messageLabel.setPrefHeight(100);
         adding.getChildren().add(messageLabel);
@@ -88,6 +89,7 @@ public class CreationView {
 
     private Button getSearchButton() {
         Button searchButton = new Button("Hae");
+        searchButton.setId("search");
         searchButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -99,6 +101,7 @@ public class CreationView {
 
     private Button getAddButton() {
         Button addButton = new Button("Lisää");
+        addButton.setId("add");
         addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -148,7 +151,7 @@ public class CreationView {
             @Override
             public void handle(ActionEvent event) {
                 selectedTip = (String) tipMenu.getValue();
-                //TODO oikeantyyppisen vinkkityypin Paneen vaihtaminen
+                //TODO oikeantyyppisen vinkkityypin Paneen vaihtaminen, varmaan paras ratkaisu käyttää borderpanen setCenter...
             }
         });
         return tipMenu;
@@ -159,7 +162,17 @@ public class CreationView {
         for (String infotype : tips.get("Kirja")) {
             bookLayout.getChildren().add(getQuery(infotype));
         }
+
+        // title
         textfields.get("Nimike").setPromptText("pakollinen tieto");
+
+        /* not yet supported */
+        /* textfields.get("Nimike").textProperty().addListener((difference, oldValue, newValue) -> {
+            while (true) {
+                textfields.get("Nimike").setStyle("-fx-text-box-border: red;");
+            }
+        }); */
+
         return bookLayout;
     }
 
@@ -171,6 +184,7 @@ public class CreationView {
         query.getChildren().add(spacer);
         HBox.setHgrow(spacer, Priority.ALWAYS);
         TextField input = new TextField();
+        input.setId(infotype);
         textfields.put(infotype,input);
         query.getChildren().add(input);
         return query;

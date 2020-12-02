@@ -43,8 +43,27 @@ public class Gui extends Application {
         stage.setScene(creationView.getCreationScene());
     }
     
-     public List<String> addBook(String title, String author, String year, String pages, String ISBN) {
+    public List<String> addBook(String title, String author, String year, String pages, String ISBN) {
         return logic.addBook(title, author, year, pages, ISBN);
     }
+    
+    public Logic getLogic() {
+        return this.logic;
+    }
 
+    public boolean textIsValidTitle(String text) {
+        return !text.isBlank();
+    }
+
+    public boolean textIsValidAuthorName(String text) {
+        return logic.textIsValidAuthorName(text);
+    }
+
+    public boolean textIsValidInteger(String text) {
+        return logic.textIsValidInteger(text);
+    }
+
+    public boolean textIsValidISBN(String text) {
+        return logic.textIsValidISBN(text);
+    }
 }
