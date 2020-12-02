@@ -14,37 +14,37 @@ import library.domain.Book;
  * @author tuomoart
  */
 public class StubDao implements BookDao {
-        private ArrayList<List<String>> database;
-        
-        public StubDao() {
-            format();
-        }
-        
-        @Override
-        public boolean create(String title, String author, String year,
-            String pages, String isbn) {
-            ArrayList<String> bookStrings = new ArrayList();
-            bookStrings.add(title);
-            bookStrings.add(author);
-            bookStrings.add(year);
-            bookStrings.add(pages);
-            bookStrings.add(isbn);
-            database.add(bookStrings);
-            return true;
-        }
-        
-        @Override
-        public List<List<String>> getBooks() {
-            return database;
-        }
-        
-        public void format() {
-            this.database = new ArrayList();
-        }
+    private ArrayList<List<String>> database;
 
-        @Override
-        public boolean clearDatabase() {
-            format();
-            return true;
-        }
+    public StubDao() {
+        format();
     }
+
+    @Override
+    public boolean create(String title, String author, String year,
+        String pages, String isbn) {
+        ArrayList<String> bookStrings = new ArrayList();
+        bookStrings.add(title);
+        bookStrings.add(author);
+        bookStrings.add(year);
+        bookStrings.add(pages);
+        bookStrings.add(isbn);
+        database.add(bookStrings);
+        return true;
+    }
+
+    @Override
+    public List<List<String>> getBooks() {
+        return database;
+    }
+
+    public void format() {
+        this.database = new ArrayList();
+    }
+
+    @Override
+    public boolean clearDatabase() {
+        format();
+        return true;
+    }
+}
