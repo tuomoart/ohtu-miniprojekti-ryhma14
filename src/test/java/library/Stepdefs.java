@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 
 import library.domain.Book;
 import library.domain.Logic;
+import library.dao.SQLBookDao;
 import library.ui.cli.Cli;
 
 import java.util.ArrayList;
@@ -21,11 +22,17 @@ public class Stepdefs {
     public class StubCli implements Cli {
         private List<String> inputs;
         private List<String> prints;
-        private Logic logic = new Logic();
+        private Logic logic;
 
         public StubCli(List<String> inputs) {
             this.inputs = inputs;
             prints = new ArrayList<>();
+            
+            try {
+                this.logic = new Logic(new SQLBookDao("jdbc:sqlite:database.db"));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
 
         @Override

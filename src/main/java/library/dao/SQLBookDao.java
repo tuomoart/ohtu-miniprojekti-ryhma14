@@ -16,8 +16,8 @@ public class SQLBookDao implements BookDao {
 
     final private Database database;
 
-    public SQLBookDao(Database database) throws SQLException {
-        this.database = database;
+    public SQLBookDao(String address) throws SQLException {
+        this.database = new Database(address);
     }
 
     @Override

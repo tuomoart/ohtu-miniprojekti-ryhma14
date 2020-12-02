@@ -8,6 +8,7 @@ package library.ui.gui;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import library.domain.Logic;
+import library.dao.SQLBookDao;
 
 import java.util.List;
 
@@ -25,8 +26,8 @@ public class Gui extends Application {
         this.logic = logic;
     }
     
-    public Gui() {
-        this.logic = new Logic();
+    public Gui() throws Exception{
+        this.logic = new Logic(new SQLBookDao("jdbc:sqlite:database.db"));
     }
 
     @Override

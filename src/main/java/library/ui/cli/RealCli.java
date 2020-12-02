@@ -8,16 +8,18 @@ package library.ui.cli;
 import java.util.List;
 import java.util.Scanner;
 import library.domain.*;
+import library.dao.*;
 /**
  *
  * @author hiira
  */
 public class RealCli implements Cli {
     private Scanner scanner = new Scanner(System.in);
-    private Logic logic = new Logic();
+    private Logic logic;
     
     @Override
     public void start() {
+        initialize();
         System.out.println("");
         System.out.println("Tervetuloa lukuvinkkikirjastoon!");
         while (true) {
@@ -119,4 +121,11 @@ public class RealCli implements Cli {
         }
     }
     
+    public void initialize() {
+        try {
+            logic = new Logic(new SQLBookDao("jdbc:sqlite:database.db"));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
