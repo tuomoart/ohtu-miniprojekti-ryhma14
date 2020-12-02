@@ -7,6 +7,7 @@ package library.ui.gui;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import library.domain.Logic;
 /**
  *
  * @author hiira
@@ -15,11 +16,13 @@ public class Gui extends Application {
     private Stage stage;
     private SearchView searchView;
     private CreationView creationView;
+    private Logic logic;
     
     @Override
     public void start(Stage stg) {
+        this.logic = new Logic();
         this.stage = stg;
-        this.searchView = new SearchView();
+        this.searchView = new SearchView(this, logic);
         this.creationView = new CreationView(this);
         
         this.stage.setTitle("Lukuvinkkikirjasto");
@@ -35,6 +38,10 @@ public class Gui extends Application {
 
     public void switchToCreation() {
         stage.setScene(creationView.getCreationScene());
+    }
+    
+     public void addBook(String title, String author, String year, String pages, String ISBN) {
+        logic.addBook(title, author, year, pages, ISBN);
     }
 
 }

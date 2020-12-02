@@ -18,7 +18,7 @@ public class Database {
         this.databaseAddress = address;
         Connection connection = DriverManager.getConnection(databaseAddress);
         Statement statement = connection.createStatement();
-        statement.execute("CREATE TABLE IF NOT EXISTS Books(title VARCHAR, author VARCHAR, year VARCHAR, pages VARCHAR, isbn VARCHAR);");
+        statement.execute("CREATE TABLE IF NOT EXISTS Books(id INTEGER PRIMARY KEY, title VARCHAR, author VARCHAR, year VARCHAR, pages VARCHAR, isbn VARCHAR);");
         connection.close();
     }
     
