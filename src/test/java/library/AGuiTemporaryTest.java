@@ -21,8 +21,10 @@ import library.ui.gui.CreationView;
 import library.ui.gui.Gui;
 import library.ui.gui.SearchView;
 import static org.junit.Assert.assertTrue;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.api.FxToolkit.registerPrimaryStage;
 import org.testfx.framework.junit.ApplicationTest;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
@@ -44,6 +46,18 @@ public class AGuiTemporaryTest extends ApplicationTest {
         
         Application app = Application.class.cast(sovellus);
         app.start(stage);
+    }
+    
+    @BeforeClass
+    public static void setupSpec() throws Exception {
+        if (Boolean.getBoolean("headless")) {
+            System.setProperty("testfx.robot", "glass");
+            System.setProperty("testfx.headless", "true");
+            System.setProperty("prism.order", "sw");
+            System.setProperty("prism.text", "t2k");
+            System.setProperty("java.awt.headless", "true");
+        }
+        registerPrimaryStage();
     }
     
     @Test
