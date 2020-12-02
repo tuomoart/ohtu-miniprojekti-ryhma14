@@ -166,10 +166,10 @@ public class CreationView {
         // title
         textfields.get("Nimike").setPromptText("pakollinen tieto");
 
-        /* not yet supported */
-        /* textfields.get("Nimike").textProperty().addListener((difference, oldValue, newValue) -> {
-            while (true) {
-                textfields.get("Nimike").setStyle("-fx-text-box-border: red;");
+        /* real time error listening - not yet supported */
+        /* textfields.get("Nimike").textProperty().addListener((arg0, oldValue, newValue) -> {
+            if (true) {
+                textfields.get("Nimike").setStyle("-fx-border-color: red;" + " -fx-border-width: 1.5px");
             }
         }); */
 
