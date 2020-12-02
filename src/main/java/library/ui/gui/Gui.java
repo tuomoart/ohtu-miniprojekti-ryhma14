@@ -47,7 +47,7 @@ public class Gui extends Application {
         return logic.addBook(title, author, year, pages, ISBN);
     }
 
-    /* public boolean textIsValidTitle(String text) {
+    public boolean textIsValidTitle(String text) {
         return !text.isBlank();
     }
 
@@ -61,5 +61,5 @@ public class Gui extends Application {
 
     public boolean textIsValidISBN(String text) {
         return logic.textIsValidISBN(text);
-    } */
+    }
 }

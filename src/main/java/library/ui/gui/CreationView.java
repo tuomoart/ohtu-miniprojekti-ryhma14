@@ -64,8 +64,8 @@ public class CreationView {
         // create button for adding the tip
         VBox adding = new VBox(20);
         adding.setAlignment(Pos.CENTER);
-        messageLabel.setId("messages");
         messageLabel = new Label("");
+        messageLabel.setId("messages");
         messageLabel.setPrefHeight(100);
         messageLabel.setPrefHeight(100);
         adding.getChildren().add(messageLabel);
