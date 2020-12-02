@@ -5,13 +5,7 @@
  */
 package library.ui.gui;
 
-import library.domain.*;
-
 import javafx.application.Application;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.*;
 import javafx.stage.Stage;
 /**
  *
@@ -20,17 +14,29 @@ import javafx.stage.Stage;
 public class Gui extends Application {
     private Stage stage;
     private SearchView searchView;
+    private CreationView creationView;
     
     @Override
     public void start(Stage stg) {
         this.stage = stg;
         this.searchView = new SearchView();
+        this.creationView = new CreationView(this);
         
         this.stage.setTitle("Lukuvinkkikirjasto");
         
         //start the application with the search view
-        stage.setScene(searchView.createSearchScene());
+        stage.setScene(creationView.getCreationScene());
         stage.show();
+        System.out.println(stage.getWidth());
+        System.out.println(stage.getHeight());
+    }
+
+    public void switchToSearch() {
+        stage.setScene(searchView.createSearchScene());
+    }
+
+    public void switchToCreation() {
+        stage.setScene(creationView.getCreationScene());
     }
 
 }
