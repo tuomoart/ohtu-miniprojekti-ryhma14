@@ -13,19 +13,19 @@ import library.domain.Logic;
  * @author hiira
  */
 public class Gui extends Application {
+    private Logic logic;
     private Stage stage;
     private SearchView searchView;
     private CreationView creationView;
-    private Logic logic;
-    
+
     @Override
     public void start(Stage stg) {
-        this.logic = new Logic();
-        this.stage = stg;
-        this.searchView = new SearchView(this, logic);
-        this.creationView = new CreationView(this);
+        logic = new Logic();    // should dependency injection be used here?
+        stage = stg;
+        searchView = new SearchView(this, logic);
+        creationView = new CreationView(this);
         
-        this.stage.setTitle("Lukuvinkkikirjasto");
+        stage.setTitle("Lukuvinkkikirjasto");
         
         //start the application with the search view
         stage.setScene(creationView.getCreationScene());
