@@ -42,6 +42,12 @@ public class LogicTest {
         public void format() {
             this.database = new ArrayList();
         }
+
+        @Override
+        public boolean clearDatabase() {
+            format();
+            return true;
+        }
     }
     
     
@@ -168,7 +174,8 @@ public class LogicTest {
     }
     
     public String tryToAdd(Book book) {
-        return logic.addBook(book.getTitle(), book.getAuthor(), book.getYear(), book.getPages(), book.getISBN());
+        return logic.addBook(book.getTitle(), book.getAuthor(), book.getYear(),
+                book.getPages(), book.getISBN()).get(0);
     }
     
     public void addSomeBooksDirectly() throws Throwable {
