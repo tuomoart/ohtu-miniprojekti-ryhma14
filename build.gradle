@@ -39,6 +39,13 @@ run {
     standardInput = System.in
 }
 
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+}
+
 task fatJar(type: Jar) {
     manifest {
         attributes 'Main-Class': 'library.Main'
