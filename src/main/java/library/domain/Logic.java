@@ -37,7 +37,6 @@ public class Logic {
         
         try {
             
-            
             if (title.isBlank()) {
                 messages.add("Otsikko ei saa olla tyhjä");
             }
@@ -62,8 +61,7 @@ public class Logic {
                 return messages;
             }
             
-            Book book = new Book(title, author, year, pages, ISBN);
-            if (dao.create(book)) {
+            if (dao.create(title, author, year, pages, ISBN)) {
                 messages.add("Kirja '" + title + "' lisätty");
             } else {
                 messages.add("Ongelma kirjan lisäämisessä");
@@ -77,12 +75,12 @@ public class Logic {
         }
     }
     
-    private boolean textIsValidAuthorName(String text) {
+    public boolean textIsValidAuthorName(String text) {
         if (text.isEmpty()) return true;
         return text.matches("^[ .A-Öa-ö]+$");
     }
     
-    private boolean textIsValidInteger(String text) {
+    public boolean textIsValidInteger(String text) {
         if (text.isEmpty()) return true;
         return text.matches("[0-9]+");
     }
@@ -93,7 +91,7 @@ public class Logic {
     ovat numeroita, viivoja ei ole kahta peräkkäin, numeroita on yhteensä
     väh. kymmenen.
     */
-    private boolean textIsValidISBN(String text) {
+    public boolean textIsValidISBN(String text) {
         if (text.isEmpty()) return true;
         
         String[] split = text.split("-");
@@ -144,13 +142,16 @@ public class Logic {
     public List<Book> filteredList(String string) {
         String haku = string.toLowerCase();
         List<Book> books = getBooks();
+        List<Book> result = new ArrayList<>();
         
         books.stream()
-                .filter(b -> b.getAuthor().toLowerCase().contains(haku) 
+                .filter(b -> b.getTitle().toLowerCase().contains(haku)
+                        || b.getAuthor().toLowerCase().contains(haku) 
                         || b.getISBN().toLowerCase().contains(haku) 
                         || b.getYear().toLowerCase().contains(haku) 
-                        || b.getPages().toLowerCase().contains(haku));
+                        || b.getPages().toLowerCase().contains(haku))
+                .forEach(b -> result.add(b));
         
-        return books;
+        return result;
     }
 }

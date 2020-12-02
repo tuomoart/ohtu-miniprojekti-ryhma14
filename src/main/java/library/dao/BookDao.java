@@ -15,7 +15,8 @@ import java.util.List;
  */
 public interface BookDao {
     
-    boolean create(Book book) throws SQLException;
+    boolean create(String title, String author, String year,
+            String pages, String isbn) throws SQLException;
     
     List<List<String>> getBooks() throws SQLException;
     

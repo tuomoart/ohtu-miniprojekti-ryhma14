@@ -21,16 +21,17 @@ public class SQLBookDao implements BookDao {
     }
     
     @Override
-    public boolean create(Book book) throws SQLException {
+    public boolean create(String title, String author, String year, String pages,
+            String isbn) throws SQLException {
         try {
             Connection connection = database.getConnection();
             PreparedStatement ps = connection.prepareStatement("INSERT INTO Books(title, author, year, pages, isbn) " +
                      "VALUES (?, ?, ?, ?, ?)");
-            ps.setString(1, book.getTitle());
-            ps.setString(2, book.getAuthor());
-            ps.setString(3, book.getYear());
-            ps.setString(4, book.getPages());
-            ps.setString(5, book.getISBN());      
+            ps.setString(1, title);
+            ps.setString(2, author);
+            ps.setString(3, year);
+            ps.setString(4, pages);
+            ps.setString(5, isbn);      
             ps.executeUpdate();
             connection.close();
         } catch (SQLException e) {
