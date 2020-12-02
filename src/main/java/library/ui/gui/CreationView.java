@@ -112,7 +112,9 @@ public class CreationView {
             messages = addBook();
         }
         setMessages(messages);
-        empty();
+        if (messages.get(0).contains("lisätty")) {
+            empty();
+        }
     }
 
     private List<String> addBook() {
