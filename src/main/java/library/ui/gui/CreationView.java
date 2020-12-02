@@ -164,21 +164,67 @@ public class CreationView {
         }
 
         // title
-        textfields.get("Nimike").setPromptText("pakollinen tieto");
-
-        /* real time error listening - not yet supported */
- /* textfields.get("Nimike").textProperty().addListener((arg0, oldValue, newValue) -> {
-            if (true) {
-                textfields.get("Nimike").setStyle("-fx-border-color: red;" + " -fx-border-width: 1.5px");
-            }
-        }); */
-        textfields.get("Nimike").setOnKeyReleased(new EventHandler<KeyEvent>() {
+        TextField title = textfields.get("Nimike");
+        title.setPromptText("pakollinen tieto");
+        title.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                if (textfields.get("Nimike").getText().isBlank()) {
-                    textfields.get("Nimike").setStyle("-fx-border-color: red;" + " -fx-border-width: 1.5px");
+                if (!gui.textIsValidTitle(title.getText())) {
+                    title.setStyle("-fx-border-color: red;" + " -fx-border-width: 1.5px");
                 } else {
-                    textfields.get("Nimike").setStyle("-fx-border-color: green;" + " -fx-border-width: 1.5px");
+                    title.setStyle("");
+                }
+            }
+        });
+
+        // author
+        TextField author = textfields.get("Kirjailija");
+        author.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (!gui.textIsValidAuthorName(author.getText())) {
+                    author.setStyle("-fx-border-color: red;" + " -fx-border-width: 1.5px");
+                }  else {
+                    author.setStyle("");
+                }
+            }
+        });
+
+        // year
+        TextField year = textfields.get("Julkaisuvuosi");
+        year.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (!gui.textIsValidInteger(year.getText())) {
+                    year.setStyle("-fx-border-color: red;" + " -fx-border-width: 1.5px");
+                }  else {
+                    year.setStyle("");
+                }
+            }
+        });
+
+        // pages
+        TextField pages = textfields.get("Sivumäärä");
+        pages.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (!gui.textIsValidInteger(pages.getText())) {
+                    pages.setStyle("-fx-border-color: red;" + " -fx-border-width: 1.5px");
+                }  else {
+                    pages.setStyle("");
+                }
+            }
+        });
+
+        // isbn
+        TextField isbn = textfields.get("ISBN-tunniste");
+        isbn.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (!gui.textIsValidISBN(isbn.getText())) {
+                    isbn.setStyle("-fx-border-color: red;" + " -fx-border-width: 1.5px");
+                }  else {
+                    isbn.setStyle("");
                 }
             }
         });
