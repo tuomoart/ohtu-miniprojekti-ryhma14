@@ -12,17 +12,7 @@ import java.util.*;
  * @author hiira
  */
 public class Logic {
-    private Database database;
     private BookDao dao;
-    
-    public Logic() {
-        try {
-            database = new Database("jdbc:sqlite:database.db");
-            dao = new SQLBookDao(database);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
     
     public Logic(BookDao dao) {
         this.dao = dao;

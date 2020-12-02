@@ -8,6 +8,7 @@ package library.ui.gui;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import library.domain.Logic;
+import library.dao.SQLBookDao;
 
 import java.util.List;
 
@@ -25,21 +26,25 @@ public class Gui extends Application {
         this.logic = logic;
     }
     
-    public Gui() {
-        this.logic = new Logic();
+    public Gui() throws Exception{
+        this.logic = new Logic(new SQLBookDao("jdbc:sqlite:database.db"));
     }
 
     @Override
     public void start(Stage stg) {
         stage = stg;
-        searchView = new SearchView(this, logic);
-        creationView = new CreationView(this);
+        format();
         
         stage.setTitle("Lukuvinkkikirjasto");
         
         //start the application with the search view
         stage.setScene(creationView.getCreationScene());
         stage.show();
+    }
+    
+    public void format() {
+        searchView = new SearchView(this, logic);
+        creationView = new CreationView(this);
     }
 
     public void switchToSearch() {
@@ -56,6 +61,14 @@ public class Gui extends Application {
     
     public Logic getLogic() {
         return this.logic;
+    }
+
+    public SearchView getSearchView() {
+        return searchView;
+    }
+
+    public CreationView getCreationView() {
+        return creationView;
     }
 
     public boolean textIsValidTitle(String text) {

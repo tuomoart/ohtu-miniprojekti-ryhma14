@@ -41,10 +41,10 @@ public class GuiTemporaryTest extends ApplicationTest {
     public void start(Stage stage) throws Exception {
         logic = new Logic(new StubDao());
         Gui gui = new Gui(logic);
+        gui.format();
         
-           // should dependency injection be used here?
-        searchView = new SearchView(gui, logic);
-        creationView = new CreationView(gui);
+        searchView = gui.getSearchView();
+        creationView = gui.getCreationView();
         
         scene = creationView.getCreationScene();
         rootNode = scene.getRoot();

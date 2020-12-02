@@ -19,7 +19,7 @@ public class SQLBookDaoTest {
 
     @Before
     public void setUp() throws SQLException {
-        sqlBookDao = new SQLBookDao(new Database("jdbc:sqlite:testdatabase.db"));
+        sqlBookDao = new SQLBookDao("jdbc:sqlite:testdatabase.db");
     }
 
     @After
