@@ -122,6 +122,10 @@ public class Logic {
             return books;
         }
     }
+
+    public BookDao getDao() {
+        return dao;
+    }
     
     public boolean clearDatabase() {
         return dao.clearDatabase();

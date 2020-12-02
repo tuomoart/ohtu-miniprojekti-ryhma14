@@ -22,6 +22,7 @@ import library.ui.gui.CreationView;
 import library.ui.gui.Gui;
 import library.ui.gui.SearchView;
 import static org.junit.Assert.assertTrue;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.testfx.api.FxAssert.verifyThat;
@@ -34,16 +35,11 @@ import static org.testfx.matcher.control.LabeledMatchers.hasText;
  * @author tuomoart
  */
 public class GuiTest extends ApplicationTest {
-    private Scene scene;
-    private Parent rootNode;
-    
-    private Logic logic;
-    private SearchView searchView;
-    private CreationView creationView;
+    private Gui sovellus;
     
     @Override
     public void start(Stage stage) throws Exception {
-        Gui sovellus = new Gui(new Logic(new SQLBookDao("jdbc:sqlite:testdatabase.db")));
+        sovellus = new Gui(new Logic(new SQLBookDao("jdbc:sqlite:testdatabase.db")));
         
         Application app = Application.class.cast(sovellus);
         app.start(stage);
@@ -62,20 +58,44 @@ public class GuiTest extends ApplicationTest {
         registerPrimaryStage();
     }
     
+    @Before
+    public void setUp() {
+        sovellus.getLogic().getDao().clearDatabase();
+    }
+    
     @Test
     public void canAddBookWithValidName() {
-        enterNameInGui("kirjannimi");
-        
-        guiRespondsWith("\nKirja 'kirjannimi' lisätty");
+        checkThatBookGetsAdded("kirjannimi", "", "", "", "");
     }
     
-    public void enterNameInGui(String name) {
+    @Test
+    public void canAddBookWithAllValidData() {
+        
+    }
+    
+    private void checkThatBookGetsAdded(String name, String writer, String year, String pages, String isbn) {
+        enterValuesForBook(name, writer, year, pages, isbn);
+        clickAddInGui();
+        AddingRespondsWith("\nKirja 'kirjannimi' lisätty");
+    }
+    
+    private void enterValuesForBook(String name, String writer, String year, String pages, String isbn) {
+        enterValueInGui("#Nimike", name);
+        enterValueInGui("#Kirjailija", writer);
+        enterValueInGui("#Julkaisuvuosi", year);
+        enterValueInGui("#Sivumäärä", pages);
+        enterValueInGui("#ISBN-tunniste", isbn);
+    }
+    
+    private void enterValueInGui(String id, String name) {
         clickOn("#Nimike").write(name);
-        clickOn("#add");
-        
     }
     
-    public void guiRespondsWith(String response) {
+    private void clickAddInGui() {
+        clickOn("#add");
+    }
+    
+    private void AddingRespondsWith(String response) {
         verifyThat("#messages", hasText(response));
     }
     
