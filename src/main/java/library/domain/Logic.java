@@ -113,12 +113,26 @@ public class Logic {
     }
     
     public List<Book> getBooks() {
+         List<Book> books = new ArrayList<>();
+        
         try {
-            List<Book> books = dao.getBooks();
+            
+            List<List<String>> data = dao.getBooks();
+            
+            for (List<String> b : data) {
+                String title = b.get(0);
+                String author = b.get(1);
+                String year = b.get(2);
+                String pages = b.get(3);
+                String isbn = b.get(4);
+                
+                Book book = new Book(title, author, year, pages, isbn);
+                books.add(book);
+            }
+            
             return books;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            List<Book> books = new ArrayList<>();
             return books;
         }
     }

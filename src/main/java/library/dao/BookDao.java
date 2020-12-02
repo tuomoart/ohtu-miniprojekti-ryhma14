@@ -17,7 +17,7 @@ public interface BookDao {
     
     boolean create(Book book) throws SQLException;
     
-    List<Book> getBooks() throws SQLException;
+    List<List<String>> getBooks() throws SQLException;
     
     boolean clearDatabase();
     

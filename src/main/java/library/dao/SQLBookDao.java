@@ -6,8 +6,7 @@
 package library.dao;
 import library.domain.Book;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -41,20 +40,21 @@ public class SQLBookDao implements BookDao {
     }
     
     @Override
-    public List<Book> getBooks() throws SQLException {
-        List<Book> books = new ArrayList<>();
+    public List<List<String>> getBooks() throws SQLException {
+        List<List<String>> books = new ArrayList<>();
         Connection connection = database.getConnection();
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM Books");
         ResultSet results = ps.executeQuery();
         
         while (results.next()) {
-            String title = results.getString("title");
-            String author = results.getString("author");
-            String year = results.getString("year");
-            String pages = results.getString("pages");
-            String isbn = results.getString("isbn");
+            List<String> book = new ArrayList<>();
             
-            Book book = new Book(title, author, year, pages, isbn);
+            book.add(results.getString("title"));
+            book.add(results.getString("author"));
+            book.add(results.getString("year"));
+            book.add(results.getString("pages"));
+            book.add(results.getString("isbn"));
+            
             books.add(book);
         }
         connection.close();
