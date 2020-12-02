@@ -7,6 +7,8 @@ package library.domain;
 
 import library.dao.*;
 import java.util.*;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 /**
  *
  * @author hiira
@@ -123,5 +125,17 @@ public class Logic {
     
     public boolean clearDatabase() {
         return dao.clearDatabase();
+    }
+    
+    public List<Book> filteredList(String string) {
+        List<Book> books = getBooks();
+        
+        books.stream()
+                .filter(b -> b.getAuthor().equals(string) 
+                        || b.getISBN().equals(string) 
+                        || b.getYear().equals(string) 
+                        || b.getPages().equals(string));
+        
+        return books;
     }
 }
