@@ -157,6 +157,7 @@ public class CreationView {
         for (String infotype : tips.get("Kirja")) {
             bookLayout.getChildren().add(getQuery(infotype));
         }
+        textfields.get("Nimike").setPromptText("pakollinen tieto");
         return bookLayout;
     }
 
