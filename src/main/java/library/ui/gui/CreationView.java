@@ -48,7 +48,7 @@ public class CreationView {
         // create main layout
         BorderPane mainLayout = new BorderPane();
         mainLayout.setPrefSize(360,420);
-        mainLayout.setPadding(new Insets(10,10,10,10));
+        mainLayout.setPadding(new Insets(10,20,10,20));
 
         // create top bar for search, etc.
         Pane top = getTopBar();
@@ -148,7 +148,7 @@ public class CreationView {
             @Override
             public void handle(ActionEvent event) {
                 selectedTip = (String) tipMenu.getValue();
-                //TODO oikeantyyppisen vinkkityypin Paneen vaihtaminen
+                //TODO oikeantyyppisen vinkkityypin Paneen vaihtaminen, varmaan paras ratkaisu käyttää borderpanen setCenter...
             }
         });
         return tipMenu;
@@ -159,7 +159,17 @@ public class CreationView {
         for (String infotype : tips.get("Kirja")) {
             bookLayout.getChildren().add(getQuery(infotype));
         }
+
+        // title
         textfields.get("Nimike").setPromptText("pakollinen tieto");
+
+        /* not yet supported */
+        /* textfields.get("Nimike").textProperty().addListener((difference, oldValue, newValue) -> {
+            while (true) {
+                textfields.get("Nimike").setStyle("-fx-text-box-border: red;");
+            }
+        }); */
+
         return bookLayout;
     }
 
