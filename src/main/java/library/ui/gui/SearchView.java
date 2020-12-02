@@ -5,12 +5,8 @@
  */
 package library.ui.gui;
 
-import java.util.function.Predicate;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -38,7 +34,6 @@ import library.domain.*;
 public class SearchView {
 
     private Button addNewTipButton;
-    private Button searchLibraryButton;
     private ComboBox tipDropdownlist;
     private TextField searchBox;
     private Logic logic;
@@ -98,7 +93,6 @@ public class SearchView {
         searchLayout.getChildren().add(createDropDownListForTypeOfTip());
         searchLayout.getChildren().add(createSearchBox());
         searchLayout.getChildren().add(createBookTable());
-        //searchLayout.getChildren().add(createListOfResults());
 
         ((Group) scene.getRoot()).getChildren().addAll(searchLayout);
 
@@ -107,11 +101,9 @@ public class SearchView {
 
     public HBox createMenu() {
         HBox menu = new HBox();
-        // this.searchLibraryButton = new Button("Hae lukuvinkkiä");
         this.addNewTipButton = getCreationButton();
         menu.setSpacing(10);
         menu.getChildren().add(addNewTipButton);
-        //menu.getChildren().add(searchLibraryButton);
 
         return menu;
     }
