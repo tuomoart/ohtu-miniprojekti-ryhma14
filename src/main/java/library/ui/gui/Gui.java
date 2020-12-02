@@ -20,10 +20,17 @@ public class Gui extends Application {
     private Stage stage;
     private SearchView searchView;
     private CreationView creationView;
+    
+    public Gui(Logic logic) {
+        this.logic = logic;
+    }
+    
+    public Gui() {
+        this.logic = new Logic();
+    }
 
     @Override
     public void start(Stage stg) {
-        logic = new Logic();    // should dependency injection be used here?
         stage = stg;
         searchView = new SearchView(this, logic);
         creationView = new CreationView(this);
