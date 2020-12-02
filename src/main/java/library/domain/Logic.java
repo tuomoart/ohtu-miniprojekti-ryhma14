@@ -28,36 +28,50 @@ public class Logic {
         this.dao = dao;
     }
     
-    public String addBook(String title, String author, String year, String pages,
+    public List<String> addBook(String title, String author, String year, String pages,
             String ISBN) {
+        
+        List<String> messages = new ArrayList<>();
+        
         try {
+            
+            
             if (title.isBlank()) {
-                return "Otsikko ei saa olla tyhjä";
+                messages.add("Otsikko ei saa olla tyhjä");
             }
             
             if (!textIsValidAuthorName(author)) {
-                return "Kirjailijan nimi ei saa sisältää numeroita";
+                messages.add("Kirjailijan nimi ei saa sisältää numeroita");
             }
             
             if (!textIsValidInteger(year)) {
-                return "Vääränmallinen vuosiluku";
+                messages.add("Vääränmallinen vuosiluku");
             }
             
             if (!textIsValidInteger(pages)) {
-                return "Vääränmallinen sivumäärä";
+                messages.add("Vääränmallinen sivumäärä");
             }
             
             if (!textIsValidISBN(ISBN)) {
-                return "Vääränmallinen ISBN";
+                messages.add("Vääränmallinen ISBN");
+            }
+            
+            if (!messages.isEmpty()) {
+                return messages;
             }
             
             Book book = new Book(title, author, year, pages, ISBN);
             if (dao.create(book)) {
-                return "Kirja '" + title + "' lisätty";
+                messages.add("Kirja '" + title + "' lisätty");
+            } else {
+                messages.add("Ongelma kirjan lisäämisessä");
             }
-            return "Ongelma kirjan lisäämisessä";
+            
+            return messages;
+            
         } catch (Exception e) {
-            return e.getMessage();
+            messages.add(e.getMessage());
+            return messages;
         }
     }
     
@@ -105,5 +119,9 @@ public class Logic {
             List<Book> books = new ArrayList<>();
             return books;
         }
+    }
+    
+    public boolean clearDatabase() {
+        return dao.clearDatabase();
     }
 }

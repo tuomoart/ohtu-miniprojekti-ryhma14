@@ -103,8 +103,11 @@ public class RealCli implements Cli {
         String isbn = scanner.nextLine();
         
         //add book
-        String message = logic.addBook(nameOfBook, author, year, pages, isbn);
-        System.out.println("\n" + message);
+        List <String> messages = logic.addBook(nameOfBook, author, year, pages, isbn);
+        
+        for (String message : messages) {
+            System.out.println("\n" + message);
+        }
     }
     
     @Override

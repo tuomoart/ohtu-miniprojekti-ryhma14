@@ -61,4 +61,16 @@ public class SQLBookDao implements BookDao {
         return books;
     }
     
+    @Override
+    public boolean clearDatabase() {
+        try {
+            Connection connection = database.getConnection();
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM Books");
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
 }
