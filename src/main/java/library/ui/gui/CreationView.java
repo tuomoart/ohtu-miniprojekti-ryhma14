@@ -64,6 +64,7 @@ public class CreationView {
         // create button for adding the tip
         VBox adding = new VBox(20);
         adding.setAlignment(Pos.CENTER);
+        messageLabel.setId("messages");
         messageLabel = new Label("");
         messageLabel.setPrefHeight(100);
         messageLabel.setPrefHeight(100);
@@ -88,6 +89,7 @@ public class CreationView {
 
     private Button getSearchButton() {
         Button searchButton = new Button("Hae");
+        searchButton.setId("search");
         searchButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -99,6 +101,7 @@ public class CreationView {
 
     private Button getAddButton() {
         Button addButton = new Button("Lisää");
+        addButton.setId("add");
         addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -181,6 +184,7 @@ public class CreationView {
         query.getChildren().add(spacer);
         HBox.setHgrow(spacer, Priority.ALWAYS);
         TextField input = new TextField();
+        input.setId(infotype);
         textfields.put(infotype,input);
         query.getChildren().add(input);
         return query;
