@@ -97,8 +97,12 @@ public class LogicTest {
     @Test
     public void getBooksTest() throws Throwable {
         addSomeBooksDirectly();
+        List<List<String>> books = new ArrayList();
+        for (Book book : logic.getBooks()) {
+            books.add(book.toStringList(book));
+        }
         
-        assertEquals(dao.getBooks(), logic.getBooks());
+        assertEquals(dao.getBooks(), books);
     }
     
     @Test
@@ -177,7 +181,7 @@ public class LogicTest {
     public void checkThatGetsAdded(Book book) throws Throwable{
         assertEquals("Kirja '" + book.getTitle() + "' lisätty", tryToAdd(book));
         assertEquals(1, dao.getBooks().size());
-        assertEquals(book, dao.getBooks().get(0));
+        assertEquals(book.toStringList(book), dao.getBooks().get(0));
     }
     
     public String tryToAdd(Book book) {
