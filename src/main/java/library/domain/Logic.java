@@ -7,8 +7,6 @@ package library.domain;
 
 import library.dao.*;
 import java.util.*;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 /**
  *
  * @author hiira

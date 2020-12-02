@@ -6,7 +6,6 @@
 package library.dao;
 
 import java.sql.SQLException;
-import library.domain.Book;
 import java.util.List;
 
 /**
