@@ -7,22 +7,26 @@ package library.ui.gui;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import library.domain.Logic;
+
 /**
  *
  * @author hiira
  */
 public class Gui extends Application {
+    private Logic logic;
     private Stage stage;
     private SearchView searchView;
     private CreationView creationView;
-    
+
     @Override
     public void start(Stage stg) {
-        this.stage = stg;
-        this.searchView = new SearchView();
-        this.creationView = new CreationView(this);
+        logic = new Logic();    // should dependency injection be used here?
+        stage = stg;
+        searchView = new SearchView();
+        creationView = new CreationView(this);
         
-        this.stage.setTitle("Lukuvinkkikirjasto");
+        stage.setTitle("Lukuvinkkikirjasto");
         
         //start the application with the search view
         stage.setScene(creationView.getCreationScene());
@@ -37,4 +41,7 @@ public class Gui extends Application {
         stage.setScene(creationView.getCreationScene());
     }
 
+    public void addBook(String title, String author, String year, String pages, String ISBN) {
+        logic.addBook(title, author, year, pages, ISBN);
+    }
 }

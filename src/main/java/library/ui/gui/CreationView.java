@@ -23,6 +23,21 @@ import java.util.*;
 public class CreationView {
 
     private Gui gui;
+    private String selectedTip = "Kirja";
+    private Map<String,List<String>> tips = new HashMap<>() {
+        {
+            put("Kirja", new ArrayList<String>() {
+                {
+                    add("Nimike");
+                    add("Kirjailija");
+                    add("Julkaisuvuosi");
+                    add("Sivumäärä");
+                    add("ISBN-tunniste");
+                }
+            });
+        }
+    };
+    private Map<String,TextField> textfields = new HashMap<>();
 
     public CreationView(Gui gui) {
         this.gui = gui;
@@ -80,34 +95,52 @@ public class CreationView {
         addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //TODO logiikan kutsuminen
+                addTip();
             }
         });
         return addButton;
     }
 
+    private void addTip() {
+        if (selectedTip.equals("Kirja")) {
+            addBook();
+        }
+        empty();
+    }
+
+    private void addBook() {
+        String name = textfields.get("Nimike").getText();
+        String author = textfields.get("Kirjailija").getText();
+        String year = textfields.get("Julkaisuvuosi").getText();
+        String pages = textfields.get("Sivumäärä").getText();
+        String ISBN = textfields.get("ISBN-tunniste").getText();
+        gui.addBook(name, author, year, pages, ISBN);
+    }
+
+    private void empty() {
+        for (TextField textfield : textfields.values()) {
+            textfield.setText("");
+        }
+    }
+
     private ComboBox getTipMenu() {
-        Map tipTypes = getTipTypes();
-        ComboBox tipMenu = new ComboBox(FXCollections.observableArrayList(tipTypes.keySet()));
+        ComboBox tipMenu = new ComboBox(FXCollections.observableArrayList(tips.keySet()));
         tipMenu.setPromptText("Valitse lisättävän vinkin tyyppi");
         tipMenu.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                selectedTip = (String) tipMenu.getValue();
                 //TODO oikeantyyppisen vinkkityypin Paneen vaihtaminen
             }
         });
         return tipMenu;
     }
 
-    private Map getTipTypes() {
-        HashMap<String,Pane> types = new HashMap<>();
-        types.put("Kirja",getBookCreationLayout());
-        return types;
-    }
-
     private VBox getBookCreationLayout() {
         VBox bookLayout = new VBox(5);
-        bookLayout.getChildren().addAll(getTitleQuery(),getAuthorQuery(),getYearQuery(),getPagesQuery(),getISBNQuery());
+        for (String infotype : tips.get("Kirja")) {
+            bookLayout.getChildren().add(getQuery(infotype));
+        }
         return bookLayout;
     }
 
@@ -119,27 +152,8 @@ public class CreationView {
         query.getChildren().add(spacer);
         HBox.setHgrow(spacer, Priority.ALWAYS);
         TextField input = new TextField();
+        textfields.put(infotype,input);
         query.getChildren().add(input);
         return query;
-    }
-
-    private HBox getTitleQuery() {
-        return getQuery("Nimike");
-    }
-
-    private HBox getAuthorQuery() {
-        return getQuery("Kirjailija");
-    }
-
-    private HBox getYearQuery() {
-        return getQuery("Julkaisuvuosi");
-    }
-
-    private HBox getPagesQuery() {
-        return getQuery("Sivumäärä");
-    }
-
-    private HBox getISBNQuery() {
-        return getQuery("ISBN-tunniste");
     }
 }
