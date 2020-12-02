@@ -32,7 +32,7 @@ import static org.testfx.matcher.control.LabeledMatchers.hasText;
  *
  * @author tuomoart
  */
-public class AGuiTemporaryTest extends ApplicationTest {
+public class GuiTest extends ApplicationTest {
     private Scene scene;
     private Parent rootNode;
     

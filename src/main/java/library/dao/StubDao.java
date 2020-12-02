@@ -16,7 +16,7 @@ import library.domain.Book;
 public class StubDao implements BookDao {
     private ArrayList<List<String>> database;
 
-    public StubDao() {
+    public StubDao()  {
         format();
     }
 
