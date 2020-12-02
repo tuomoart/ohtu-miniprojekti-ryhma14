@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import library.dao.SQLBookDao;
 import library.dao.StubDao;
 import library.domain.Logic;
 import library.ui.gui.CreationView;
@@ -42,7 +43,7 @@ public class GuiTest extends ApplicationTest {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Gui sovellus = new Gui(new Logic(new StubDao()));
+        Gui sovellus = new Gui(new Logic(new SQLBookDao("jdbc:sqlite:testdatabase.db")));
         
         Application app = Application.class.cast(sovellus);
         app.start(stage);
