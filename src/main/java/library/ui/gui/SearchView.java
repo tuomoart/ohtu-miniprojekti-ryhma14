@@ -61,7 +61,7 @@ public class SearchView {
         FilteredList<Book> flBooks = filteredBooks("");
         table.setItems(flBooks);
         table.getColumns().addAll(authorCol, titleCol, yearCol, pagesCol, isbnCol);
-        
+
         searchBox.setOnKeyReleased(keyEvent
                 -> {
             table.setItems(filteredBooks(searchBox.getText()));
@@ -87,7 +87,7 @@ public class SearchView {
         column.setCellValueFactory(new PropertyValueFactory<Book, String>(contents));
         return column;
     }
-    
+
     public Scene createSearchScene() {
         Scene scene = new Scene(new Group());
 
