@@ -22,20 +22,27 @@ import static org.mockito.Mockito.*;
  */
 public class LogicTest {
     public class StubDao implements BookDao {
-        private ArrayList<Book> database;
+        private ArrayList<List<String>> database;
         
         public StubDao() {
             format();
         }
         
         @Override
-        public boolean create(Book book) {
-            database.add(book);
+        public boolean create(String title, String author, String year,
+            String pages, String isbn) {
+            ArrayList<String> bookStrings = new ArrayList();
+            bookStrings.add(title);
+            bookStrings.add(author);
+            bookStrings.add(year);
+            bookStrings.add(pages);
+            bookStrings.add(isbn);
+            database.add(bookStrings);
             return true;
         }
         
         @Override
-        public List<Book> getBooks() {
+        public List<List<String>> getBooks() {
             return database;
         }
         
@@ -180,7 +187,14 @@ public class LogicTest {
     
     public void addSomeBooksDirectly() throws Throwable {
         for (Book book: someBooks) {
-            dao.create(book);
+            dao.create(book.getTitle(), book.getAuthor(), book.getYear(), book.getPages(), book.getISBN());
         }
+    }
+
+    @Test
+    public void noBookDataAfterClearDatabase() throws Throwable {
+        tryToAdd(someBooks.get(0));
+        logic.clearDatabase();
+        assertTrue(dao.getBooks().isEmpty());
     }
 }
