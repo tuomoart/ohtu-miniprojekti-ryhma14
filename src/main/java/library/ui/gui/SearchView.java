@@ -43,44 +43,28 @@ public class SearchView {
     private TextField searchBox;
     private Logic logic;
     private Gui gui;
-    private ObservableList<Book> data;
 
     public SearchView(Gui gui, Logic logic) {
         this.gui = gui;
         this.logic = logic;
     }
 
-    public VBox createBookTable() {
-        this.data = FXCollections.observableArrayList(logic.getBooks());
+    private VBox createBookTable() {
         TableView<Book> table = new TableView<>();
-
         final Label label = new Label("Kirjat");
-
         table.setEditable(true);
-
         TableColumn authorCol = createTableColumn("Author", "author");
         TableColumn titleCol = createTableColumn("Title", "title");
         TableColumn pagesCol = createTableColumn("Pages", "pages");
         TableColumn yearCol = createTableColumn("Year", "year");
         TableColumn isbnCol = createTableColumn("ISBN", "ISBN");
-        FilteredList<Book> filteredBooks = new FilteredList(data, p -> true);
-        table.setItems(filteredBooks);
+        FilteredList<Book> flBooks = filteredBooks("");
+        table.setItems(flBooks);
         table.getColumns().addAll(authorCol, titleCol, yearCol, pagesCol, isbnCol);
-
-        ObjectProperty<Predicate<Book>> filter = new SimpleObjectProperty<>();
-
-        filter.bind(Bindings.createObjectBinding(()
-                -> book -> book.getAuthor().toLowerCase().contains(searchBox.getText().toLowerCase())
-                || book.getTitle().toLowerCase().contains(searchBox.getText().toLowerCase())
-                || book.getPages().toLowerCase().contains(searchBox.getText().toLowerCase())
-                || book.getISBN().toLowerCase().contains(searchBox.getText().toLowerCase())
-                || book.getYear().toLowerCase().contains(searchBox.getText().toLowerCase()),
-                searchBox.textProperty()));
-
+        
         searchBox.setOnKeyReleased(keyEvent
                 -> {
-            filteredBooks.predicateProperty().bind(Bindings.createObjectBinding(
-                    () -> filter.get()));
+            table.setItems(filteredBooks(searchBox.getText()));
         });
 
         final VBox vbox = new VBox();
@@ -90,7 +74,13 @@ public class SearchView {
 
         return vbox;
     }
-    
+
+    private FilteredList<Book> filteredBooks(String filter) {
+        ObservableList<Book> data = FXCollections.observableArrayList(logic.filteredList(filter));
+        FilteredList<Book> flBooks = new FilteredList(data, p -> true);
+        return flBooks;
+    }
+
     private TableColumn createTableColumn(String label, String contents) {
         TableColumn column = new TableColumn(label);
         column.setMinWidth(100);
