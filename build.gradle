@@ -8,6 +8,8 @@ plugins {
 
 repositories {
     jcenter()
+    mavenCentral()
+    google()
 }
 
 project.ext {
