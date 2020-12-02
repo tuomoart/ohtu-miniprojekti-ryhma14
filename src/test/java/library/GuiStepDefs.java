@@ -40,10 +40,10 @@ public class GuiStepDefs extends ApplicationTest {
     public void start(Stage stage) throws Exception {
         logic = new Logic(new StubDao());
         Gui gui = new Gui(logic);
+        gui.format();
         
-            // should dependency injection be used here?
-        searchView = new SearchView(gui, logic);
-        creationView = new CreationView(gui);
+        searchView = gui.getSearchView();
+        creationView = gui.getCreationView();
         
         scene = creationView.getCreationScene();
         rootNode = scene.getRoot();
@@ -55,13 +55,7 @@ public class GuiStepDefs extends ApplicationTest {
     
     @Given("^command new book is selected in gui$")
     public void commandNewBookInGui() {
-//        Button[] buttons = from(rootNode).lookup(".button").queryAll().toArray(new Button[0]);
-//        
-//        for (Button b: buttons) {
-//            if (b.getText().equals("Lisää uusi lukuvinkki")) {
-//                clickOn(b);
-//            }
-//        }
+
     }
     
     @When("name {string} is entered in gui")

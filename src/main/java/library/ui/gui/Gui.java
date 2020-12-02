@@ -32,14 +32,18 @@ public class Gui extends Application {
     @Override
     public void start(Stage stg) {
         stage = stg;
-        searchView = new SearchView(this, logic);
-        creationView = new CreationView(this);
+        format();
         
         stage.setTitle("Lukuvinkkikirjasto");
         
         //start the application with the search view
         stage.setScene(creationView.getCreationScene());
         stage.show();
+    }
+    
+    public void format() {
+        searchView = new SearchView(this, logic);
+        creationView = new CreationView(this);
     }
 
     public void switchToSearch() {
@@ -56,6 +60,14 @@ public class Gui extends Application {
     
     public Logic getLogic() {
         return this.logic;
+    }
+
+    public SearchView getSearchView() {
+        return searchView;
+    }
+
+    public CreationView getCreationView() {
+        return creationView;
     }
 
     public boolean textIsValidTitle(String text) {
