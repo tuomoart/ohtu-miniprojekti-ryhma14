@@ -30,7 +30,7 @@ import static org.testfx.matcher.control.LabeledMatchers.hasText;
  *
  * @author tuomoart
  */
-public class GuiTest extends ApplicationTest {
+public class GuiCreationTest extends ApplicationTest {
     private Gui sovellus;
     
     @Override
@@ -119,8 +119,8 @@ public class GuiTest extends ApplicationTest {
         enterValueInGui("#ISBN-tunniste", isbn);
     }
     
-    private void enterValueInGui(String id, String name) {
-        clickOn(id).write(name);
+    private void enterValueInGui(String id, String value) {
+        clickOn(id).write(value);
     }
     
     private void clickAddInGui() {

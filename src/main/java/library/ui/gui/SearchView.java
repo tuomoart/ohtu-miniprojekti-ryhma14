@@ -47,6 +47,7 @@ public class SearchView {
 
     private VBox createBookTable() {
         TableView<Book> table = new TableView<>();
+        table.setId("list");
         final Label label = new Label("Kirjat");
         table.setEditable(true);
         TableColumn authorCol = createTableColumn("Author", "author");
@@ -136,6 +137,7 @@ public class SearchView {
         searchBoxLayout.setAlignment(Pos.CENTER);
         this.searchBox = new TextField();
 
+        searchBox.setId("searchBox");
         searchBox.setPromptText("Hakusana: ");
         searchBoxLayout.getChildren().add(this.searchBox);
 
