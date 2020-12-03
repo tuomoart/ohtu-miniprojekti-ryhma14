@@ -8,6 +8,7 @@ package library.domain;
 import java.util.ArrayList;
 import java.util.List;
 import library.dao.BookDao;
+import library.dao.StubDao;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -20,43 +21,7 @@ import static org.mockito.Mockito.*;
  *
  * @author tuomoart
  */
-public class LogicTest {
-    public class StubDao implements BookDao {
-        private ArrayList<List<String>> database;
-        
-        public StubDao() {
-            format();
-        }
-        
-        @Override
-        public boolean create(String title, String author, String year,
-            String pages, String isbn) {
-            ArrayList<String> bookStrings = new ArrayList();
-            bookStrings.add(title);
-            bookStrings.add(author);
-            bookStrings.add(year);
-            bookStrings.add(pages);
-            bookStrings.add(isbn);
-            database.add(bookStrings);
-            return true;
-        }
-        
-        @Override
-        public List<List<String>> getBooks() {
-            return database;
-        }
-        
-        public void format() {
-            this.database = new ArrayList();
-        }
-
-        @Override
-        public boolean clearDatabase() {
-            format();
-            return true;
-        }
-    }
-    
+public class LogicTest {   
     
     private BookDao dao;
     private Logic logic;
