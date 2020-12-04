@@ -59,13 +59,13 @@ public class Book extends Tip {
         this.ISBN = ISBN;
     }
 
-    public List<String> toStringList(Book book) {
+    public List<String> toStringList() {
         List<String> strings = new ArrayList();
-        strings.add(book.getTitle());
-        strings.add(book.getAuthor());
-        strings.add(book.getYear());
-        strings.add(book.getPages());
-        strings.add(book.getISBN());
+        strings.add(this.getTitle());
+        strings.add(author);
+        strings.add(year);
+        strings.add(pages);
+        strings.add(ISBN);
         return strings;
     }
 
