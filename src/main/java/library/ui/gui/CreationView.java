@@ -48,7 +48,7 @@ public class CreationView {
     public Scene getCreationScene() {
         // create main layout
         BorderPane mainLayout = new BorderPane();
-        mainLayout.setPrefSize(541, 520);
+        mainLayout.setPrefSize(542, 520);
         mainLayout.setPadding(new Insets(10, 20, 10, 20));
 
         // create top bar for search, etc.

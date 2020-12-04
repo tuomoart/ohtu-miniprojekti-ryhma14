@@ -47,6 +47,24 @@ public class SearchView {
         this.logic = logic;
     }
 
+    public Scene createSearchScene() {
+        Scene scene = new Scene(new Group());
+
+        VBox searchLayout = new VBox(10);
+        searchLayout.setPadding(new Insets(10,20,10,20));
+        searchLayout.setAlignment(Pos.CENTER);
+        searchLayout.getChildren().add(createMenu());
+        searchLayout.getChildren().add(createTitle());
+        searchLayout.getChildren().add(createDropDownListForTypeOfTip());
+        searchLayout.getChildren().add(createSearchBox());
+        searchLayout.getChildren().add(createBookTable());
+        searchLayout.setPrefSize(542,520);
+
+        ((Group) scene.getRoot()).getChildren().addAll(searchLayout);
+
+        return scene;
+    }
+
     private VBox createBookTable() {
         TableView<Book> table = new TableView<>();
         table.setId("list");
@@ -86,24 +104,6 @@ public class SearchView {
         column.setMinWidth(100);
         column.setCellValueFactory(new PropertyValueFactory<Book, String>(contents));
         return column;
-    }
-
-    public Scene createSearchScene() {
-        Scene scene = new Scene(new Group());
-
-        VBox searchLayout = new VBox(10);
-        searchLayout.setPadding(new Insets(10,20,10,20));
-        searchLayout.setAlignment(Pos.CENTER);
-        searchLayout.getChildren().add(createMenu());
-        searchLayout.getChildren().add(createTitle());
-        searchLayout.getChildren().add(createDropDownListForTypeOfTip());
-        searchLayout.getChildren().add(createSearchBox());
-        searchLayout.getChildren().add(createBookTable());
-        searchLayout.setPrefSize(541,520);
-
-        ((Group) scene.getRoot()).getChildren().addAll(searchLayout);
-
-        return scene;
     }
 
     public HBox createMenu() {
