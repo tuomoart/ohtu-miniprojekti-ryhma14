@@ -23,6 +23,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import library.domain.Book;
@@ -68,7 +70,6 @@ public class SearchView {
 
         final VBox vbox = new VBox();
         vbox.setSpacing(5);
-        vbox.setPadding(new Insets(10, 0, 0, 10));
         vbox.getChildren().addAll(label, table);
 
         return vbox;
@@ -90,13 +91,15 @@ public class SearchView {
     public Scene createSearchScene() {
         Scene scene = new Scene(new Group());
 
-        VBox searchLayout = new VBox();
-        searchLayout.setSpacing(10);
+        VBox searchLayout = new VBox(10);
+        searchLayout.setPadding(new Insets(10,20,10,20));
+        searchLayout.setAlignment(Pos.CENTER);
         searchLayout.getChildren().add(createMenu());
         searchLayout.getChildren().add(createTitle());
         searchLayout.getChildren().add(createDropDownListForTypeOfTip());
         searchLayout.getChildren().add(createSearchBox());
         searchLayout.getChildren().add(createBookTable());
+        searchLayout.setPrefSize(541,520);
 
         ((Group) scene.getRoot()).getChildren().addAll(searchLayout);
 
@@ -105,6 +108,9 @@ public class SearchView {
 
     public HBox createMenu() {
         HBox menu = new HBox();
+        Region spacer = new Region();
+        menu.getChildren().add(spacer);
+        HBox.setHgrow(spacer, Priority.ALWAYS);
         this.addNewTipButton = getCreationButton();
         menu.setSpacing(10);
         menu.getChildren().add(addNewTipButton);

@@ -14,6 +14,7 @@ import javafx.scene.layout.*;
 
 import java.util.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Font;
 
 /**
  * for getting the javafx scene for adding new tips to the library
@@ -47,7 +48,7 @@ public class CreationView {
     public Scene getCreationScene() {
         // create main layout
         BorderPane mainLayout = new BorderPane();
-        mainLayout.setPrefSize(360, 420);
+        mainLayout.setPrefSize(541, 520);
         mainLayout.setPadding(new Insets(10, 20, 10, 20));
 
         // create top bar for search, etc.
@@ -55,9 +56,9 @@ public class CreationView {
         mainLayout.setTop(top);
 
         // create vbox for tips
-        VBox tip = new VBox(20);
+        VBox tip = new VBox(50);
         tip.setAlignment(Pos.CENTER);
-        tip.getChildren().addAll(getTipMenu(), getBookCreationLayout());
+        tip.getChildren().addAll(getTitle(), getTipMenu(), getBookCreationLayout());
         BorderPane.setAlignment(tip, Pos.BOTTOM_CENTER);
         mainLayout.setCenter(tip);
 
@@ -142,6 +143,12 @@ public class CreationView {
         for (TextField textfield : textfields.values()) {
             textfield.setText("");
         }
+    }
+
+    private Label getTitle() {
+        Label title = new Label("Lisää lukuvinkki");
+        title.setFont(Font.font("Arial", 20));
+        return title;
     }
 
     private ComboBox getTipMenu() {
