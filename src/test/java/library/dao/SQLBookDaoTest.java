@@ -3,7 +3,6 @@ package library.dao;
 
 import java.sql.SQLException;
 import java.util.List;
-import library.domain.Book;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,4 +44,10 @@ public class SQLBookDaoTest {
         assertEquals("123-0123456789", createdBook.get(4));
     }
 
+    @Test
+    public void canClearDatabase() throws SQLException {
+        sqlBookDao.create("Book", "Author", "1970", "420", "");
+        assertTrue(sqlBookDao.clearDatabase());
+        assertTrue(sqlBookDao.getBooks().isEmpty());
+    }
 }
