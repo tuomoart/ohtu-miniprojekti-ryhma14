@@ -4,6 +4,7 @@ plugins {
     id 'checkstyle'
     id 'jacoco'
     id 'org.openjfx.javafxplugin' version '0.0.8'
+    id "com.github.johnrengelman.shadow" version "6.1.0"
 }
 
 repositories {
@@ -33,6 +34,7 @@ javafx {
 
 application {
     mainClass = 'library.Main'
+    mainClassName = 'library.Main'
 }
 
 run {
