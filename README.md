@@ -4,7 +4,7 @@
 
 [Backlogs](https://docs.google.com/spreadsheets/d/1_j0GMxQzZxuQtvnp0Q1qjaKo_pBgB3EL9K5jWWytnto/edit?usp=sharing)
 
-[Release (Sprint 1)](https://github.com/tuomoart/ohtu-miniprojekti-ryhma14/releases)
+[Release](https://github.com/tuomoart/ohtu-miniprojekti-ryhma14/releases)
 
 ## Dokumentaatio
 
