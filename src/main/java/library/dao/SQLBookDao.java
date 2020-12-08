@@ -34,7 +34,7 @@ public class SQLBookDao implements BookDao {
             ps.setString(5, isbn);
             ps.executeUpdate();
             connection.close();
-        } catch (SQLException e) {;
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }
