@@ -137,11 +137,11 @@ public class GuiSearchTest extends ApplicationTest {
         
         someBooks = new ArrayList();
         
-        someBooks.add( new Book("Book with all data", "A. AuthorI", "2000", "100", "978-951-98548-9-2"));
-        someBooks.add( new Book("Find By Name", "", "", "", ""));
-        someBooks.add( new Book("Some Name", "Find by author", "", "", ""));
-        someBooks.add( new Book("Some Other Name", "", "2001", "", ""));
-        someBooks.add( new Book("Some Third Name", "", "2001", "", ""));
+        someBooks.add( new Book("Book with all data", "b-1", "A. AuthorI", "2000", "100", "978-951-98548-9-2"));
+        someBooks.add( new Book("Find By Name", "b-2", "", "", "", ""));
+        someBooks.add( new Book("Some Name", "b-3", "Find by author", "", "", ""));
+        someBooks.add( new Book("Some Other Name", "b-4", "", "2001", "", ""));
+        someBooks.add( new Book("Some Third Name", "b-5", "", "2001", "", ""));
         
         someBooks.forEach((b) -> {
             l.addBook(b.getTitle(), b.getAuthor(), b.getYear(), b.getPages(), b.getISBN());

@@ -21,7 +21,7 @@ public class SQLBookDao implements BookDao {
     }
 
     @Override
-    public boolean create(String title, String author, String year, String pages,
+    public boolean addBookToDatabase(String title, String author, String year, String pages,
             String isbn) throws SQLException {
         try {
             Connection connection = database.getConnection();
@@ -34,7 +34,8 @@ public class SQLBookDao implements BookDao {
             ps.setString(5, isbn);
             ps.executeUpdate();
             connection.close();
-        } catch (SQLException e) {
+        } catch (SQLException e) {;
+            System.out.println(e.getMessage());
             return false;
         }
         return true;
@@ -51,17 +52,19 @@ public class SQLBookDao implements BookDao {
             while (results.next()) {
                 List<String> book = new ArrayList<>();
 
+                
                 book.add(results.getString("title"));
                 book.add(results.getString("author"));
                 book.add(results.getString("year"));
                 book.add(results.getString("pages"));
                 book.add(results.getString("isbn"));
-
+                
                 books.add(book);
             }
             connection.close();
             return books;
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             return books;
         }
     }

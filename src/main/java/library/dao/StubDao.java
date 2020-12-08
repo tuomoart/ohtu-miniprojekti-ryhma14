@@ -21,7 +21,7 @@ public class StubDao implements BookDao {
     }
 
     @Override
-    public boolean create(String title, String author, String year,
+    public boolean addBookToDatabase(String title, String author, String year,
         String pages, String isbn) {
         ArrayList<String> bookStrings = new ArrayList();
         bookStrings.add(title);

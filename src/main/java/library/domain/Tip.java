@@ -11,9 +11,13 @@ package library.domain;
  */
 public class Tip {
     private String title;
+    private boolean read;
+    private final String id;
     
-    public Tip(String title) {
+    public Tip(String title, String id) {
         this.title = title;
+        this.id = id;
+        this.read = false;
     }
 
     public String getTitle() {
@@ -22,6 +26,18 @@ public class Tip {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+    
+    public boolean isRead() {
+        return read;
+    }
+    
+    public void setAsRead() {
+        this.read = true;
+    }
+    
+    public String getId() {
+        return id;
     }
     
     @Override

@@ -28,13 +28,13 @@ public class SQLBookDaoTest {
 
     @Test
     public void canAddBook() throws SQLException {
-        boolean created = sqlBookDao.create("How to write tests", "Some Person", "2020", "100", "012-0123456789");
+        boolean created = sqlBookDao.addBookToDatabase("How to write tests", "Some Person", "2020", "100", "012-0123456789");
         assertTrue(created);
     }
 
     @Test
     public void createdBookHasCorrectData() throws SQLException {
-        sqlBookDao.create("Test Book", "Author", "2020", "20", "123-0123456789");
+        sqlBookDao.addBookToDatabase("Test Book", "Author", "2020", "20", "123-0123456789");
         List<List<String>> books = sqlBookDao.getBooks();
         List<String> createdBook = books.get(books.size()-1);
         assertEquals("Test Book", createdBook.get(0));
@@ -46,7 +46,7 @@ public class SQLBookDaoTest {
 
     @Test
     public void canClearDatabase() throws SQLException {
-        sqlBookDao.create("Book", "Author", "1970", "420", "");
+        sqlBookDao.addBookToDatabase("Book", "Author", "1970", "420", "");
         assertTrue(sqlBookDao.clearDatabase());
         assertTrue(sqlBookDao.getBooks().isEmpty());
     }
