@@ -66,6 +66,7 @@ public class Book extends Tip {
         strings.add(year);
         strings.add(pages);
         strings.add(ISBN);
+        strings.add(getId());
         strings.add(isRead().toString());
         return strings;
     }

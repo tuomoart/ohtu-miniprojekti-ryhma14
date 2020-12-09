@@ -30,7 +30,7 @@ public class StubDao implements BookDao {
         bookStrings.add(year);
         bookStrings.add(pages);
         bookStrings.add(isbn);
-        bookStrings.add(String.valueOf(this.id));
+        bookStrings.add("b-" + String.valueOf(this.id));
         this.id++;
         bookStrings.add(read.toString());
         database.add(bookStrings);
