@@ -142,6 +142,7 @@ public class Logic {
         
         boolean success = false;
         if (arr[0].equals("b")) {
+            System.out.println("lol");
             success = dao.toggleRead(idval);
         }
         
