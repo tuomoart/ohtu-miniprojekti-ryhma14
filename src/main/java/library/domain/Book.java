@@ -72,17 +72,6 @@ public class Book extends Tip {
     }
 
     @Override
-    public String toString() {
-        String result = "Otsikko: " + super.getTitle() + "\n";
-        result += "Kirjailija: " + author + "\n";
-        result += "Julkaisuvuosi: " + year + "\n";
-        result += "Sivuja: " + pages + "\n";
-        result += "ISBN: " + ISBN;
-        
-        return result;
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
