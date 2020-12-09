@@ -5,8 +5,6 @@
  */
 package library.ui.gui;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.collections.FXCollections;
@@ -20,21 +18,16 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.util.Callback;
 import library.domain.Book;
 import library.domain.*;
 
@@ -181,8 +174,6 @@ public class SearchView {
     }
 
     public BorderPane createSearchBoxAndModifyingButtons() {
-        //HBox searchBoxLayout = new HBox();
-        //searchBoxLayout.setAlignment(Pos.CENTER);
         BorderPane searchBoxLayout = new BorderPane();
         
         this.searchBox = new TextField();
@@ -239,6 +230,7 @@ public class SearchView {
     
     private void updateTable() {
         table.setItems(filteredBooks(searchBox.getText()));
+        table.refresh();
     }
     
     private Button getCreationButton() {
