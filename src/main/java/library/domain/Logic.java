@@ -137,6 +137,8 @@ public class Logic {
             
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            
+            books.add(new Book(e.getMessage(),"","","","","",false));
             return books;
         }  
     }

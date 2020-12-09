@@ -25,13 +25,13 @@ public class StubDao implements BookDao {
     public boolean addBookToDatabase(String title, String author, String year,
         String pages, String isbn, Boolean read) {
         ArrayList<String> bookStrings = new ArrayList();
-        bookStrings.add(String.valueOf(this.id));
-        this.id++;
         bookStrings.add(title);
         bookStrings.add(author);
         bookStrings.add(year);
         bookStrings.add(pages);
         bookStrings.add(isbn);
+        bookStrings.add(String.valueOf(this.id));
+        this.id++;
         bookStrings.add(read.toString());
         database.add(bookStrings);
         return true;
@@ -57,7 +57,7 @@ public class StubDao implements BookDao {
     public boolean remove(int id) {
         String idString = String.valueOf(id);
         for (List<String> l : database) {
-            if (l.get(0).equals(idString)) {
+            if (l.get(5).equals(idString)) {
                 database.remove(l);
                 return true;
             }
@@ -69,7 +69,7 @@ public class StubDao implements BookDao {
     public boolean toggleRead(int id) {
         String idString = String.valueOf(id);
          for (List<String> l : database) {
-            if (l.get(0).equals(idString)) {
+            if (l.get(5).equals(idString)) {
                 if (l.get(6).equals("0")) {
                     l.set(6, "1");
                 } else {
