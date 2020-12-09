@@ -44,8 +44,8 @@ public class LogicTest {
         logic = new Logic(dao);
         
         someBooks = new ArrayList();
-        someBooks.add(new Book("Book with all data", "b-10", "A. AuthorI", "2000", "100", "978-951-98548-9-2", false));
-        someBooks.add(new Book("Book with minimal data", "b-2", "", "", "", "", false));
+        someBooks.add(new Book("Book with all data", "b-0", "A. AuthorI", "2000", "100", "978-951-98548-9-2", false));
+        someBooks.add(new Book("Book with minimal data", "b-0", "", "", "", "", false));
         someBooks.add(new Book("Book with incorrect author", "b-3", "Author1","","","", false));
         someBooks.add(new Book("Book with incorrect year", "b-4", "Author I", "123S", "", "", false));
         someBooks.add(new Book("Book with incorrect pages", "b-5", "AuthorII", "", "I0", "", false));
@@ -152,6 +152,7 @@ public class LogicTest {
     public void checkThatGetsAdded(Book book) throws Throwable{
         assertEquals("Kirja '" + book.getTitle() + "' lisätty", tryToAdd(book));
         assertEquals(1, dao.getBooks().size());
+        book = new Book(book.getTitle(), book.getId().substring(2), book.getAuthor(), book.getYear(), book.getPages(), book.getISBN(), book.isRead());
         assertEquals(book.toStringList(), dao.getBooks().get(0));
     }
     
