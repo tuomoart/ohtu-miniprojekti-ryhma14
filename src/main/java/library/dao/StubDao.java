@@ -68,7 +68,7 @@ public class StubDao implements BookDao {
     @Override
     public boolean toggleRead(int id) {
         String idString = String.valueOf(id);
-         for (List<String> l : database) {
+        for (List<String> l : database) {
             if (l.get(5).equals(idString)) {
                 if (l.get(6).equals("0")) {
                     l.set(6, "1");
