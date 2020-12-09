@@ -68,7 +68,7 @@ public class SearchView {
         searchLayout.getChildren().add(createSearchBoxAndModifyingButtons());
         searchLayout.getChildren().add(createBookTable());
         
-        searchLayout.setPrefSize(604,520);
+        searchLayout.setPrefSize(642,520);
 
         ((Group) scene.getRoot()).getChildren().addAll(searchLayout);
 
@@ -85,8 +85,8 @@ public class SearchView {
         TableColumn authorCol = createTableColumn("Kirjailija", "author");
         TableColumn titleCol = createTableColumn("Nimike", "title");
         TableColumn pagesCol = createTableColumn("Sivumäärä", "pages");
-        TableColumn yearCol = createTableColumn("Julkaisuvuosi", "year");
-        TableColumn isbnCol = createTableColumn("ISBN-tunniste", "ISBN");
+        TableColumn yearCol = createTableColumn("Vuosi", "year");
+        TableColumn isbnCol = createTableColumn("ISBN", "ISBN");
         TableColumn readCol = createTableColumn("Luettu", "read");
         
         FilteredList<Tip> flBooks = filteredBooks("");
@@ -148,7 +148,7 @@ public class SearchView {
         this.tipDropdownlist = new ComboBox();
 
         dropdownlistLayout.setAlignment(Pos.CENTER);
-        tipDropdownlist.getItems().addAll("Kirja","Podcast","Url");
+        tipDropdownlist.getItems().addAll("Kirja");
         tipDropdownlist.getSelectionModel().selectFirst();
 
         dropdownlistLayout.getChildren().add(new Label("Vinkkityyppi: "));
@@ -158,15 +158,8 @@ public class SearchView {
             @Override
             public void handle(ActionEvent event) {
                 String tip = (String) tipDropdownlist.getValue();
-                
-                if (tip.equals("Kirja")) {
-                    createBookTable();
-                } else if (tip.equals("Podcast")) {
-                    //createPodcastTable();
-                } else {
-                    //createUrlTable();
-                }
-                
+                //tänne muut vinkkityypit, jos ehtii
+                updateTable();
             }
         });
         
