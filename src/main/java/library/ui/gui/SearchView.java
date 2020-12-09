@@ -116,39 +116,6 @@ public class SearchView {
     
     
     
-    
-    /* UNOHDETAAN TOISTAISEKSI :)
-    
-    private void createPodcastTable() {
-        final Label title = new Label("Podcastit");
-        
-        
-        final VBox vbox = new VBox();
-        vbox.setSpacing(5);
-        //vbox.getChildren().addAll(title, table);
-
-        this.tipTable = vbox;
-    }
-    
-    
-    private void createUrlTable() {
-        TableView<Tip> table = new TableView<>();
-        final Label title = new Label("Linkit");
-        
-        table.setEditable(true);
-        TableColumn linkCol = createTableColumn("Linkki", "link");
-        TableColumn commentCol = createTableColumn("Kommentti", "comment");
-        table.getColumns().addAll(linkCol, commentCol);
-        
-        
-        final VBox vbox = new VBox();
-        vbox.setSpacing(5);
-        vbox.getChildren().addAll(title, table);
-
-        this.tipTable = vbox;
-    }
-    */
-    
     private FilteredList<Tip> filteredBooks(String filter) {
         ObservableList<Tip> data = FXCollections.observableArrayList(logic.filteredList(filter));
         FilteredList<Tip> flBooks = new FilteredList(data, p -> true);
@@ -234,28 +201,38 @@ public class SearchView {
         searchBoxLayout.setRight(hbox);
         
         markReadButton.setOnAction(new EventHandler<ActionEvent>() {
-           @Override
-           public void handle(ActionEvent event) {
-//               markSelectedRowRead();
-           }
-        });
+            @Override
+            public void handle(ActionEvent event) {
+                 markSelectedRowRead();
+            }
+         });
         
         deleteButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //Poista valittu vinkki
+                deleteSelectedRow();
             }
         });
         
         return searchBoxLayout;
     }
-//
-//    public void markSelectedRowRead() {
-//        ObservableList selected = table.getSelectionModel().getSelectedItems();
-//        System.out.println(selected.toString());
-//        TablePosition tablePosition = (TablePosition) selected.get(5);
-//        System.out.println(tablePosition.toString());
-//    }
+
+    public void markSelectedRowRead() {
+        ObservableList<Tip> selected = table.getSelectionModel().getSelectedItems();
+        
+
+    }
+    
+    public void deleteSelectedRow() {
+        ObservableList<Tip> selected = table.getSelectionModel().getSelectedItems();
+        if (selected.isEmpty()) {
+            return;
+        } else {
+            for (Tip tip : selected) {
+                logic.removeTip(tip.getId());
+            }
+        }
+    }
     
     
     private Button getCreationButton() {
