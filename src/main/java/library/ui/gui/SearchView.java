@@ -119,7 +119,6 @@ public class SearchView {
     
     
     private void createUrlTable() {
-        this.tipTable = null;
         TableView<Tip> table = new TableView<>();
         final Label title = new Label("Linkit");
         
@@ -127,6 +126,7 @@ public class SearchView {
         TableColumn linkCol = createTableColumn("Linkki", "link");
         TableColumn commentCol = createTableColumn("Kommentti", "comment");
         table.getColumns().addAll(linkCol, commentCol);
+        
         
         final VBox vbox = new VBox();
         vbox.setSpacing(5);
@@ -146,7 +146,7 @@ public class SearchView {
     private TableColumn createTableColumn(String label, String contents) {
         TableColumn column = new TableColumn(label);
         column.setMinWidth(100);
-        column.setCellValueFactory(new PropertyValueFactory<Book, String>(contents));
+        column.setCellValueFactory(new PropertyValueFactory<Tip, String>(contents));
         return column;
     }
 
