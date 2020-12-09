@@ -23,3 +23,4 @@ Ohjelmasta on julkaistu [release](https://github.com/tuomoart/ohtu-miniprojekti-
 ### Ohjelman käyttö
 
 Ohjelman käynnistyttyä avautuu ohjelma "lisää uusi lukuvinkki" -näkymään. Syöttämällä lukuvinkin tiedot voi käyttäjä lisätä uuden vinkin lukuvinkkikirjastoon. Oikeasta ylänurkasta pääsee hakunäkymään painamalla nappia "Hae". Hakunäkymässä käyttäjä voi hakea ja tarkastella omia lukuvinkkejään.
+
