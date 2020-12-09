@@ -59,12 +59,20 @@ public class SearchView {
         searchLayout.getChildren().add(createTitle());
         searchLayout.getChildren().add(createDropDownListForTypeOfTip());
         searchLayout.getChildren().add(createSearchBoxAndDeleteButton());
-        searchLayout.getChildren().add(createBookTable());
+        searchLayout.getChildren().add(createAllTables());
         searchLayout.setPrefSize(542,520);
 
         ((Group) scene.getRoot()).getChildren().addAll(searchLayout);
 
         return scene;
+    }
+    
+    private VBox createAllTables() {
+        VBox tables = new VBox();
+        tables.getChildren().addAll(createBookTable(), 
+                createPodcastTable(), createUrlTable());
+        
+        return tables;
     }
 
     private VBox createBookTable() {
@@ -91,6 +99,27 @@ public class SearchView {
         final VBox vbox = new VBox();
         vbox.setSpacing(5);
         vbox.getChildren().addAll(label, table);
+
+        return vbox;
+    }
+    
+    private VBox createPodcastTable() {
+        final Label title = new Label("Podcastit");
+        
+        
+        final VBox vbox = new VBox();
+        vbox.setSpacing(5);
+        //vbox.getChildren().addAll(title, table);
+
+        return vbox;
+    }
+    
+    private VBox createUrlTable() {
+        final Label title = new Label("Linkit");
+        
+        final VBox vbox = new VBox();
+        vbox.setSpacing(5);
+        //vbox.getChildren().addAll(title, table);
 
         return vbox;
     }
