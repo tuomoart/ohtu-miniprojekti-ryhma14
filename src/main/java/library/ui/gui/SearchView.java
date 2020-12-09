@@ -229,12 +229,9 @@ public class SearchView {
     
     public void deleteSelectedRow() {
         ObservableList<Tip> selected = table.getSelectionModel().getSelectedItems();
-        if (selected.isEmpty()) {
-            return;
-        } else {
-            for (Tip tip : selected) {
-                logic.removeTip(tip.getId());
-            }
+        
+        for (Tip tip : selected) {
+            logic.removeTip(tip.getId());
         }
         
         updateTable();
