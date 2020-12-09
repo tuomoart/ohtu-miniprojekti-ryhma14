@@ -34,10 +34,10 @@ public class Tip {
     public Boolean isRead() {
         return read;
     }
-    
+
     @lombok.Generated
-    public void setAsRead() {
-        this.read = true;
+    public void setRead(boolean read) {
+        this.read = read;
     }
     
     @lombok.Generated

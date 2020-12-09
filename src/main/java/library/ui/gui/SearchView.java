@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -68,7 +69,7 @@ public class SearchView {
         createBookTable();
         searchLayout.getChildren().add(tipTable);
         
-        searchLayout.setPrefSize(542,520);
+        searchLayout.setPrefSize(604,520);
 
         ((Group) scene.getRoot()).getChildren().addAll(searchLayout);
 
@@ -77,19 +78,24 @@ public class SearchView {
     
     
     private void createBookTable() {
-        TableView<Tip> table = new TableView<>();
+        TableView<Book> table = new TableView<>();
         table.setId("list");
         final Label label = new Label("Kirjat");
         table.setEditable(true);
+        
         TableColumn authorCol = createTableColumn("Kirjailija", "author");
         TableColumn titleCol = createTableColumn("Nimike", "title");
         TableColumn pagesCol = createTableColumn("Sivumäärä", "pages");
         TableColumn yearCol = createTableColumn("Julkaisuvuosi", "year");
         TableColumn isbnCol = createTableColumn("ISBN-tunniste", "ISBN");
         
-        FilteredList<Tip> flBooks = filteredBooks("");
+        //Checkboxs for marking books that have already been read
+        TableColumn<Book, Boolean> readCol = new TableColumn<>("Luettu");
+        readCol.setCellFactory(column -> new CheckBoxTableCell<>());
+        
+        FilteredList<Book> flBooks = filteredBooks("");
         table.setItems(flBooks);
-        table.getColumns().addAll(authorCol, titleCol, yearCol, pagesCol, isbnCol);
+        table.getColumns().addAll(authorCol, titleCol, yearCol, pagesCol, isbnCol, readCol);
 
         searchBox.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
@@ -105,6 +111,10 @@ public class SearchView {
         this.tipTable = vbox;
     }
     
+    
+    
+    
+    /* UNOHDETAAN TOISTAISEKSI :)
     
     private void createPodcastTable() {
         final Label title = new Label("Podcastit");
@@ -134,11 +144,11 @@ public class SearchView {
 
         this.tipTable = vbox;
     }
-
+    */
     
-    private FilteredList<Tip> filteredBooks(String filter) {
-        ObservableList<Tip> data = FXCollections.observableArrayList(logic.filteredList(filter));
-        FilteredList<Tip> flBooks = new FilteredList(data, p -> true);
+    private FilteredList<Book> filteredBooks(String filter) {
+        ObservableList<Book> data = FXCollections.observableArrayList(logic.filteredList(filter));
+        FilteredList<Book> flBooks = new FilteredList(data, p -> true);
         return flBooks;
     }
 
@@ -146,7 +156,7 @@ public class SearchView {
     private TableColumn createTableColumn(String label, String contents) {
         TableColumn column = new TableColumn(label);
         column.setMinWidth(100);
-        column.setCellValueFactory(new PropertyValueFactory<Tip, String>(contents));
+        column.setCellValueFactory(new PropertyValueFactory<Book, String>(contents));
         return column;
     }
 
@@ -189,9 +199,9 @@ public class SearchView {
                 if (tip.equals("Kirja")) {
                     createBookTable();
                 } else if (tip.equals("Podcast")) {
-                    createPodcastTable();
+                    //createPodcastTable();
                 } else {
-                    createUrlTable();
+                    //createUrlTable();
                 }
                 
             }
