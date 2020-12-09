@@ -70,14 +70,14 @@ public class StubDao implements BookDao {
         String idString = String.valueOf(id);
         for (List<String> l : database) {
             if (l.get(5).equals(idString)) {
-                if (l.get(6).equals("0")) {
-                    l.set(6, "1");
+                if (l.get(6).equals("false")) {
+                    l.set(6, "true");
                 } else {
-                    l.set(6, "0");
+                    l.set(6, "false");
                 }
                 return true;
             }
         }
-        return true;
+        return false;
     }
 }
