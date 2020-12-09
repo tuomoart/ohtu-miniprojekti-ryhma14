@@ -15,6 +15,7 @@ import library.domain.Book;
  */
 public class StubDao implements BookDao {
     private ArrayList<List<String>> database;
+    private int id;
 
     public StubDao()  {
         format();
@@ -24,6 +25,8 @@ public class StubDao implements BookDao {
     public boolean addBookToDatabase(String title, String author, String year,
         String pages, String isbn, Boolean read) {
         ArrayList<String> bookStrings = new ArrayList();
+        bookStrings.add(String.valueOf(this.id));
+        this.id++;
         bookStrings.add(title);
         bookStrings.add(author);
         bookStrings.add(year);
@@ -38,14 +41,43 @@ public class StubDao implements BookDao {
     public List<List<String>> getBooks() {
         return database;
     }
-
+    
     public void format() {
         this.database = new ArrayList();
+        this.id = 0;
     }
 
     @Override
     public boolean clearDatabase() {
         format();
+        return true;
+    }
+    
+    @Override
+    public boolean remove(int id) {
+        String idString = String.valueOf(id);
+        for (List<String> l : database) {
+            if (l.get(0).equals(idString)) {
+                database.remove(l);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean toggleRead(int id) {
+        String idString = String.valueOf(id);
+         for (List<String> l : database) {
+            if (l.get(0).equals(idString)) {
+                if (l.get(6).equals("0")) {
+                    l.set(6, "1");
+                } else {
+                    l.set(6, "0");
+                }
+                return true;
+            }
+        }
         return true;
     }
 }
