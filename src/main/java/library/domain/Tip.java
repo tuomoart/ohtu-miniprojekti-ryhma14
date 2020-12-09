@@ -32,8 +32,8 @@ public class Tip {
         return read;
     }
     
-    public void setAsRead() {
-        this.read = true;
+    public void setRead(boolean read) {
+        this.read = read;
     }
     
     public String getId() {
