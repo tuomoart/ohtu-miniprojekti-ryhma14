@@ -25,6 +25,7 @@ public class CreationView {
 
     private Gui gui;
     private String selectedTip = "Kirja";
+    private VBox tipCreationLayout;
     private Map<String, List<String>> tips = new HashMap<>() {
         {
             put("Kirja", new ArrayList<String>() {
@@ -159,6 +160,9 @@ public class CreationView {
             public void handle(ActionEvent event) {
                 selectedTip = (String) tipMenu.getValue();
                 //TODO oikeantyyppisen vinkkityypin Paneen vaihtaminen, varmaan paras ratkaisu käyttää borderpanen setCenter...
+                if (selectedTip.equals("Kirja")) {
+                    
+                }
             }
         });
         return tipMenu;
