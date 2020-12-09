@@ -22,6 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -37,6 +38,7 @@ import library.domain.*;
 public class SearchView {
 
     private Button addNewTipButton;
+    private Button deleteButton;
     private ComboBox tipDropdownlist;
     private TextField searchBox;
     private Logic logic;
@@ -56,7 +58,7 @@ public class SearchView {
         searchLayout.getChildren().add(createMenu());
         searchLayout.getChildren().add(createTitle());
         searchLayout.getChildren().add(createDropDownListForTypeOfTip());
-        searchLayout.getChildren().add(createSearchBox());
+        searchLayout.getChildren().add(createSearchBoxAndDeleteButton());
         searchLayout.getChildren().add(createBookTable());
         searchLayout.setPrefSize(542,520);
 
@@ -130,23 +132,54 @@ public class SearchView {
         this.tipDropdownlist = new ComboBox();
 
         dropdownlistLayout.setAlignment(Pos.CENTER);
-        tipDropdownlist.getItems().addAll("Kirja");
+        tipDropdownlist.getItems().addAll("Kirja","Podcast","Url");
 
         dropdownlistLayout.getChildren().add(new Label("Vinkkityyppi: "));
         dropdownlistLayout.getChildren().add(this.tipDropdownlist);
-
+        
+        tipDropdownlist.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String tip = (String) tipDropdownlist.getValue();
+                
+                if (tip == null) {
+                    //NÄYTÄ KAIKKI TAULUKOT & HAE KAIKISTA
+                } else if (tip.equals("Kirja")) {
+                    // näytä vain kirjataulukko ja hae vain kirjataulukosta
+                } else if (tip.equals("Podcast")) {
+                    //PODCAST
+                } else {
+                    //URL
+                }
+                
+            }
+        });
+        
         return dropdownlistLayout;
     }
 
-    public HBox createSearchBox() {
-        HBox searchBoxLayout = new HBox();
-        searchBoxLayout.setAlignment(Pos.CENTER);
+    public BorderPane createSearchBoxAndDeleteButton() {
+        //HBox searchBoxLayout = new HBox();
+        //searchBoxLayout.setAlignment(Pos.CENTER);
+        BorderPane searchBoxLayout = new BorderPane();
+        
         this.searchBox = new TextField();
-
+        this.deleteButton = new Button("Poista");
+        
         searchBox.setId("searchBox");
-        searchBox.setPromptText("Hakusana: ");
-        searchBoxLayout.getChildren().add(this.searchBox);
-
+        searchBox.setPromptText("Hakusana");
+        searchBox.setMaxWidth(200);
+        
+        searchBoxLayout.setCenter(searchBox);
+        searchBoxLayout.setRight(deleteButton);
+        
+        deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //Poista valittu vinkki
+            }
+        });
+        
         return searchBoxLayout;
     }
 
