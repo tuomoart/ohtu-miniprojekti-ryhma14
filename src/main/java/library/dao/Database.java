@@ -20,6 +20,7 @@ public class Database {
         Statement statement = connection.createStatement();
         statement.execute("CREATE TABLE IF NOT EXISTS Books(id INTEGER PRIMARY KEY, title VARCHAR, author VARCHAR, year VARCHAR, pages VARCHAR, isbn VARCHAR, read INTEGER);");
         statement.execute("CREATE TABLE IF NOT EXISTS Podcasts(id INTEGER PRIMARY KEY, title VARCHAR, series VARCHAR, creator VARCHAR, url VARCHAR, read INTEGER);");
+        statement.execute("CREATE TABLE IF NOT EXISTS Links(id INTEGER PRIMARY KEY, url VARCHAR, comment VARCHAR, read INTEGER)");
         connection.close();
     }
     
