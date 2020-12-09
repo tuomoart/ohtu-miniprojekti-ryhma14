@@ -43,23 +43,31 @@ public class SearchView {
     private TextField searchBox;
     private Logic logic;
     private Gui gui;
+    private VBox tipTable;
 
+    
+    
     public SearchView(Gui gui, Logic logic) {
         this.gui = gui;
         this.logic = logic;
     }
 
+    
     public Scene createSearchScene() {
         Scene scene = new Scene(new Group());
-
+        
+        
         VBox searchLayout = new VBox(10);
         searchLayout.setPadding(new Insets(10,20,10,20));
         searchLayout.setAlignment(Pos.CENTER);
+        
         searchLayout.getChildren().add(createMenu());
         searchLayout.getChildren().add(createTitle());
         searchLayout.getChildren().add(createDropDownListForTypeOfTip());
         searchLayout.getChildren().add(createSearchBoxAndDeleteButton());
-        searchLayout.getChildren().add(createAllTables());
+        createBookTable();
+        searchLayout.getChildren().add(tipTable);
+        
         searchLayout.setPrefSize(542,520);
 
         ((Group) scene.getRoot()).getChildren().addAll(searchLayout);
@@ -67,16 +75,9 @@ public class SearchView {
         return scene;
     }
     
-    private VBox createAllTables() {
-        VBox tables = new VBox();
-        tables.getChildren().addAll(createBookTable(), 
-                createPodcastTable(), createUrlTable());
-        
-        return tables;
-    }
-
-    private VBox createBookTable() {
-        TableView<Book> table = new TableView<>();
+    
+    private void createBookTable() {
+        TableView<Tip> table = new TableView<>();
         table.setId("list");
         final Label label = new Label("Kirjat");
         table.setEditable(true);
@@ -85,7 +86,8 @@ public class SearchView {
         TableColumn pagesCol = createTableColumn("Sivumäärä", "pages");
         TableColumn yearCol = createTableColumn("Julkaisuvuosi", "year");
         TableColumn isbnCol = createTableColumn("ISBN-tunniste", "ISBN");
-        FilteredList<Book> flBooks = filteredBooks("");
+        
+        FilteredList<Tip> flBooks = filteredBooks("");
         table.setItems(flBooks);
         table.getColumns().addAll(authorCol, titleCol, yearCol, pagesCol, isbnCol);
 
@@ -99,11 +101,12 @@ public class SearchView {
         final VBox vbox = new VBox();
         vbox.setSpacing(5);
         vbox.getChildren().addAll(label, table);
-
-        return vbox;
+        
+        this.tipTable = vbox;
     }
     
-    private VBox createPodcastTable() {
+    
+    private void createPodcastTable() {
         final Label title = new Label("Podcastit");
         
         
@@ -111,25 +114,35 @@ public class SearchView {
         vbox.setSpacing(5);
         //vbox.getChildren().addAll(title, table);
 
-        return vbox;
+        this.tipTable = vbox;
     }
     
-    private VBox createUrlTable() {
+    
+    private void createUrlTable() {
+        this.tipTable = null;
+        TableView<Tip> table = new TableView<>();
         final Label title = new Label("Linkit");
+        
+        table.setEditable(true);
+        TableColumn linkCol = createTableColumn("Linkki", "link");
+        TableColumn commentCol = createTableColumn("Kommentti", "comment");
+        table.getColumns().addAll(linkCol, commentCol);
         
         final VBox vbox = new VBox();
         vbox.setSpacing(5);
-        //vbox.getChildren().addAll(title, table);
+        vbox.getChildren().addAll(title, table);
 
-        return vbox;
+        this.tipTable = vbox;
     }
 
-    private FilteredList<Book> filteredBooks(String filter) {
-        ObservableList<Book> data = FXCollections.observableArrayList(logic.filteredList(filter));
-        FilteredList<Book> flBooks = new FilteredList(data, p -> true);
+    
+    private FilteredList<Tip> filteredBooks(String filter) {
+        ObservableList<Tip> data = FXCollections.observableArrayList(logic.filteredList(filter));
+        FilteredList<Tip> flBooks = new FilteredList(data, p -> true);
         return flBooks;
     }
 
+    
     private TableColumn createTableColumn(String label, String contents) {
         TableColumn column = new TableColumn(label);
         column.setMinWidth(100);
@@ -137,6 +150,7 @@ public class SearchView {
         return column;
     }
 
+    
     public HBox createMenu() {
         HBox menu = new HBox();
         Region spacer = new Region();
@@ -162,6 +176,7 @@ public class SearchView {
 
         dropdownlistLayout.setAlignment(Pos.CENTER);
         tipDropdownlist.getItems().addAll("Kirja","Podcast","Url");
+        tipDropdownlist.getSelectionModel().selectFirst();
 
         dropdownlistLayout.getChildren().add(new Label("Vinkkityyppi: "));
         dropdownlistLayout.getChildren().add(this.tipDropdownlist);
@@ -171,14 +186,12 @@ public class SearchView {
             public void handle(ActionEvent event) {
                 String tip = (String) tipDropdownlist.getValue();
                 
-                if (tip == null) {
-                    //NÄYTÄ KAIKKI TAULUKOT & HAE KAIKISTA
-                } else if (tip.equals("Kirja")) {
-                    // näytä vain kirjataulukko ja hae vain kirjataulukosta
+                if (tip.equals("Kirja")) {
+                    createBookTable();
                 } else if (tip.equals("Podcast")) {
-                    //PODCAST
+                    createPodcastTable();
                 } else {
-                    //URL
+                    createUrlTable();
                 }
                 
             }
