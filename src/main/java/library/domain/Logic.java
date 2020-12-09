@@ -102,9 +102,6 @@ public class Logic {
         List<Book> books = new ArrayList<>();
         
         try {
-            
-            
-            
             List<List<String>> data = dao.getBooks();
             
             for (List<String> b : data) {
@@ -128,8 +125,6 @@ public class Logic {
                 Book book = new Book(title, id, author, year, pages, isbn, read);
                 books.add(book);
                 
-                System.out.println(books);
-                
             }
             
             return books;
@@ -141,6 +136,18 @@ public class Logic {
             books.add(new Book(e.getMessage(),"","","","","",false));
             return books;
         }  
+    }
+    
+    public boolean toggleRead(String id) {
+        String[] arr = id.split("-");
+        int idval = Integer.parseInt(arr[1]);
+        
+        boolean success = false;
+        if (arr[0].equals("b")) {
+            success = dao.toggleRead(idval);
+        }
+        
+        return success;
     }
 
     public BookDao getDao() {
