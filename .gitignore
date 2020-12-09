@@ -10,3 +10,6 @@ build
 # Ignore database file
 database.db
 testdatabase.db
+
+# Ignore Netbeans IDE -specific files
+nbproject/

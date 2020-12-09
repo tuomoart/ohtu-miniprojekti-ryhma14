@@ -26,35 +26,43 @@ public class Book extends Tip {
         this.pages = pages;
         this.ISBN = ISBN;
     }
-
+    
+    @lombok.Generated
     public String getAuthor() {
         return author;
     }
 
+    @lombok.Generated
     public String getYear() {
         return year;
     }
 
+    @lombok.Generated
     public String getPages() {
         return pages;
     }
 
+    @lombok.Generated
     public String getISBN() {
         return ISBN;
     }
 
+    @lombok.Generated
     public void setAuthor(String author) {
         this.author = author;
     }
 
+    @lombok.Generated
     public void setYear(String year) {
         this.year = year;
     }
 
+    @lombok.Generated
     public void setPages(String pages) {
         this.pages = pages;
     }
 
+    @lombok.Generated
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
