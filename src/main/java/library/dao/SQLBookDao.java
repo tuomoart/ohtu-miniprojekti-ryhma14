@@ -89,7 +89,7 @@ public class SQLBookDao implements BookDao {
 
     @Override
     public boolean remove(int id) {
-         try {
+        try {
             Connection connection = database.getConnection();
             PreparedStatement ps = connection.prepareStatement("DELETE FROM Books WHERE id = ?");
             ps.setInt(1, id);
@@ -104,7 +104,7 @@ public class SQLBookDao implements BookDao {
     
     @Override
     public boolean toggleRead(int id) {
-         try {
+        try {
             Connection connection = database.getConnection();
             PreparedStatement ps = connection.prepareStatement("UPDATE Books SET read = ((read | 1) - (read & 1)) WHERE id = ?");
             ps.setInt(1, id);
