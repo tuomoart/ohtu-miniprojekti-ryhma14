@@ -5,6 +5,8 @@
  */
 package library.ui.gui;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.collections.FXCollections;
@@ -18,17 +20,21 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.util.Callback;
 import library.domain.Book;
 import library.domain.*;
 
@@ -40,11 +46,12 @@ public class SearchView {
 
     private Button addNewTipButton;
     private Button deleteButton;
+    private Button markReadButton;
     private ComboBox tipDropdownlist;
     private TextField searchBox;
     private Logic logic;
     private Gui gui;
-    private VBox tipTable;
+    private TableView<Tip> table;
 
     
     
@@ -65,9 +72,8 @@ public class SearchView {
         searchLayout.getChildren().add(createMenu());
         searchLayout.getChildren().add(createTitle());
         searchLayout.getChildren().add(createDropDownListForTypeOfTip());
-        searchLayout.getChildren().add(createSearchBoxAndDeleteButton());
-        createBookTable();
-        searchLayout.getChildren().add(tipTable);
+        searchLayout.getChildren().add(createSearchBoxAndModifyingButtons());
+        searchLayout.getChildren().add(createBookTable());
         
         searchLayout.setPrefSize(604,520);
 
@@ -77,8 +83,8 @@ public class SearchView {
     }
     
     
-    private void createBookTable() {
-        TableView<Book> table = new TableView<>();
+    private VBox createBookTable() {
+        table = new TableView<>();
         table.setId("list");
         final Label label = new Label("Kirjat");
         table.setEditable(true);
@@ -88,12 +94,9 @@ public class SearchView {
         TableColumn pagesCol = createTableColumn("Sivumäärä", "pages");
         TableColumn yearCol = createTableColumn("Julkaisuvuosi", "year");
         TableColumn isbnCol = createTableColumn("ISBN-tunniste", "ISBN");
+        TableColumn readCol = createTableColumn("Luettu", "read");
         
-        //Checkboxs for marking books that have already been read
-        TableColumn<Book, Boolean> readCol = new TableColumn<>("Luettu");
-        readCol.setCellFactory(column -> new CheckBoxTableCell<>());
-        
-        FilteredList<Book> flBooks = filteredBooks("");
+        FilteredList<Tip> flBooks = filteredBooks("");
         table.setItems(flBooks);
         table.getColumns().addAll(authorCol, titleCol, yearCol, pagesCol, isbnCol, readCol);
 
@@ -108,7 +111,7 @@ public class SearchView {
         vbox.setSpacing(5);
         vbox.getChildren().addAll(label, table);
         
-        this.tipTable = vbox;
+        return vbox;
     }
     
     
@@ -146,9 +149,9 @@ public class SearchView {
     }
     */
     
-    private FilteredList<Book> filteredBooks(String filter) {
-        ObservableList<Book> data = FXCollections.observableArrayList(logic.filteredList(filter));
-        FilteredList<Book> flBooks = new FilteredList(data, p -> true);
+    private FilteredList<Tip> filteredBooks(String filter) {
+        ObservableList<Tip> data = FXCollections.observableArrayList(logic.filteredList(filter));
+        FilteredList<Tip> flBooks = new FilteredList(data, p -> true);
         return flBooks;
     }
 
@@ -210,20 +213,32 @@ public class SearchView {
         return dropdownlistLayout;
     }
 
-    public BorderPane createSearchBoxAndDeleteButton() {
+    public BorderPane createSearchBoxAndModifyingButtons() {
         //HBox searchBoxLayout = new HBox();
         //searchBoxLayout.setAlignment(Pos.CENTER);
         BorderPane searchBoxLayout = new BorderPane();
         
         this.searchBox = new TextField();
+        this.markReadButton = new Button("Merkitse luetuksi");
         this.deleteButton = new Button("Poista");
+        
+        HBox hbox = new HBox();
+        hbox.getChildren().addAll(markReadButton, deleteButton);
+        hbox.setSpacing(10);
         
         searchBox.setId("searchBox");
         searchBox.setPromptText("Hakusana");
         searchBox.setMaxWidth(200);
         
         searchBoxLayout.setCenter(searchBox);
-        searchBoxLayout.setRight(deleteButton);
+        searchBoxLayout.setRight(hbox);
+        
+        markReadButton.setOnAction(new EventHandler<ActionEvent>() {
+           @Override
+           public void handle(ActionEvent event) {
+//               markSelectedRowRead();
+           }
+        });
         
         deleteButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -234,7 +249,15 @@ public class SearchView {
         
         return searchBoxLayout;
     }
-
+//
+//    public void markSelectedRowRead() {
+//        ObservableList selected = table.getSelectionModel().getSelectedItems();
+//        System.out.println(selected.toString());
+//        TablePosition tablePosition = (TablePosition) selected.get(5);
+//        System.out.println(tablePosition.toString());
+//    }
+    
+    
     private Button getCreationButton() {
         Button creationButton = new Button("Lisää uusi lukuvinkki");
         creationButton.setOnAction(new EventHandler<ActionEvent>() {
