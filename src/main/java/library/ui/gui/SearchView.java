@@ -103,7 +103,7 @@ public class SearchView {
         searchBox.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                table.setItems(filteredBooks(searchBox.getText()));
+                updateTable();
             }
         });
 
@@ -220,7 +220,11 @@ public class SearchView {
     public void markSelectedRowRead() {
         ObservableList<Tip> selected = table.getSelectionModel().getSelectedItems();
         
-
+        for (Tip tip : selected) {
+            logic.toggleRead(tip.getId());
+        }
+        
+        updateTable();
     }
     
     public void deleteSelectedRow() {
@@ -232,8 +236,13 @@ public class SearchView {
                 logic.removeTip(tip.getId());
             }
         }
+        
+        updateTable();
     }
     
+    private void updateTable() {
+        table.setItems(filteredBooks(searchBox.getText()));
+    }
     
     private Button getCreationButton() {
         Button creationButton = new Button("Lisää uusi lukuvinkki");
