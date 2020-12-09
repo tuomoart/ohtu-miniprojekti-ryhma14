@@ -22,13 +22,14 @@ public class StubDao implements BookDao {
 
     @Override
     public boolean addBookToDatabase(String title, String author, String year,
-        String pages, String isbn) {
+        String pages, String isbn, Boolean read) {
         ArrayList<String> bookStrings = new ArrayList();
         bookStrings.add(title);
         bookStrings.add(author);
         bookStrings.add(year);
         bookStrings.add(pages);
         bookStrings.add(isbn);
+        bookStrings.add(read.toString());
         database.add(bookStrings);
         return true;
     }

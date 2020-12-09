@@ -22,16 +22,26 @@ public class SQLBookDao implements BookDao {
 
     @Override
     public boolean addBookToDatabase(String title, String author, String year, String pages,
-            String isbn) throws SQLException {
+            String isbn, Boolean read) throws SQLException {
         try {
             Connection connection = database.getConnection();
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO Books(title, author, year, pages, isbn) "
-                    + "VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO Books(title, author, year, pages, isbn, read) "
+                    + "VALUES (?, ?, ?, ?, ?, ?)");
             ps.setString(1, title);
             ps.setString(2, author);
             ps.setString(3, year);
             ps.setString(4, pages);
             ps.setString(5, isbn);
+            
+            int r;
+            if (read) {
+                r = 1;
+            } else {
+                r = 0;
+            }
+            
+            ps.setInt(6, r);
+            
             ps.executeUpdate();
             connection.close();
         } catch (SQLException e) {
@@ -44,13 +54,18 @@ public class SQLBookDao implements BookDao {
     @Override
     public List<List<String>> getBooks() throws SQLException {
         List<List<String>> books = new ArrayList<>();
+        
+        
         try {
             Connection connection = database.getConnection();
+            
+            
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM Books");
             ResultSet results = ps.executeQuery();
 
             while (results.next()) {
                 List<String> book = new ArrayList<>();
+                
 
                 
                 book.add(results.getString("title"));
@@ -58,6 +73,10 @@ public class SQLBookDao implements BookDao {
                 book.add(results.getString("year"));
                 book.add(results.getString("pages"));
                 book.add(results.getString("isbn"));
+                book.add(results.getString("id"));
+                book.add(Integer.toString(results.getInt("read")));
+                
+                System.out.println(books);
                 
                 books.add(book);
             }
