@@ -72,11 +72,11 @@ public class SearchView {
         table.setId("list");
         final Label label = new Label("Kirjat");
         table.setEditable(true);
-        TableColumn authorCol = createTableColumn("Author", "author");
-        TableColumn titleCol = createTableColumn("Title", "title");
-        TableColumn pagesCol = createTableColumn("Pages", "pages");
-        TableColumn yearCol = createTableColumn("Year", "year");
-        TableColumn isbnCol = createTableColumn("ISBN", "ISBN");
+        TableColumn authorCol = createTableColumn("Kirjailija", "author");
+        TableColumn titleCol = createTableColumn("Nimike", "title");
+        TableColumn pagesCol = createTableColumn("Sivumäärä", "pages");
+        TableColumn yearCol = createTableColumn("Julkaisuvuosi", "year");
+        TableColumn isbnCol = createTableColumn("ISBN-tunniste", "ISBN");
         FilteredList<Book> flBooks = filteredBooks("");
         table.setItems(flBooks);
         table.getColumns().addAll(authorCol, titleCol, yearCol, pagesCol, isbnCol);
