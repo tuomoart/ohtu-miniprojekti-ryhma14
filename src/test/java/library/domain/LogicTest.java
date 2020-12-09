@@ -173,4 +173,35 @@ public class LogicTest {
         logic.clearDatabase();
         assertTrue(dao.getBooks().isEmpty());
     }
+    
+    @Test
+    public void removeWorksWithCorrectId() throws Throwable {
+        addSomeBooksDirectly();
+        
+        assertTrue(logic.removeTip("b-7"));
+        assertTrue(logic.removeTip("b-4"));
+    }
+    
+    @Test
+    public void removeFailsWithWrongId() throws Throwable {
+        addSomeBooksDirectly();
+        
+        assertFalse(logic.removeTip("c-7"));
+        assertFalse(logic.removeTip("b-999"));
+    }
+    
+    @Test
+    public void toggleReadWorksWithCorrectId() throws Throwable {
+        addSomeBooksDirectly();
+        
+        assertTrue(logic.toggleRead("b-5"));
+        assertEquals(dao.getBooks().get(5).get(6), "true");
+    }
+    
+    @Test
+    public void toggleReadFailsWithWrongId() throws Throwable {
+        addSomeBooksDirectly();
+        
+        assertFalse(logic.toggleRead("c-5"));
+    }
 }

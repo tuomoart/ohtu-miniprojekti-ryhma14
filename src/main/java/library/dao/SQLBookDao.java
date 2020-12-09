@@ -64,9 +64,7 @@ public class SQLBookDao implements BookDao {
 
             while (results.next()) {
                 List<String> book = new ArrayList<>();
-                
 
-                
                 book.add(results.getString("title"));
                 book.add(results.getString("author"));
                 book.add(results.getString("year"));
@@ -74,8 +72,6 @@ public class SQLBookDao implements BookDao {
                 book.add(results.getString("isbn"));
                 book.add(results.getString("id"));
                 book.add(Integer.toString(results.getInt("read")));
-                
-                System.out.println(books);
                 
                 books.add(book);
             }
