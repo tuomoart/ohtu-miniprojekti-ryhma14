@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -88,8 +89,9 @@ public class SearchView {
         TableColumn yearCol = createTableColumn("Julkaisuvuosi", "year");
         TableColumn isbnCol = createTableColumn("ISBN-tunniste", "ISBN");
         
+        //Checkboxs for marking books that have already been read
         TableColumn<Book, Boolean> readCol = new TableColumn<>("Luettu");
-        
+        readCol.setCellFactory(column -> new CheckBoxTableCell<>());
         
         FilteredList<Book> flBooks = filteredBooks("");
         table.setItems(flBooks);
