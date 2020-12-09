@@ -14,10 +14,10 @@ import java.util.List;
  */
 public interface PodcastDao {
     
-    boolean addBookToDatabase(String title, String author, String year,
-            String pages, String isbn) throws SQLException;
+    boolean addPodcastToDatabase(String title, String series, String creator,
+            String url, boolean read) throws SQLException;
     
-    List<List<String>> getBooks() throws SQLException;
+    List<List<String>> getPodcasts() throws SQLException;
     
     boolean clearDatabase();
     

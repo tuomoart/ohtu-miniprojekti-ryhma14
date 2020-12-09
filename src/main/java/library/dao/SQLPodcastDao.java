@@ -21,17 +21,17 @@ public class SQLPodcastDao implements PodcastDao {
     }
 
     @Override
-    public boolean addBookToDatabase(String title, String author, String year, String pages,
-            String isbn) throws SQLException {
+    public boolean addPodcastToDatabase(String title, String series, String creator,
+            String url, boolean read) throws SQLException {
         try {
             Connection connection = database.getConnection();
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO Books(title, author, year, pages, isbn) "
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO Podcasts(title, series, creator, url, read) "
                     + "VALUES (?, ?, ?, ?, ?)");
             ps.setString(1, title);
-            ps.setString(2, author);
-            ps.setString(3, year);
-            ps.setString(4, pages);
-            ps.setString(5, isbn);
+            ps.setString(2, series);
+            ps.setString(3, creator);
+            ps.setString(4, url);
+            ps.setInt(5, read ? 1 : 0);
             ps.executeUpdate();
             connection.close();
         } catch (SQLException e) {
@@ -42,30 +42,30 @@ public class SQLPodcastDao implements PodcastDao {
     }
 
     @Override
-    public List<List<String>> getBooks() throws SQLException {
-        List<List<String>> books = new ArrayList<>();
+    public List<List<String>> getPodcasts() throws SQLException {
+        List<List<String>> podcasts = new ArrayList<>();
         try {
             Connection connection = database.getConnection();
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM Books");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM Podcasts");
             ResultSet results = ps.executeQuery();
 
             while (results.next()) {
-                List<String> book = new ArrayList<>();
+                List<String> podcast = new ArrayList<>();
 
                 
-                book.add(results.getString("title"));
-                book.add(results.getString("author"));
-                book.add(results.getString("year"));
-                book.add(results.getString("pages"));
-                book.add(results.getString("isbn"));
+                podcast.add(results.getString("title"));
+                podcast.add(results.getString("series"));
+                podcast.add(results.getString("creator"));
+                podcast.add(results.getString("url"));
+                podcast.add(results.getString("read"));
                 
-                books.add(book);
+                podcasts.add(podcast);
             }
             connection.close();
-            return books;
+            return podcasts;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return books;
+            return podcasts;
         }
     }
 
