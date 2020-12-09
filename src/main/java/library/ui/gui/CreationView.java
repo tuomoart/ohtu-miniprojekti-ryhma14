@@ -149,6 +149,7 @@ public class CreationView {
     private Label getTitle() {
         Label title = new Label("Lisää lukuvinkki");
         title.setFont(Font.font("Arial", 20));
+        title.setId("CreateViewTitle");
         return title;
     }
 

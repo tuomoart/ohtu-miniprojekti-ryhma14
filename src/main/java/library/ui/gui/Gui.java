@@ -59,14 +59,17 @@ public class Gui extends Application {
         return logic.addBook(title, author, year, pages, ISBN);
     }
     
+    @lombok.Generated
     public Logic getLogic() {
         return this.logic;
     }
 
+    @lombok.Generated
     public SearchView getSearchView() {
         return searchView;
     }
 
+    @lombok.Generated
     public CreationView getCreationView() {
         return creationView;
     }
