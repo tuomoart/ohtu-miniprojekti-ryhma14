@@ -21,4 +21,8 @@ public interface BookDao {
     
     boolean clearDatabase();
     
+    boolean remove(int id);
+    
+    boolean toggleRead(int id);
+    
 }

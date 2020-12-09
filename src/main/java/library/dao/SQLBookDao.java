@@ -89,6 +89,35 @@ public class SQLBookDao implements BookDao {
     }
 
     @Override
+    public boolean remove(int id) {
+         try {
+            Connection connection = database.getConnection();
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM Books WHERE id = ?");
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            connection.close();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+    
+    
+    @Override
+    public boolean toggleRead(int id) {
+         try {
+            Connection connection = database.getConnection();
+            PreparedStatement ps = connection.prepareStatement("UPDATE Books SET read = ((read | 1) - (read & 1))");
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            connection.close();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+    
+    @Override
     public boolean clearDatabase() {
         try {
             Connection connection = database.getConnection();
