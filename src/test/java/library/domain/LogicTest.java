@@ -44,7 +44,7 @@ public class LogicTest {
         logic = new Logic(dao);
         
         someBooks = new ArrayList();
-        someBooks.add(new Book("Book with all data", "b-1", "A. AuthorI", "2000", "100", "978-951-98548-9-2", false));
+        someBooks.add(new Book("Book with all data", "b-10", "A. AuthorI", "2000", "100", "978-951-98548-9-2", false));
         someBooks.add(new Book("Book with minimal data", "b-2", "", "", "", "", false));
         someBooks.add(new Book("Book with incorrect author", "b-3", "Author1","","","", false));
         someBooks.add(new Book("Book with incorrect year", "b-4", "Author I", "123S", "", "", false));
@@ -67,7 +67,13 @@ public class LogicTest {
             books.add(book.toStringList());
         }
         
-        assertEquals(dao.getBooks(), books);
+        List<List<String>> correct = dao.getBooks();
+        
+        for (List<String> listBook : correct) {
+            listBook.set(5, "b-" + listBook.get(5));
+        }
+        
+        assertEquals(correct, books);
     }
     
     @Test

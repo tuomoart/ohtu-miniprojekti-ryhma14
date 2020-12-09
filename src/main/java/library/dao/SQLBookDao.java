@@ -55,7 +55,6 @@ public class SQLBookDao implements BookDao {
     public List<List<String>> getBooks() throws SQLException {
         List<List<String>> books = new ArrayList<>();
         
-        
         try {
             Connection connection = database.getConnection();
             

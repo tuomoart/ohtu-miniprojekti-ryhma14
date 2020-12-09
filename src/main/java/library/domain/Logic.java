@@ -113,7 +113,7 @@ public class Logic {
                 String year = b.get(2);
                 String pages = b.get(3);
                 String isbn = b.get(4);
-                String id = "b-";
+                String id = "b-" + b.get(5);
                 String r = b.get(6);
                 
                 
