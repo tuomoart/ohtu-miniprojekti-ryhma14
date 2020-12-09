@@ -49,7 +49,7 @@ public class Logic {
                 return messages;
             }
             
-            if (dao.addBookToDatabase(title, author, year, pages, ISBN)) {
+            if (dao.addBookToDatabase(title, author, year, pages, ISBN, false)) {
                 messages.add("Kirja '" + title + "' lisätty");
             } else {
                 messages.add("Ongelma kirjan lisäämisessä");
@@ -103,21 +103,33 @@ public class Logic {
         
         try {
             
+            
+            
             List<List<String>> data = dao.getBooks();
             
-            int i = 1;
             for (List<String> b : data) {
                 String title = b.get(0);
                 String author = b.get(1);
                 String year = b.get(2);
                 String pages = b.get(3);
                 String isbn = b.get(4);
-                String id = "b-" + Integer.toString(i);
+                String id = "b-";
+                String r = b.get(6);
                 
-                Book book = new Book(title, id, author, year, pages, isbn);
+                
+                boolean read;
+                
+                if (r.equals("1")) {
+                    read = true;
+                } else {
+                    read = false;
+                }
+                
+                Book book = new Book(title, id, author, year, pages, isbn, read);
                 books.add(book);
                 
-                i++;
+                System.out.println(books);
+                
             }
             
             return books;

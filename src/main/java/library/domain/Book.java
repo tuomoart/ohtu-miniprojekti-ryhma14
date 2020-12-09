@@ -19,8 +19,8 @@ public class Book extends Tip {
     private String pages;
     private String ISBN;
     
-    public Book(String title, String id, String author, String year, String pages, String ISBN) {
-        super(title, id);
+    public Book(String title, String id, String author, String year, String pages, String ISBN, Boolean read) {
+        super(title, id, read);
         this.author = author;
         this.year = year;
         this.pages = pages;
@@ -66,6 +66,7 @@ public class Book extends Tip {
         strings.add(year);
         strings.add(pages);
         strings.add(ISBN);
+        strings.add(isRead().toString());
         return strings;
     }
 
