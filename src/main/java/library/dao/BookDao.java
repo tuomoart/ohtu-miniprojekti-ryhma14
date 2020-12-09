@@ -15,10 +15,14 @@ import java.util.List;
 public interface BookDao {
     
     boolean addBookToDatabase(String title, String author, String year,
-            String pages, String isbn) throws SQLException;
+            String pages, String isbn, Boolean read) throws SQLException;
     
     List<List<String>> getBooks() throws SQLException;
     
     boolean clearDatabase();
+    
+    boolean remove(int id);
+    
+    boolean toggleRead(int id);
     
 }

@@ -14,10 +14,10 @@ public class Tip {
     private boolean read;
     private final String id;
     
-    public Tip(String title, String id) {
+    public Tip(String title, String id, Boolean read) {
         this.title = title;
         this.id = id;
-        this.read = false;
+        this.read = read;
     }
 
     public String getTitle() {
@@ -28,7 +28,7 @@ public class Tip {
         this.title = title;
     }
     
-    public boolean isRead() {
+    public Boolean isRead() {
         return read;
     }
     

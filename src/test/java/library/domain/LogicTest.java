@@ -44,15 +44,15 @@ public class LogicTest {
         logic = new Logic(dao);
         
         someBooks = new ArrayList();
-        someBooks.add(new Book("Book with all data", "b-1", "A. AuthorI", "2000", "100", "978-951-98548-9-2"));
-        someBooks.add(new Book("Book with minimal data", "b-2", "", "", "", ""));
-        someBooks.add(new Book("Book with incorrect author", "b-3", "Author1","","",""));
-        someBooks.add(new Book("Book with incorrect year", "b-4", "Author I", "123S", "", ""));
-        someBooks.add(new Book("Book with incorrect pages", "b-5", "AuthorII", "", "I0", ""));
-        someBooks.add(new Book("Book with letters in ISBN", "b-6", "AuthorII", "", "", "ABC-951-98548-9-2"));
-        someBooks.add(new Book("Book with too few hyphens in ISBN", "b-7", "AuthorII", "", "", "978951-98548-92"));
-        someBooks.add(new Book("Book with too few numbers in ISBN", "b-8", "AuthorII", "", "", "9-951-985-92"));
-        someBooks.add(new Book("","","","","",""));
+        someBooks.add(new Book("Book with all data", "b-1", "A. AuthorI", "2000", "100", "978-951-98548-9-2", false));
+        someBooks.add(new Book("Book with minimal data", "b-2", "", "", "", "", false));
+        someBooks.add(new Book("Book with incorrect author", "b-3", "Author1","","","", false));
+        someBooks.add(new Book("Book with incorrect year", "b-4", "Author I", "123S", "", "", false));
+        someBooks.add(new Book("Book with incorrect pages", "b-5", "AuthorII", "", "I0", "", false));
+        someBooks.add(new Book("Book with letters in ISBN", "b-6", "AuthorII", "", "", "ABC-951-98548-9-2", false));
+        someBooks.add(new Book("Book with too few hyphens in ISBN", "b-7", "AuthorII", "", "", "978951-98548-92", false));
+        someBooks.add(new Book("Book with too few numbers in ISBN", "b-8", "AuthorII", "", "", "9-951-985-92", false));
+        someBooks.add(new Book("","","","","","", false));
     }
     
     @After
@@ -156,7 +156,7 @@ public class LogicTest {
     
     public void addSomeBooksDirectly() throws Throwable {
         for (Book book: someBooks) {
-            dao.addBookToDatabase(book.getTitle(), book.getAuthor(), book.getYear(), book.getPages(), book.getISBN());
+            dao.addBookToDatabase(book.getTitle(), book.getAuthor(), book.getYear(), book.getPages(), book.getISBN(), book.isRead());
         }
     }
 
