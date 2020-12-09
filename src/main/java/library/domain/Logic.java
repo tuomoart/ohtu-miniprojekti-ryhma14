@@ -149,6 +149,18 @@ public class Logic {
         
         return success;
     }
+    
+    public boolean removeTip(String id) {
+        String[] arr = id.split("-");
+        int idval = Integer.parseInt(arr[1]);
+        
+        boolean success = false;
+        if (arr[0].equals("b")) {
+            success = dao.remove(idval);
+        }
+        
+        return success;
+    }
 
     public BookDao getDao() {
         return dao;
