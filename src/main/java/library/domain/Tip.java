@@ -20,26 +20,33 @@ public class Tip {
         this.read = read;
     }
 
+    @lombok.Generated
     public String getTitle() {
         return title;
     }
 
+    @lombok.Generated
     public void setTitle(String title) {
         this.title = title;
     }
     
+    @lombok.Generated
     public Boolean isRead() {
         return read;
     }
     
+    @lombok.Generated
     public void setAsRead() {
         this.read = true;
     }
     
+    @lombok.Generated
     public String getId() {
         return id;
     }
     
+    
+    @lombok.Generated
     @Override
     public String toString() {
         String result = "Otsikko: " + title;
