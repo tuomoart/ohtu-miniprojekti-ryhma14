@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package library;
+package acceptanceTests;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -36,7 +36,7 @@ import org.testfx.matcher.control.TableViewMatchers;
  *
  * @author tuomoart
  */
-public class GuiSearchTest extends ApplicationTest {
+public class SearchBooksAcceptanceTest extends ApplicationTest {
     private Gui sovellus;
     private ArrayList<Book> someBooks;
     
