@@ -46,17 +46,6 @@ public class Podcast extends Tip {
     public void setCreator(String creator) {
         this.creator = creator;
     }
-
-    @Override
-    public String toString() {
-        String result = "Nimi: " + super.getTitle() + " \n";
-        result += "Sarja: " + series + "\n";
-        result += "Tekijä: " + creator + "\n";
-        result += "Url: " + url + "\n";
-        result += "Luettu: " + super.getRead();
-        return result;
-    }
-    
     
 
     @Override
