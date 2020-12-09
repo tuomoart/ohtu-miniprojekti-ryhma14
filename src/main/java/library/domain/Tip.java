@@ -49,7 +49,8 @@ public class Tip {
     @lombok.Generated
     @Override
     public String toString() {
-        String result = "Otsikko: " + title;
+        String result = "Otsikko: " + title + "\n";
+        result += "Luettu: " + read;
         
         return result;
     }

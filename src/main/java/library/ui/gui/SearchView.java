@@ -194,9 +194,9 @@ public class SearchView {
         markReadButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                 markSelectedRowRead();
+                markSelectedRowRead();
             }
-         });
+        });
         
         deleteButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
