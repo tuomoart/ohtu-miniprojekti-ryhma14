@@ -79,6 +79,7 @@ public class Book extends Tip {
         return strings;
     }
 
+    @lombok.Generated
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
