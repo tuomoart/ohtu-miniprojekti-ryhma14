@@ -106,7 +106,7 @@ public class SQLBookDao implements BookDao {
     public boolean toggleRead(int id) {
          try {
             Connection connection = database.getConnection();
-            PreparedStatement ps = connection.prepareStatement("UPDATE Books SET read = ((read | 1) - (read & 1))");
+            PreparedStatement ps = connection.prepareStatement("UPDATE Books SET read = ((read | 1) - (read & 1)) WHERE id = ?");
             ps.setInt(1, id);
             ps.executeUpdate();
             connection.close();
