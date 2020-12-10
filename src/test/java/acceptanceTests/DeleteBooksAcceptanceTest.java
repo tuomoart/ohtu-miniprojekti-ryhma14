@@ -28,7 +28,7 @@ import org.testfx.matcher.control.TableViewMatchers;
  *
  * @author tuomoart
  */
-public class MarkBooksReadAcceptanceTest extends ApplicationTest {
+public class DeleteBooksAcceptanceTest extends ApplicationTest {
     private Gui sovellus;
     private ArrayList<Book> someBooks;
     
@@ -67,39 +67,22 @@ public class MarkBooksReadAcceptanceTest extends ApplicationTest {
     }
     
     @Test
-    public void ensureThatDefaultIsUnread() {
-        assertThat((TableView<Book>)lookup("#list").query(), not(TableViewMatchers.hasTableCell("true")));
+    public void whenDeleteIsClickedTheSelectedBookIsdeleted() {
+        deleteRow(0);
+        
+        assertThat((TableView<Book>)lookup("#list").query(), not(TableViewMatchers.hasTableCell("Book with all data")));
     }
     
     @Test
-    public void whenToggleReadIsClickedUnreadChangesToRead() {
-        toggleReadForRow(0);
+    public void whenDeleteIsClickedAndNoBookIsSelectedThenNoBookIsDeleted() {
+        clickOn("#deleteButton");
         
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell("true"));
+        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell("Book with all data"));
     }
     
-    @Test
-    public void whenToggleReadIsClickedAndNoBookIsSelectedThenNoReadStatusChanges() {
-        clickOn("#markReadButton");
-        
-        assertThat((TableView<Book>)lookup("#list").query(), not(TableViewMatchers.hasTableCell("true")));
-    }
-    
-    @Test
-    public void whenToggleReadIsClickedReadChangesToUnread() {
-        //Create suitable environment first
-        sovellus.getLogic().getDao().clearDatabase();
-        sovellus.getLogic().addBook("Kirjannimi", "", "", "", "");
-        
-        toggleReadForRow(0);
-        toggleReadForRow(0);
-        
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell("false"));
-    }
-    
-    private void toggleReadForRow(int row) {
+    private void deleteRow(int row) {
         clickOn(lookup("#authorCol").nth(1 + row).queryAs(Node.class));
-        clickOn("#markReadButton");
+        clickOn("#deleteButton");
     }
     
     private void moveToSearchView() {
@@ -112,12 +95,6 @@ public class MarkBooksReadAcceptanceTest extends ApplicationTest {
         someBooks = new ArrayList();
         
         someBooks.add( new Book("Book with all data", "b-1", "A. AuthorI", "2000", "100", "978-951-98548-9-2", false));
-        someBooks.add( new Book("Find By Name", "b-2", "", "", "", "", false));
-        someBooks.add( new Book("Some Name", "b-3", "Find by author", "", "", "", false));
-        someBooks.add( new Book("Some Other Name", "b-4", "", "2001", "", "", false));
-        someBooks.add( new Book("Some Third Name", "b-5", "", "2001", "", "", false));
-        someBooks.add( new Book("Some Fourth Name", "b-6", "", "2001", "", "", false));
-        someBooks.add( new Book("Some Fifth Name", "b-7", "", "2001", "", "", false));
         
         someBooks.forEach((b) -> {
             l.addBook(b.getTitle(), b.getAuthor(), b.getYear(), b.getPages(), b.getISBN());
