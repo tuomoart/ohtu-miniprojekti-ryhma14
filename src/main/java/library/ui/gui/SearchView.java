@@ -89,6 +89,8 @@ public class SearchView {
         TableColumn isbnCol = createTableColumn("ISBN", "ISBN");
         TableColumn readCol = createTableColumn("Luettu", "read");
         
+        authorCol.setId("authorCol");
+        
         FilteredList<Tip> flBooks = filteredBooks("");
         table.setItems(flBooks);
         table.getColumns().addAll(authorCol, titleCol, yearCol, pagesCol, isbnCol, readCol);
@@ -171,7 +173,9 @@ public class SearchView {
         
         this.searchBox = new TextField();
         this.markReadButton = new Button("Merkitse luetuksi");
+        markReadButton.setId("markReadButton");
         this.deleteButton = new Button("Poista");
+        this.deleteButton.setId("deleteButton");
         
         HBox hbox = new HBox();
         hbox.getChildren().addAll(markReadButton, deleteButton);
