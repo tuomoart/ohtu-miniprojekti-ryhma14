@@ -30,6 +30,12 @@ public class SQLBookDaoTest {
         boolean created = sqlBookDao.addBookToDatabase("How to write tests", "Some Person", "2020", "100", "012-0123456789", false);
         assertTrue(created);
     }
+    
+    @Test
+    public void canAddReadBook() throws SQLException {
+        sqlBookDao.addBookToDatabase("How to write tests", "Some Person", "2020", "100", "012-0123456789", true);
+        assertEquals("1", sqlBookDao.getBooks().get(0).get(6));
+    }
 
     @Test
     public void createdBookHasCorrectData() throws SQLException {
@@ -71,4 +77,41 @@ public class SQLBookDaoTest {
         toggled = sqlBookDao.getBooks().get(0);
         assertEquals("1", toggled.get(6));
     }
+    
+    @Test
+    public void addBookReturnsFalseInCaseOfSqlException() throws SQLException {
+        Database db = new Database("jdbc:sqlite:testdatabase.db");
+        db.getConnection().createStatement().execute("DROP TABLE Books");
+        assertFalse(sqlBookDao.addBookToDatabase("Book", "Author", "1970", "420", "", false));
+    }
+    
+    @Test
+    public void clearDatabaseReturnsFalseInCaseOfSqlException() throws SQLException {
+        Database db = new Database("jdbc:sqlite:testdatabase.db");
+        db.getConnection().createStatement().execute("DROP TABLE Books");
+        assertFalse(sqlBookDao.clearDatabase());
+    }
+    
+    @Test
+    public void toggleReadReturnsFalseInCaseOfSqlException() throws SQLException {
+        Database db = new Database("jdbc:sqlite:testdatabase.db");
+        db.getConnection().createStatement().execute("DROP TABLE Books");
+        assertFalse(sqlBookDao.toggleRead(1));
+    }
+    
+    @Test
+    public void removeReturnsFalseInCaseOfSqlException() throws SQLException {
+        Database db = new Database("jdbc:sqlite:testdatabase.db");
+        db.getConnection().createStatement().execute("DROP TABLE Books");
+        assertFalse(sqlBookDao.remove(1));
+    }
+    
+    @Test
+    public void getBooksReturnsAnAmptyListInCaseOfSqlException() throws SQLException {
+        sqlBookDao.addBookToDatabase("", "", "", "", "", false);
+        Database db = new Database("jdbc:sqlite:testdatabase.db");
+        db.getConnection().createStatement().execute("DROP TABLE Books");
+        assertTrue(sqlBookDao.getBooks().isEmpty());
+    }
+    
 }

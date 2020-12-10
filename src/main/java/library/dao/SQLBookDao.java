@@ -33,13 +33,8 @@ public class SQLBookDao implements BookDao {
             ps.setString(4, pages);
             ps.setString(5, isbn);
 
-            int r;
-            if (read) {
-                r = 1;
-            } else {
-                r = 0;
-            }
-
+            int r = 0;
+            if (read) r = 1;
             ps.setInt(6, r);
 
             ps.executeUpdate();

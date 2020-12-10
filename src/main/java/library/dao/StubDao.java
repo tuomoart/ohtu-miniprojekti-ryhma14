@@ -7,7 +7,6 @@ package library.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import library.domain.Book;
 
 /**
  *
@@ -75,9 +74,8 @@ public class StubDao implements BookDao {
                 } else {
                     l.set(6, "false");
                 }
-                return true;
             }
         }
-        return false;
+        return true;
     }
 }

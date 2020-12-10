@@ -124,7 +124,7 @@ public class SearchView {
     }
 
     
-    public HBox createMenu() {
+    private HBox createMenu() {
         HBox menu = new HBox();
         Region spacer = new Region();
         menu.getChildren().add(spacer);
@@ -136,14 +136,14 @@ public class SearchView {
         return menu;
     }
 
-    public Label createTitle() {
+    private Label createTitle() {
         Label title = new Label("Hae lukuvinkkiä");
         title.setFont(Font.font("Arial", 20));
 
         return title;
     }
 
-    public HBox createDropDownListForTypeOfTip() {
+    private HBox createDropDownListForTypeOfTip() {
         HBox dropdownlistLayout = new HBox();
         this.tipDropdownlist = new ComboBox();
 
@@ -166,7 +166,7 @@ public class SearchView {
         return dropdownlistLayout;
     }
 
-    public BorderPane createSearchBoxAndModifyingButtons() {
+    private BorderPane createSearchBoxAndModifyingButtons() {
         BorderPane searchBoxLayout = new BorderPane();
         
         this.searchBox = new TextField();
@@ -201,7 +201,7 @@ public class SearchView {
         return searchBoxLayout;
     }
 
-    public void markSelectedRowRead() {
+    private void markSelectedRowRead() {
         ObservableList<Tip> selected = table.getSelectionModel().getSelectedItems();
         
         for (Tip tip : selected) {
@@ -211,7 +211,7 @@ public class SearchView {
         updateTable();
     }
     
-    public void deleteSelectedRow() {
+    private void deleteSelectedRow() {
         ObservableList<Tip> selected = table.getSelectionModel().getSelectedItems();
         
         for (Tip tip : selected) {
