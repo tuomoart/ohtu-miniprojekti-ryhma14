@@ -5,17 +5,9 @@
  */
 package acceptanceTests;
 
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import java.util.ArrayList;
 import javafx.application.Application;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import library.dao.SQLBookDao;
 import library.domain.Book;
@@ -27,10 +19,8 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.api.FxToolkit.registerPrimaryStage;
 import org.testfx.framework.junit.ApplicationTest;
-import static org.testfx.matcher.control.LabeledMatchers.hasText;
 import org.testfx.matcher.control.TableViewMatchers;
 
 /**
