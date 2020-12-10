@@ -21,3 +21,19 @@
 
 - Dokumentaatioon päivitetty mahdolliset muutokset ohjelman rakenteessa ja toiminnassa
 - Sprintin lopussa julkaistu uusi release
+
+
+## Sprint 3
+
+### User Story Level
+
+- User Storyn [laatuvaatimukset](https://docs.google.com/spreadsheets/d/1_j0GMxQzZxuQtvnp0Q1qjaKo_pBgB3EL9K5jWWytnto/edit?usp=sharing) ovat täyttyneet
+- Ohjelmakoodi on laadukasta, selkeää ja tarpeen vaatiessa refaktoroitua
+- Ohjelmakoodissa ei ole turhia metodeja, muuttujia tms.
+- Ohjelmasta on toimiva ja testit läpäisevä versio githubissa
+- Testejä (yksikkö- ja järjestelmätaso) on suoritettu niin, että mitään ilmeisiä virheitä ei pääse tapahtumaan ohjelman suorituksessa ja ohjelmaan halutut toiminnot toimivat, kuten on määritelty
+
+### Sprint Level
+
+- Dokumentaatioon päivitetty mahdolliset muutokset ohjelman rakenteessa ja toiminnassa
+- Sprintin lopussa on julkaistu uusi release
