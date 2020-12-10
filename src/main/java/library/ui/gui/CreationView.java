@@ -53,6 +53,7 @@ public class CreationView {
         // create main layout
         mainLayout = new BorderPane();
         mainLayout.setPadding(new Insets(10));
+        mainLayout.setPrefSize(642,582);
 
         // create top bar for search, etc.
         Pane top = getTopBar();
@@ -179,7 +180,7 @@ public class CreationView {
         layout.setPadding(new Insets(10));
         ((BorderPane) layout).setTop(getTipSplitMenu());
         BorderPane.setAlignment(((BorderPane) layout).getTop(),Pos.CENTER);
-        BorderPane.setMargin(((BorderPane) layout).getTop(),new Insets(0,0,30,0));
+        BorderPane.setMargin(((BorderPane) layout).getTop(),new Insets(0,0,50,0));
         ((BorderPane) layout).setCenter(getEmptyCreationLayout());
         layouts.put("Kirja",getBookCreationLayout());
         BorderPane.setAlignment(((BorderPane) layout).getCenter(),Pos.TOP_CENTER);
@@ -193,6 +194,7 @@ public class CreationView {
 
     private SplitMenuButton getTipSplitMenu() {
         SplitMenuButton splitMenu = new SplitMenuButton();
+        splitMenu.setPrefWidth(345);
         splitMenu.setId("split");
         splitMenu.setOnAction(new EventHandler<ActionEvent>() {
             @Override

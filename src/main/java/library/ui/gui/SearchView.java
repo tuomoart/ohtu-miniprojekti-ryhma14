@@ -5,6 +5,7 @@
  */
 package library.ui.gui;
 
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,6 +44,7 @@ public class SearchView {
         // create main layout
         BorderPane mainLayout = new BorderPane();
         mainLayout.setPadding(new Insets(10));
+        mainLayout.setPrefSize(642,582);
 
         // create top bar
         mainLayout.setTop(getTopBar());
@@ -64,10 +66,11 @@ public class SearchView {
 
     private VBox createBookTable() {
         table = new TableView<>();
+        table.setMaxHeight(268);
         table.setId("list");
         final Label label = new Label("Kirjat");
         table.setEditable(true);
-        
+
         TableColumn authorCol = createTableColumn("Kirjailija", "author");
         TableColumn titleCol = createTableColumn("Nimike", "title");
         TableColumn pagesCol = createTableColumn("Sivumäärä", "pages");
@@ -103,12 +106,16 @@ public class SearchView {
     }
     
     private TableColumn createTableColumn(String label, String contents) {
-        TableColumn column = new TableColumn(label);
+        TableColumn column = new TableColumn();
+        Label l = new Label(label);
+        l.setMaxWidth(Integer.MAX_VALUE);
+        l.getStyleClass().addAll("lbl","lbl-primary");
+        column.setGraphic(l);
         column.setMinWidth(100);
         column.setCellValueFactory(new PropertyValueFactory<Book, String>(contents));
         return column;
     }
-    
+
     private Pane getTopBar() {
         Pane menu = new HBox();
         menu.getChildren().add(getTitle());
@@ -142,6 +149,7 @@ public class SearchView {
 
     private SplitMenuButton getTipSplitMenu() {
         SplitMenuButton splitMenu = new SplitMenuButton();
+        splitMenu.setPrefWidth(345);
         splitMenu.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
