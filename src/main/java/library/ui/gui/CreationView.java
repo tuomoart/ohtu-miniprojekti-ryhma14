@@ -93,7 +93,7 @@ public class CreationView {
         // create the scene that will be returned
         Scene creationScene = new Scene(mainLayout);
         creationScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
-        // creationScene.getRoot().setStyle("-fx-background: #dfe3ee");
+        creationScene.getRoot().setStyle("-fx-background: #243447");
         return creationScene;
     }
 
@@ -263,6 +263,7 @@ public class CreationView {
             String infotype = tips.get("Kirja").get(i);
 
             Label infolabel = new Label(infotype + ":");
+            infolabel.setStyle("-fx-text-fill: #ffffff");
             infolabel.getStyleClass().addAll("h4");
             ((GridPane) layout).add(infolabel,0,i);
 
