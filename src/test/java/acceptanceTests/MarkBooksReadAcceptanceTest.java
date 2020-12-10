@@ -8,7 +8,6 @@ package acceptanceTests;
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.scene.Node;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import library.dao.SQLBookDao;
@@ -24,7 +23,6 @@ import org.junit.Test;
 import static org.testfx.api.FxToolkit.registerPrimaryStage;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.control.TableViewMatchers;
-import static org.testfx.util.NodeQueryUtils.hasText;
 
 /**
  *
@@ -69,27 +67,32 @@ public class MarkBooksReadAcceptanceTest extends ApplicationTest {
     }
     
     @Test
-    public void whenToggleReadisClickedUnreadChangesToRead() {
-        clickOn(lookup("#authorCol").nth(1).queryAs(Node.class));
-        clickOn("#markReadButton");
+    public void ensureThatDefaultIsUnread() {
+        assertThat((TableView<Book>)lookup("#list").query(), not(TableViewMatchers.hasTableCell("true")));
+    }
+    
+    @Test
+    public void whenToggleReadIsClickedUnreadChangesToRead() {
+        toggleReadForRow(0);
         
         assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell("true"));
     }
     
-    private void enterValueInGui(String id, String value) {
-        clickOn(id).write(value);
+    @Test
+    public void whenToggleReadIsClickedReadChangesToUnread() {
+        //Create suitable environment first
+        sovellus.getLogic().getDao().clearDatabase();
+        sovellus.getLogic().addBook("Kirjannimi", "", "", "", "");
+        
+        toggleReadForRow(0);
+        toggleReadForRow(0);
+        
+        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell("false"));
     }
     
-    private void checkThatBookIsFound(Book book) {
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell(book.getTitle()));
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell(book.getAuthor()));
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell(book.getYear()));
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell(book.getPages()));
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell(book.getISBN()));
-    }
-    
-    private void checkThatBookIsNotFound(Book book) {
-        assertThat((TableView<Book>)lookup("#list").query(), not(TableViewMatchers.hasTableCell(book.getTitle())));
+    private void toggleReadForRow(int row) {
+        clickOn(lookup("#authorCol").nth(1 + row).queryAs(Node.class));
+        clickOn("#markReadButton");
     }
     
     private void moveToSearchView() {
