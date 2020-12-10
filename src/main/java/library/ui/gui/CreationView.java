@@ -163,7 +163,11 @@ public class CreationView {
             messageLabel.setText(messageLabel.getText() + "\n" + msg);
             TextFlow tf = new TextFlow();
             tf.setMaxWidth(342);
-            tf.getStyleClass().addAll("alert","alert-danger");
+            if (msg.contains("lisätty")) {
+                tf.getStyleClass().addAll("alert","alert-success");
+            } else {
+                tf.getStyleClass().addAll("alert","alert-danger");
+            }
             Text pre = new Text("");
             pre.getStyleClass().add("strong");
             Text post = new Text(msg);
