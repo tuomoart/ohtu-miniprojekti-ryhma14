@@ -70,25 +70,9 @@ public class CreationView {
         BorderPane.setAlignment(spacer,Pos.BOTTOM_CENTER);
         mainLayout.setBottom(spacer);
 
-        /*// create vbox for tips
-        VBox tip = new VBox(50);
-        tip.setAlignment(Pos.CENTER);
-        tip.getChildren().addAll(getTipCreationLayout());
-        BorderPane.setAlignment(tip, Pos.BOTTOM_CENTER);
-        mainLayout.setCenter(tip);
-
-        // create button for adding the tip
-        VBox adding = new VBox(20);
-        adding.setAlignment(Pos.CENTER);
-        */messageLabel = new Label("");
+        messageLabel = new Label("");
         messageLabel.setId("messages");
         messageLabel.setMaxSize(0,0);
-        /*messageLabel.setPrefHeight(100);
-        messageLabel.setPrefHeight(100);
-        adding.getChildren().add(messageLabel);
-        Button add = getAddButton();
-        adding.getChildren().add(add);
-        mainLayout.setBottom(adding);*/
 
         // create the scene that will be returned
         Scene creationScene = new Scene(mainLayout);
@@ -190,22 +174,6 @@ public class CreationView {
         return title;
     }
 
-    /* private ComboBox getTipMenu() {
-        ComboBox tipMenu = new ComboBox(FXCollections.observableArrayList(tips.keySet()));
-        tipMenu.setPromptText("Valitse lisättävän vinkin tyyppi");
-        tipMenu.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                selectedTip = (String) tipMenu.getValue();
-                //TODO oikeantyyppisen vinkkityypin Paneen vaihtaminen, varmaan paras ratkaisu käyttää borderpanen setCenter...
-                if (selectedTip.equals("Kirja")) {
-                    
-                }
-            }
-        });
-        return tipMenu;
-    } */
-
     private Pane getTipCreationLayout() {
         Pane layout = new BorderPane();
         layout.setPadding(new Insets(10));
@@ -277,15 +245,11 @@ public class CreationView {
             textfields.put(infotype, input);
             ((GridPane) layout).add(input,1,i);
         }
+        bookErrorProcessing();
         return layout;
     }
 
-    /* private VBox getBookCreationLayout() {
-        VBox bookLayout = new VBox(5);
-        for (String infotype : tips.get("Kirja")) {
-            bookLayout.getChildren().add(getQuery(infotype));
-        }
-
+    private void bookErrorProcessing() {
         // title
         TextField title = textfields.get("Nimike");
         title.setPromptText("pakollinen tieto");
@@ -293,9 +257,9 @@ public class CreationView {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (!gui.textIsValidTitle(title.getText())) {
-                    title.setStyle("-fx-border-color: red;" + " -fx-border-width: 1.5px");
+                    title.getStyleClass().add("btn-danger");
                 } else {
-                    title.setStyle("");
+                    title.getStyleClass().removeAll("btn-danger");
                 }
             }
         });
@@ -306,9 +270,9 @@ public class CreationView {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (!gui.textIsValidAuthorName(author.getText())) {
-                    author.setStyle("-fx-border-color: red;" + " -fx-border-width: 1.5px");
+                    author.getStyleClass().add("btn-danger");
                 }  else {
-                    author.setStyle("");
+                    author.getStyleClass().removeAll("btn-danger");
                 }
             }
         });
@@ -319,9 +283,9 @@ public class CreationView {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (!gui.textIsValidInteger(year.getText())) {
-                    year.setStyle("-fx-border-color: red;" + " -fx-border-width: 1.5px");
+                    year.getStyleClass().add("btn-danger");
                 }  else {
-                    year.setStyle("");
+                    year.getStyleClass().removeAll("btn-danger");
                 }
             }
         });
@@ -332,9 +296,9 @@ public class CreationView {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (!gui.textIsValidInteger(pages.getText())) {
-                    pages.setStyle("-fx-border-color: red;" + " -fx-border-width: 1.5px");
+                    pages.getStyleClass().add("btn-danger");
                 }  else {
-                    pages.setStyle("");
+                    pages.getStyleClass().removeAll("btn-danger");
                 }
             }
         });
@@ -345,27 +309,11 @@ public class CreationView {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (!gui.textIsValidISBN(isbn.getText())) {
-                    isbn.setStyle("-fx-border-color: red;" + " -fx-border-width: 1.5px");
+                    isbn.getStyleClass().add("btn-danger");
                 }  else {
-                    isbn.setStyle("");
+                    isbn.getStyleClass().removeAll("btn-danger");
                 }
             }
         });
-
-        return bookLayout;
-    } */
-
-    /* private HBox getQuery(String infotype) {
-        HBox query = new HBox();
-        Label info = new Label(infotype + ":");
-        query.getChildren().add(info);
-        Region spacer = new Region();
-        query.getChildren().add(spacer);
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-        TextField input = new TextField();
-        input.setId(infotype);
-        textfields.put(infotype, input);
-        query.getChildren().add(input);
-        return query;
-    } */
+    }
 }
