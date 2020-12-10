@@ -5,8 +5,7 @@
  */
 package library.ui.gui;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -14,22 +13,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import library.domain.Book;
 import library.domain.*;
+import org.kordamp.bootstrapfx.BootstrapFX;
 
 /**
  *
@@ -37,6 +28,7 @@ import library.domain.*;
  */
 public class SearchView {
 
+    private BorderPane content;
     private Button addNewTipButton;
     private Button deleteButton;
     private Button markReadButton;
@@ -55,24 +47,37 @@ public class SearchView {
 
     
     public Scene createSearchScene() {
-        Scene scene = new Scene(new Group());
-        
-        
-        VBox searchLayout = new VBox(10);
+        /*VBox searchLayout = new VBox(10);
         searchLayout.setPadding(new Insets(10,20,10,20));
         searchLayout.setAlignment(Pos.CENTER);
         
-        searchLayout.getChildren().add(createMenu());
-        searchLayout.getChildren().add(createTitle());
+        searchLayout.getChildren().add(getTopBar());
         searchLayout.getChildren().add(createDropDownListForTypeOfTip());
         searchLayout.getChildren().add(createSearchBoxAndModifyingButtons());
         searchLayout.getChildren().add(createBookTable());
         
-        searchLayout.setPrefSize(642,520);
+        searchLayout.setPrefSize(642,520);*/
 
-        ((Group) scene.getRoot()).getChildren().addAll(searchLayout);
+        // create main layout
+        BorderPane mainLayout = new BorderPane();
+        mainLayout.setPadding(new Insets(10));
 
-        return scene;
+        // create top bar
+        mainLayout.setTop(getTopBar());
+        BorderPane.setMargin(mainLayout.getTop(),new Insets(0,0,30,0));
+
+        // create content
+        mainLayout.setCenter(getContent());
+        BorderPane.setMargin(mainLayout.getCenter(),new Insets(0,0,30,0));
+
+        // create bottom bar
+        mainLayout.setBottom(getDeleteAndRead());
+
+        // create the scene that will be returned
+        Scene searchView = new Scene(mainLayout);
+        searchView.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+        searchView.getRoot().setStyle("-fx-background: #243447");
+        return searchView;
     }
     
     
@@ -126,23 +131,56 @@ public class SearchView {
     }
 
     
-    private HBox createMenu() {
-        HBox menu = new HBox();
+    private Pane getTopBar() {
+        Pane menu = new HBox();
+        menu.getChildren().add(getTitle());
         Region spacer = new Region();
         menu.getChildren().add(spacer);
         HBox.setHgrow(spacer, Priority.ALWAYS);
         this.addNewTipButton = getCreationButton();
-        menu.setSpacing(10);
         menu.getChildren().add(addNewTipButton);
 
         return menu;
     }
 
-    private Label createTitle() {
-        Label title = new Label("Hae lukuvinkkiä");
-        title.setFont(Font.font("Arial", 20));
-
+    private Label getTitle() {
+        Label title = new Label("");
         return title;
+    }
+
+    private Pane getContent() {
+        content = new BorderPane();
+        content.setPadding(new Insets(10));
+        ((BorderPane) content).setTop(getTipSplitMenu());
+        BorderPane.setAlignment(((BorderPane) content).getTop(),Pos.CENTER);
+        BorderPane.setMargin(((BorderPane) content).getTop(),new Insets(0,0,30,0));
+        ((BorderPane) content).setCenter(getSearchBox());
+        BorderPane.setAlignment(((BorderPane) content).getCenter(),Pos.CENTER);
+        BorderPane.setMargin(((BorderPane) content).getCenter(),new Insets(0,0,30,0));
+        ((BorderPane) content).setBottom(createBookTable());
+        BorderPane.setAlignment(((BorderPane) content).getBottom(),Pos.CENTER);
+        return content;
+    }
+
+    private SplitMenuButton getTipSplitMenu() {
+        SplitMenuButton splitMenu = new SplitMenuButton();
+        splitMenu.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                splitMenu.show();
+            }
+        });
+        MenuItem books = new MenuItem("Kirja");
+        books.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                // content.setCenter(createBookTable());
+            }
+        });
+        splitMenu.getItems().add(books);
+        splitMenu.setText("Valitse haettavan vinkin tyyppi");
+        splitMenu.getStyleClass().addAll("split-menu-btn","split-menu-btn-lg","split-menu-btn-primary");
+        return splitMenu;
     }
 
     private HBox createDropDownListForTypeOfTip() {
@@ -168,7 +206,42 @@ public class SearchView {
         return dropdownlistLayout;
     }
 
-    private BorderPane createSearchBoxAndModifyingButtons() {
+    private Pane getDeleteAndRead() {
+        Pane bottomBar = new HBox(5);
+        Region spacer = new Region();
+        bottomBar.getChildren().add(spacer);
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        bottomBar.getChildren().addAll(getMarkReadButton(),getDeleteButton());
+        return bottomBar;
+    }
+
+    private Button getDeleteButton() {
+        Button deleteButton = new Button("Poista");
+        deleteButton.getStyleClass().addAll("btn","btn-danger");
+        deleteButton.setId("deleteButton");
+        deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                deleteSelectedRow();
+            }
+        });
+        return deleteButton;
+    }
+
+    private Button getMarkReadButton() {
+        Button markReadButton = new Button("Lue");
+        markReadButton.getStyleClass().addAll("btn","btn-success");
+        markReadButton.setId("markReadButton");
+        markReadButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                markSelectedRowRead();
+            }
+        });
+        return markReadButton;
+    }
+
+    private Pane createSearchBoxAndModifyingButtons() {
         BorderPane searchBoxLayout = new BorderPane();
         
         this.searchBox = new TextField();
@@ -224,6 +297,15 @@ public class SearchView {
         
         updateTable();
     }
+
+    private TextField getSearchBox() {
+        searchBox = new TextField();
+        searchBox.setMaxWidth(193);
+        searchBox.getStyleClass().addAll("btn");
+        searchBox.setId("searchBox");
+        searchBox.setPromptText("hakusana");
+        return searchBox;
+    }
     
     private void updateTable() {
         table.setItems(filteredBooks(searchBox.getText()));
@@ -232,6 +314,7 @@ public class SearchView {
     
     private Button getCreationButton() {
         Button creationButton = new Button("Lisää uusi lukuvinkki");
+        creationButton.getStyleClass().addAll("btn","btn-primary");
         creationButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
