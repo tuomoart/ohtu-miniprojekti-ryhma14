@@ -6,15 +6,16 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 
 import java.util.*;
-import javafx.scene.input.KeyEvent;
+
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import org.kordamp.bootstrapfx.BootstrapFX;
 
 /**
  * for getting the javafx scene for adding new tips to the library
@@ -24,8 +25,9 @@ import javafx.scene.text.Font;
 public class CreationView {
 
     private Gui gui;
-    private String selectedTip = "Kirja";
-    private VBox tipCreationLayout;
+    private BorderPane mainLayout;
+    private BorderPane content;
+    private String selectedTip;
     private Map<String, List<String>> tips = new HashMap<>() {
         {
             put("Kirja", new ArrayList<String>() {
@@ -40,6 +42,7 @@ public class CreationView {
         }
     };
     private Map<String, TextField> textfields = new HashMap<>();
+    private Map<String, Pane> layouts = new HashMap<>();
     private Label messageLabel;
 
     public CreationView(Gui gui) {
@@ -48,40 +51,54 @@ public class CreationView {
 
     public Scene getCreationScene() {
         // create main layout
-        BorderPane mainLayout = new BorderPane();
-        mainLayout.setPrefSize(642, 520);
-        mainLayout.setPadding(new Insets(10, 20, 10, 20));
+        mainLayout = new BorderPane();
+        mainLayout.setPadding(new Insets(10));
 
         // create top bar for search, etc.
         Pane top = getTopBar();
         mainLayout.setTop(top);
+        BorderPane.setMargin(mainLayout.getTop(),new Insets(0,0,30,0));
 
-        // create vbox for tips
+        // create main content for the page
+        content = (BorderPane) getTipCreationLayout();
+        mainLayout.setCenter(content);
+        BorderPane.setMargin(mainLayout.getCenter(),new Insets(0,0,30,0));
+
+        // create spaceholder for add button
+        Region spacer = new Region();
+        spacer.setPrefSize(80,32);
+        BorderPane.setAlignment(spacer,Pos.BOTTOM_CENTER);
+        mainLayout.setBottom(spacer);
+
+        /*// create vbox for tips
         VBox tip = new VBox(50);
         tip.setAlignment(Pos.CENTER);
-        tip.getChildren().addAll(getTitle(), getTipMenu(), getBookCreationLayout());
+        tip.getChildren().addAll(getTipCreationLayout());
         BorderPane.setAlignment(tip, Pos.BOTTOM_CENTER);
         mainLayout.setCenter(tip);
 
         // create button for adding the tip
         VBox adding = new VBox(20);
         adding.setAlignment(Pos.CENTER);
-        messageLabel = new Label("");
+        */messageLabel = new Label("");
         messageLabel.setId("messages");
-        messageLabel.setPrefHeight(100);
+        /*messageLabel.setPrefHeight(100);
         messageLabel.setPrefHeight(100);
         adding.getChildren().add(messageLabel);
         Button add = getAddButton();
         adding.getChildren().add(add);
-        mainLayout.setBottom(adding);
+        mainLayout.setBottom(adding);*/
 
         // create the scene that will be returned
         Scene creationScene = new Scene(mainLayout);
+        creationScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+        // creationScene.getRoot().setStyle("-fx-background: #dfe3ee");
         return creationScene;
     }
 
     private HBox getTopBar() {
         HBox topBar = new HBox();
+        topBar.getChildren().add(getTitle());
         Region spacer = new Region();
         topBar.getChildren().add(spacer);
         HBox.setHgrow(spacer, Priority.ALWAYS);
@@ -91,6 +108,7 @@ public class CreationView {
 
     private Button getSearchButton() {
         Button searchButton = new Button("Hae");
+        searchButton.getStyleClass().addAll("btn","btn-primary");
         searchButton.setId("search");
         searchButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -103,6 +121,7 @@ public class CreationView {
 
     private Button getAddButton() {
         Button addButton = new Button("Lisää");
+        addButton.getStyleClass().addAll("btn","btn-primary");
         addButton.setId("add");
         addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -118,7 +137,9 @@ public class CreationView {
         if (selectedTip.equals("Kirja")) {
             messages = addBook();
         }
-        setMessages(messages);
+        Pane messagePane = getMessagePane(messages);
+        BorderPane.setAlignment(messagePane, Pos.CENTER);
+        content.setBottom(messagePane);
         if (messages.get(0).contains("lisätty")) {
             empty();
         }
@@ -133,11 +154,23 @@ public class CreationView {
         return gui.addBook(name, author, year, pages, ISBN);
     }
 
-    public void setMessages(List<String> messages) {
-        messageLabel.setText("");
-        for (String message : messages) {
-            messageLabel.setText(messageLabel.getText() + "\n" + message);
+    private Pane getMessagePane(List<String> messages) {
+        Pane messagePane = new VBox(5);
+        ((VBox) messagePane).setAlignment(Pos.CENTER);
+        messagePane.getChildren().add(messageLabel);
+        for (String msg : messages) {
+            messageLabel.setText(messageLabel.getText() + "\n" + msg);
+            /*TextFlow tf = new TextFlow();
+            tf.setMaxWidth(342);
+            tf.getStyleClass().addAll("alert","alert-danger");
+            Text pre = new Text("");
+            pre.getStyleClass().add("strong");
+            Text post = new Text(msg);
+            post.getStyleClass().add("p");
+            tf.getChildren().addAll(pre,post);
+            messagePane.getChildren().add(tf);*/
         }
+        return messagePane;
     }
 
     private void empty() {
@@ -147,13 +180,12 @@ public class CreationView {
     }
 
     private Label getTitle() {
-        Label title = new Label("Lisää lukuvinkki");
-        title.setFont(Font.font("Arial", 20));
+        Label title = new Label();
         title.setId("CreateViewTitle");
         return title;
     }
 
-    private ComboBox getTipMenu() {
+    /* private ComboBox getTipMenu() {
         ComboBox tipMenu = new ComboBox(FXCollections.observableArrayList(tips.keySet()));
         tipMenu.setPromptText("Valitse lisättävän vinkin tyyppi");
         tipMenu.setOnAction(new EventHandler<ActionEvent>() {
@@ -167,9 +199,82 @@ public class CreationView {
             }
         });
         return tipMenu;
+    } */
+
+    private Pane getTipCreationLayout() {
+        Pane layout = new BorderPane();
+        layout.setPadding(new Insets(10));
+        ((BorderPane) layout).setTop(getTipSplitMenu());
+        BorderPane.setAlignment(((BorderPane) layout).getTop(),Pos.CENTER);
+        BorderPane.setMargin(((BorderPane) layout).getTop(),new Insets(0,0,30,0));
+        ((BorderPane) layout).setCenter(getEmptyCreationLayout());
+        layouts.put("Kirja",getBookCreationLayout());
+        BorderPane.setAlignment(((BorderPane) layout).getCenter(),Pos.TOP_CENTER);
+        BorderPane.setMargin(((BorderPane) layout).getCenter(),new Insets(0,0,30,0));
+        Region spacer = new Region();
+        spacer.setPrefSize(342,63);
+        BorderPane.setAlignment(spacer,Pos.BOTTOM_CENTER);
+        ((BorderPane) layout).setBottom(spacer);
+        return layout;
     }
 
-    private VBox getBookCreationLayout() {
+    private SplitMenuButton getTipSplitMenu() {
+        SplitMenuButton splitMenu = new SplitMenuButton();
+        splitMenu.setId("split");
+        splitMenu.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                splitMenu.show();
+            }
+        });
+        splitMenu.setText("Valitse lisättävän vinkin tyyppi");
+        splitMenu.getStyleClass().addAll("split-menu-btn","split-menu-btn-lg","split-menu-btn-primary");
+        for (String tip : tips.keySet()) {
+            MenuItem item = new MenuItem(tip);
+            item.setId(tip);
+            splitMenu.getItems().add(item);
+            item.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    selectedTip = tip;
+                    content.setCenter(layouts.get(tip));
+                    Button addButton = getAddButton();
+                    BorderPane.setAlignment(addButton,Pos.BOTTOM_CENTER);
+                    mainLayout.setBottom(addButton);
+                }
+            });
+        }
+        return splitMenu;
+    }
+
+    private Region getEmptyCreationLayout() {
+        Region region = new Region();
+        region.setPrefSize(462,180);
+        return region;
+    }
+
+    private Pane getBookCreationLayout() {
+        Pane layout = new GridPane();
+        ((GridPane) layout).setAlignment(Pos.TOP_CENTER);
+        ((GridPane) layout).setHgap(140);
+        ((GridPane) layout).setVgap(5);
+        for (int i = 0; i < tips.get("Kirja").size(); i++) {
+            String infotype = tips.get("Kirja").get(i);
+
+            Label infolabel = new Label(infotype + ":");
+            infolabel.getStyleClass().addAll("h4");
+            ((GridPane) layout).add(infolabel,0,i);
+
+            TextField input = new TextField();
+            input.getStyleClass().addAll("btn");
+            input.setId(infotype);
+            textfields.put(infotype, input);
+            ((GridPane) layout).add(input,1,i);
+        }
+        return layout;
+    }
+
+    /* private VBox getBookCreationLayout() {
         VBox bookLayout = new VBox(5);
         for (String infotype : tips.get("Kirja")) {
             bookLayout.getChildren().add(getQuery(infotype));
@@ -242,9 +347,9 @@ public class CreationView {
         });
 
         return bookLayout;
-    }
+    } */
 
-    private HBox getQuery(String infotype) {
+    /* private HBox getQuery(String infotype) {
         HBox query = new HBox();
         Label info = new Label(infotype + ":");
         query.getChildren().add(info);
@@ -256,5 +361,5 @@ public class CreationView {
         textfields.put(infotype, input);
         query.getChildren().add(input);
         return query;
-    }
+    } */
 }

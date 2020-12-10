@@ -9,6 +9,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,13 +19,17 @@ import javafx.stage.Stage;
 import library.dao.SQLBookDao;
 import library.domain.Logic;
 import library.ui.gui.Gui;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.api.FxAssert.verifyThatIter;
 import static org.testfx.api.FxToolkit.registerPrimaryStage;
 import org.testfx.framework.junit.ApplicationTest;
+
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 /**
@@ -58,6 +63,7 @@ public class CreateBookAcceptanceTest extends ApplicationTest {
     @Before
     public void setUp() {
         sovellus.getLogic().getDao().clearDatabase();
+        selectBook();
     }
     
     @After
@@ -131,6 +137,11 @@ public class CreateBookAcceptanceTest extends ApplicationTest {
     
     private void clickAddInGui() {
         clickOn("#add");
+    }
+
+    private void selectBook() {
+        clickOn("#split");
+        clickOn("#Kirja");
     }
     
     private void AddingRespondsWith(String response) {
