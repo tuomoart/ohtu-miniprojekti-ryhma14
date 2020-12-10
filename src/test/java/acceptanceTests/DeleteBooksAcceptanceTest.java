@@ -7,6 +7,7 @@ package acceptanceTests;
 
 import java.util.ArrayList;
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import library.dao.SQLBookDao;
@@ -27,7 +28,7 @@ import org.testfx.matcher.control.TableViewMatchers;
  *
  * @author tuomoart
  */
-public class SearchBooksAcceptanceTest extends ApplicationTest {
+public class DeleteBooksAcceptanceTest extends ApplicationTest {
     private Gui sovellus;
     private ArrayList<Book> someBooks;
     
@@ -66,62 +67,22 @@ public class SearchBooksAcceptanceTest extends ApplicationTest {
     }
     
     @Test
-    public void allBooksCanBeViewed() {
-        someBooks.forEach((book) -> {
-            checkThatBookIsFound(book);
-        });        
+    public void whenDeleteIsClickedTheSelectedBookIsdeleted() {
+        deleteRow(0);
+        
+        assertThat((TableView<Book>)lookup("#list").query(), not(TableViewMatchers.hasTableCell("Book with all data")));
     }
     
     @Test
-    public void bookCanBeSearchedByName() {
-        enterValueInGui("#searchBox", someBooks.get(1).getTitle());
+    public void whenDeleteIsClickedAndNoBookIsSelectedThenNoBookIsDeleted() {
+        clickOn("#deleteButton");
         
-        checkThatBookIsFound(someBooks.get(1));
+        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell("Book with all data"));
     }
     
-    @Test
-    public void bookCanBeSearchedByAuthor() {
-        enterValueInGui("#searchBox", someBooks.get(2).getAuthor());
-        
-        checkThatBookIsFound(someBooks.get(2));
-    }
-    
-    @Test
-    public void bookCanBeSearchedByYear() {
-        enterValueInGui("#searchBox", someBooks.get(3).getYear());
-        
-        checkThatBookIsFound(someBooks.get(3));
-        checkThatBookIsFound(someBooks.get(4));
-    }
-    
-    @Test
-    public void bookCanBeSearchedByISBN() {
-        enterValueInGui("#searchBox", someBooks.get(0).getISBN());
-        
-        checkThatBookIsFound(someBooks.get(0));
-    }
-    
-    @Test
-    public void whenSearchedBySomethingThenOthersAreNotVisible() {
-        enterValueInGui("#searchBox", someBooks.get(1).getTitle());
-        
-        checkThatBookIsNotFound(someBooks.get(0));
-    }
-    
-    private void enterValueInGui(String id, String value) {
-        clickOn(id).write(value);
-    }
-    
-    private void checkThatBookIsFound(Book book) {
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell(book.getTitle()));
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell(book.getAuthor()));
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell(book.getYear()));
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell(book.getPages()));
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell(book.getISBN()));
-    }
-    
-    private void checkThatBookIsNotFound(Book book) {
-        assertThat((TableView<Book>)lookup("#list").query(), not(TableViewMatchers.hasTableCell(book.getTitle())));
+    private void deleteRow(int row) {
+        clickOn(lookup("#authorCol").nth(1 + row).queryAs(Node.class));
+        clickOn("#deleteButton");
     }
     
     private void moveToSearchView() {
@@ -134,10 +95,6 @@ public class SearchBooksAcceptanceTest extends ApplicationTest {
         someBooks = new ArrayList();
         
         someBooks.add( new Book("Book with all data", "b-1", "A. AuthorI", "2000", "100", "978-951-98548-9-2", false));
-        someBooks.add( new Book("Find By Name", "b-2", "", "", "", "", false));
-        someBooks.add( new Book("Some Name", "b-3", "Find by author", "", "", "", false));
-        someBooks.add( new Book("Some Other Name", "b-4", "", "2001", "", "", false));
-        someBooks.add( new Book("Some Third Name", "b-5", "", "2001", "", "", false));
         
         someBooks.forEach((b) -> {
             l.addBook(b.getTitle(), b.getAuthor(), b.getYear(), b.getPages(), b.getISBN());

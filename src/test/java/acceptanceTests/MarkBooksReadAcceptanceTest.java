@@ -7,6 +7,7 @@ package acceptanceTests;
 
 import java.util.ArrayList;
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import library.dao.SQLBookDao;
@@ -27,7 +28,7 @@ import org.testfx.matcher.control.TableViewMatchers;
  *
  * @author tuomoart
  */
-public class SearchBooksAcceptanceTest extends ApplicationTest {
+public class MarkBooksReadAcceptanceTest extends ApplicationTest {
     private Gui sovellus;
     private ArrayList<Book> someBooks;
     
@@ -66,62 +67,39 @@ public class SearchBooksAcceptanceTest extends ApplicationTest {
     }
     
     @Test
-    public void allBooksCanBeViewed() {
-        someBooks.forEach((book) -> {
-            checkThatBookIsFound(book);
-        });        
+    public void ensureThatDefaultIsUnread() {
+        assertThat((TableView<Book>)lookup("#list").query(), not(TableViewMatchers.hasTableCell("true")));
     }
     
     @Test
-    public void bookCanBeSearchedByName() {
-        enterValueInGui("#searchBox", someBooks.get(1).getTitle());
+    public void whenToggleReadIsClickedUnreadChangesToRead() {
+        toggleReadForRow(0);
         
-        checkThatBookIsFound(someBooks.get(1));
+        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell("true"));
     }
     
     @Test
-    public void bookCanBeSearchedByAuthor() {
-        enterValueInGui("#searchBox", someBooks.get(2).getAuthor());
+    public void whenToggleReadIsClickedAndNoBookIsSelectedThenNoReadStatusChanges() {
+        clickOn("#markReadButton");
         
-        checkThatBookIsFound(someBooks.get(2));
+        assertThat((TableView<Book>)lookup("#list").query(), not(TableViewMatchers.hasTableCell("true")));
     }
     
     @Test
-    public void bookCanBeSearchedByYear() {
-        enterValueInGui("#searchBox", someBooks.get(3).getYear());
+    public void whenToggleReadIsClickedReadChangesToUnread() {
+        //Create suitable environment first
+        sovellus.getLogic().getDao().clearDatabase();
+        sovellus.getLogic().addBook("Kirjannimi", "", "", "", "");
         
-        checkThatBookIsFound(someBooks.get(3));
-        checkThatBookIsFound(someBooks.get(4));
-    }
-    
-    @Test
-    public void bookCanBeSearchedByISBN() {
-        enterValueInGui("#searchBox", someBooks.get(0).getISBN());
+        toggleReadForRow(0);
+        toggleReadForRow(0);
         
-        checkThatBookIsFound(someBooks.get(0));
+        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell("false"));
     }
     
-    @Test
-    public void whenSearchedBySomethingThenOthersAreNotVisible() {
-        enterValueInGui("#searchBox", someBooks.get(1).getTitle());
-        
-        checkThatBookIsNotFound(someBooks.get(0));
-    }
-    
-    private void enterValueInGui(String id, String value) {
-        clickOn(id).write(value);
-    }
-    
-    private void checkThatBookIsFound(Book book) {
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell(book.getTitle()));
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell(book.getAuthor()));
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell(book.getYear()));
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell(book.getPages()));
-        assertThat((TableView<Book>)lookup("#list").query(), TableViewMatchers.hasTableCell(book.getISBN()));
-    }
-    
-    private void checkThatBookIsNotFound(Book book) {
-        assertThat((TableView<Book>)lookup("#list").query(), not(TableViewMatchers.hasTableCell(book.getTitle())));
+    private void toggleReadForRow(int row) {
+        clickOn(lookup("#authorCol").nth(1 + row).queryAs(Node.class));
+        clickOn("#markReadButton");
     }
     
     private void moveToSearchView() {
@@ -138,6 +116,8 @@ public class SearchBooksAcceptanceTest extends ApplicationTest {
         someBooks.add( new Book("Some Name", "b-3", "Find by author", "", "", "", false));
         someBooks.add( new Book("Some Other Name", "b-4", "", "2001", "", "", false));
         someBooks.add( new Book("Some Third Name", "b-5", "", "2001", "", "", false));
+        someBooks.add( new Book("Some Fourth Name", "b-6", "", "2001", "", "", false));
+        someBooks.add( new Book("Some Fifth Name", "b-7", "", "2001", "", "", false));
         
         someBooks.forEach((b) -> {
             l.addBook(b.getTitle(), b.getAuthor(), b.getYear(), b.getPages(), b.getISBN());
