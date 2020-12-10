@@ -82,6 +82,7 @@ public class CreationView {
         adding.setAlignment(Pos.CENTER);
         */messageLabel = new Label("");
         messageLabel.setId("messages");
+        messageLabel.setMaxSize(0,0);
         /*messageLabel.setPrefHeight(100);
         messageLabel.setPrefHeight(100);
         adding.getChildren().add(messageLabel);
@@ -160,7 +161,7 @@ public class CreationView {
         messagePane.getChildren().add(messageLabel);
         for (String msg : messages) {
             messageLabel.setText(messageLabel.getText() + "\n" + msg);
-            /*TextFlow tf = new TextFlow();
+            TextFlow tf = new TextFlow();
             tf.setMaxWidth(342);
             tf.getStyleClass().addAll("alert","alert-danger");
             Text pre = new Text("");
@@ -168,7 +169,7 @@ public class CreationView {
             Text post = new Text(msg);
             post.getStyleClass().add("p");
             tf.getChildren().addAll(pre,post);
-            messagePane.getChildren().add(tf);*/
+            messagePane.getChildren().add(tf);
         }
         return messagePane;
     }
