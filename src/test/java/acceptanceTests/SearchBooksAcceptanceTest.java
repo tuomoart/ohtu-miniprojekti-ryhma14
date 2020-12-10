@@ -22,6 +22,7 @@ import library.domain.Book;
 import library.domain.Logic;
 import library.ui.gui.Gui;
 import static org.hamcrest.CoreMatchers.not;
+import org.junit.After;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -67,6 +68,11 @@ public class SearchBooksAcceptanceTest extends ApplicationTest {
         sovellus.getLogic().getDao().clearDatabase();
         addSomeBooks();
         moveToSearchView();
+    }
+    
+    @After
+    public void tearDown() {
+        sovellus.getLogic().getDao().clearDatabase();
     }
     
     @Test

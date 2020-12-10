@@ -32,16 +32,16 @@ public class SQLBookDao implements BookDao {
             ps.setString(3, year);
             ps.setString(4, pages);
             ps.setString(5, isbn);
-            
+
             int r;
             if (read) {
                 r = 1;
             } else {
                 r = 0;
             }
-            
+
             ps.setInt(6, r);
-            
+
             ps.executeUpdate();
             connection.close();
         } catch (SQLException e) {
@@ -54,11 +54,10 @@ public class SQLBookDao implements BookDao {
     @Override
     public List<List<String>> getBooks() throws SQLException {
         List<List<String>> books = new ArrayList<>();
-        
+
         try {
             Connection connection = database.getConnection();
-            
-            
+
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM Books");
             ResultSet results = ps.executeQuery();
 
@@ -72,7 +71,7 @@ public class SQLBookDao implements BookDao {
                 book.add(results.getString("isbn"));
                 book.add(results.getString("id"));
                 book.add(Integer.toString(results.getInt("read")));
-                
+
                 books.add(book);
             }
             connection.close();
@@ -96,13 +95,12 @@ public class SQLBookDao implements BookDao {
             return false;
         }
     }
-    
-    
+
     @Override
     public boolean toggleRead(int id) {
         try {
             Connection connection = database.getConnection();
-            PreparedStatement ps = connection.prepareStatement("UPDATE Books SET read = ((read | 1) - (read & 1)) WHERE id = ?");
+            PreparedStatement ps = connection.prepareStatement("UPDATE Books SET read = CASE WHEN read = 0 THEN 1 ELSE 0 END WHERE id = ?");
             ps.setInt(1, id);
             ps.executeUpdate();
             connection.close();
@@ -111,7 +109,7 @@ public class SQLBookDao implements BookDao {
             return false;
         }
     }
-    
+
     @Override
     public boolean clearDatabase() {
         try {

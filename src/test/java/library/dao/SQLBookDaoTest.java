@@ -1,6 +1,5 @@
 package library.dao;
 
-
 import java.sql.SQLException;
 import java.util.List;
 import org.junit.After;
@@ -36,7 +35,7 @@ public class SQLBookDaoTest {
     public void createdBookHasCorrectData() throws SQLException {
         sqlBookDao.addBookToDatabase("Test Book", "Author", "2020", "20", "123-0123456789", false);
         List<List<String>> books = sqlBookDao.getBooks();
-        List<String> createdBook = books.get(books.size()-1);
+        List<String> createdBook = books.get(books.size() - 1);
         assertEquals("Test Book", createdBook.get(0));
         assertEquals("Author", createdBook.get(1));
         assertEquals("2020", createdBook.get(2));
@@ -49,5 +48,27 @@ public class SQLBookDaoTest {
         sqlBookDao.addBookToDatabase("Book", "Author", "1970", "420", "", false);
         assertTrue(sqlBookDao.clearDatabase());
         assertTrue(sqlBookDao.getBooks().isEmpty());
+    }
+
+    @Test
+    public void canRemoveBook() throws SQLException {
+        sqlBookDao.addBookToDatabase("Book", "Author", "1970", "420", "", false);
+        sqlBookDao.addBookToDatabase("Test Book", "Author", "2020", "20", "123-0123456789", false);
+        sqlBookDao.addBookToDatabase("How to write tests", "Some Person", "2020", "100", "012-0123456789", false);
+        List<List<String>> books = sqlBookDao.getBooks();
+        List<String> createdBook = books.get(1);
+        sqlBookDao.remove(2);
+        books = sqlBookDao.getBooks();
+        assertFalse(books.contains(createdBook));
+    }
+
+    @Test
+    public void canToggelRead() throws SQLException {
+        sqlBookDao.addBookToDatabase("Book", "Author", "1970", "420", "", false);
+        List<String> toggled = sqlBookDao.getBooks().get(0);
+        assertEquals("0", toggled.get(6));
+        sqlBookDao.toggleRead(1);
+        toggled = sqlBookDao.getBooks().get(0);
+        assertEquals("1", toggled.get(6));
     }
 }

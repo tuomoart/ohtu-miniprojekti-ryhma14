@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import library.dao.SQLBookDao;
 import library.domain.Logic;
 import library.ui.gui.Gui;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -56,6 +57,11 @@ public class CreateBookAcceptanceTest extends ApplicationTest {
     
     @Before
     public void setUp() {
+        sovellus.getLogic().getDao().clearDatabase();
+    }
+    
+    @After
+    public void tearDown() {
         sovellus.getLogic().getDao().clearDatabase();
     }
     
