@@ -29,35 +29,17 @@ import org.kordamp.bootstrapfx.BootstrapFX;
 public class SearchView {
 
     private BorderPane content;
-    private Button addNewTipButton;
-    private Button deleteButton;
-    private Button markReadButton;
-    private ComboBox tipDropdownlist;
     private TextField searchBox;
     private Logic logic;
     private Gui gui;
     private TableView<Tip> table;
-
-    
     
     public SearchView(Gui gui, Logic logic) {
         this.gui = gui;
         this.logic = logic;
     }
 
-    
     public Scene createSearchScene() {
-        /*VBox searchLayout = new VBox(10);
-        searchLayout.setPadding(new Insets(10,20,10,20));
-        searchLayout.setAlignment(Pos.CENTER);
-        
-        searchLayout.getChildren().add(getTopBar());
-        searchLayout.getChildren().add(createDropDownListForTypeOfTip());
-        searchLayout.getChildren().add(createSearchBoxAndModifyingButtons());
-        searchLayout.getChildren().add(createBookTable());
-        
-        searchLayout.setPrefSize(642,520);*/
-
         // create main layout
         BorderPane mainLayout = new BorderPane();
         mainLayout.setPadding(new Insets(10));
@@ -79,8 +61,7 @@ public class SearchView {
         searchView.getRoot().setStyle("-fx-background: #243447");
         return searchView;
     }
-    
-    
+
     private VBox createBookTable() {
         table = new TableView<>();
         table.setId("list");
@@ -114,14 +95,12 @@ public class SearchView {
         return vbox;
     }
     
-    
-    
+
     private FilteredList<Tip> filteredBooks(String filter) {
         ObservableList<Tip> data = FXCollections.observableArrayList(logic.filteredList(filter));
         FilteredList<Tip> flBooks = new FilteredList(data, p -> true);
         return flBooks;
     }
-
     
     private TableColumn createTableColumn(String label, String contents) {
         TableColumn column = new TableColumn(label);
@@ -129,7 +108,6 @@ public class SearchView {
         column.setCellValueFactory(new PropertyValueFactory<Book, String>(contents));
         return column;
     }
-
     
     private Pane getTopBar() {
         Pane menu = new HBox();
@@ -137,7 +115,7 @@ public class SearchView {
         Region spacer = new Region();
         menu.getChildren().add(spacer);
         HBox.setHgrow(spacer, Priority.ALWAYS);
-        this.addNewTipButton = getCreationButton();
+        Button addNewTipButton = getCreationButton();
         menu.getChildren().add(addNewTipButton);
 
         return menu;
@@ -183,29 +161,6 @@ public class SearchView {
         return splitMenu;
     }
 
-    private HBox createDropDownListForTypeOfTip() {
-        HBox dropdownlistLayout = new HBox();
-        this.tipDropdownlist = new ComboBox();
-
-        dropdownlistLayout.setAlignment(Pos.CENTER);
-        tipDropdownlist.getItems().addAll("Kirja");
-        tipDropdownlist.getSelectionModel().selectFirst();
-
-        dropdownlistLayout.getChildren().add(new Label("Vinkkityyppi: "));
-        dropdownlistLayout.getChildren().add(this.tipDropdownlist);
-        
-        tipDropdownlist.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                String tip = (String) tipDropdownlist.getValue();
-                //tänne muut vinkkityypit, jos ehtii
-                updateTable();
-            }
-        });
-        
-        return dropdownlistLayout;
-    }
-
     private Pane getDeleteAndRead() {
         Pane bottomBar = new HBox(5);
         Region spacer = new Region();
@@ -239,43 +194,6 @@ public class SearchView {
             }
         });
         return markReadButton;
-    }
-
-    private Pane createSearchBoxAndModifyingButtons() {
-        BorderPane searchBoxLayout = new BorderPane();
-        
-        this.searchBox = new TextField();
-        this.markReadButton = new Button("Merkitse luetuksi");
-        markReadButton.setId("markReadButton");
-        this.deleteButton = new Button("Poista");
-        this.deleteButton.setId("deleteButton");
-        
-        HBox hbox = new HBox();
-        hbox.getChildren().addAll(markReadButton, deleteButton);
-        hbox.setSpacing(10);
-        
-        searchBox.setId("searchBox");
-        searchBox.setPromptText("Hakusana");
-        searchBox.setMaxWidth(200);
-        
-        searchBoxLayout.setCenter(searchBox);
-        searchBoxLayout.setRight(hbox);
-        
-        markReadButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                markSelectedRowRead();
-            }
-        });
-        
-        deleteButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                deleteSelectedRow();
-            }
-        });
-        
-        return searchBoxLayout;
     }
 
     private void markSelectedRowRead() {
