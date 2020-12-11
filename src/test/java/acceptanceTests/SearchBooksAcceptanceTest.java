@@ -19,8 +19,10 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.api.FxToolkit.registerPrimaryStage;
 import org.testfx.framework.junit.ApplicationTest;
+import static org.testfx.matcher.control.LabeledMatchers.hasText;
 import org.testfx.matcher.control.TableViewMatchers;
 
 /**
@@ -108,6 +110,13 @@ public class SearchBooksAcceptanceTest extends ApplicationTest {
         enterValueInGui("#searchBox", someBooks.get(1).getTitle());
         
         checkThatBookIsNotFound(someBooks.get(0));
+    }
+    
+    @Test
+    public void userCanChangeToCreationView() {
+        clickOn("#create");
+        
+        verifyThat(lookup("#CreateViewTitle"), hasText(""));
     }
     
     private void enterValueInGui(String id, String value) {
