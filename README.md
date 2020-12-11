@@ -12,6 +12,7 @@
 
 [Definition of Done](https://github.com/tuomoart/ohtu-miniprojekti-ryhma14/blob/main/dokumentaatio/dod.md)
 
+[Loppuraportti](https://docs.google.com/document/d/1x1ccEIhbRHWxy_YAqzFKlG9TwX75CXQaW3RglGjGUxs/edit?usp=sharing)
 
 ## Ohjelman käynnistäminen
 
