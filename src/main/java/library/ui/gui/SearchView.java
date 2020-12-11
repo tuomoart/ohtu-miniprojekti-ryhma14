@@ -28,7 +28,7 @@ import org.kordamp.bootstrapfx.BootstrapFX;
  * @author hiira
  */
 public class SearchView {
-
+    private BorderPane mainLayout;
     private BorderPane content;
     private TextField searchBox;
     private Logic logic;
@@ -42,7 +42,7 @@ public class SearchView {
 
     public Scene createSearchScene() {
         // create main layout
-        BorderPane mainLayout = new BorderPane();
+        mainLayout = new BorderPane();
         mainLayout.setPadding(new Insets(10));
         mainLayout.setPrefSize(642,582);
 
@@ -55,7 +55,9 @@ public class SearchView {
         BorderPane.setMargin(mainLayout.getCenter(),new Insets(0,0,30,0));
 
         // create bottom bar
-        mainLayout.setBottom(getDeleteAndRead());
+        Region spacer = new Region();
+        spacer.setPrefHeight(32);
+        mainLayout.setBottom(spacer);
 
         // create the scene that will be returned
         Scene searchView = new Scene(mainLayout);
@@ -139,10 +141,14 @@ public class SearchView {
         ((BorderPane) content).setTop(getTipSplitMenu());
         BorderPane.setAlignment(((BorderPane) content).getTop(),Pos.CENTER);
         BorderPane.setMargin(((BorderPane) content).getTop(),new Insets(0,0,30,0));
-        ((BorderPane) content).setCenter(getSearchBox());
+        Region searchspacer = new Region();
+        searchspacer.setPrefSize(193,32);
+        ((BorderPane) content).setCenter(searchspacer);
         BorderPane.setAlignment(((BorderPane) content).getCenter(),Pos.CENTER);
         BorderPane.setMargin(((BorderPane) content).getCenter(),new Insets(0,0,30,0));
-        ((BorderPane) content).setBottom(createBookTable());
+        Region tablespacer = new Region();
+        tablespacer.setPrefSize(602,268);
+        ((BorderPane) content).setBottom(tablespacer);
         BorderPane.setAlignment(((BorderPane) content).getBottom(),Pos.CENTER);
         return content;
     }
@@ -160,7 +166,11 @@ public class SearchView {
         books.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // content.setCenter(createBookTable());
+                ((BorderPane) content).setCenter(getSearchBox());
+                BorderPane.setAlignment(((BorderPane) content).getCenter(),Pos.CENTER);
+                content.setBottom(createBookTable());
+                BorderPane.setAlignment(((BorderPane) content).getBottom(),Pos.CENTER);
+                mainLayout.setBottom(getDeleteAndRead());
             }
         });
         splitMenu.getItems().add(books);
