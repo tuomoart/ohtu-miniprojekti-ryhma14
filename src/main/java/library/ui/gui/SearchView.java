@@ -135,6 +135,7 @@ public class SearchView {
 
     private Label getTitle() {
         Label title = new Label("");
+        title.setId("SearchViewTitle");
         return title;
     }
 
@@ -255,6 +256,7 @@ public class SearchView {
     
     private Button getCreationButton() {
         Button creationButton = new Button("Lisää uusi lukuvinkki");
+        creationButton.setId("create");
         creationButton.getStyleClass().addAll("btn","btn-primary");
         creationButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

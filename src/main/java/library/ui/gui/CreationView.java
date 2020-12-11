@@ -170,7 +170,7 @@ public class CreationView {
     }
 
     private Label getTitle() {
-        Label title = new Label();
+        Label title = new Label("");
         title.setId("CreateViewTitle");
         return title;
     }
