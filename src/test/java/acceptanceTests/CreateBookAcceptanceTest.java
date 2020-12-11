@@ -102,6 +102,13 @@ public class CreateBookAcceptanceTest extends ApplicationTest {
         checkThatBookIsNotAdded(error, "MAOL", "", "", "", "1234567-89-0");
     }
     
+    @Test
+    public void userCanChangeToSearchView() {
+        clickOn("#search");
+        
+        verifyThat(lookup("#SearchViewTitle"), hasText(""));
+    }
+    
     private void checkThatBookGetsAdded(String name, String writer, String year, String pages, String isbn) {
         enterValuesForBook(name, writer, year, pages, isbn);
         clickAddInGui();
