@@ -44,7 +44,7 @@ public class SearchView {
         // create main layout
         mainLayout = new BorderPane();
         mainLayout.setPadding(new Insets(10));
-        mainLayout.setPrefSize(642,582);
+        mainLayout.setPrefSize(872,582);
 
         // create top bar
         mainLayout.setTop(getTopBar());
@@ -74,10 +74,13 @@ public class SearchView {
         table.setEditable(true);
 
         TableColumn authorCol = createTableColumn("Kirjailija", "author");
+        authorCol.setMinWidth(200);
         TableColumn titleCol = createTableColumn("Nimike", "title");
+        titleCol.setMinWidth(200);
         TableColumn pagesCol = createTableColumn("Sivumäärä", "pages");
         TableColumn yearCol = createTableColumn("Vuosi", "year");
         TableColumn isbnCol = createTableColumn("ISBN", "ISBN");
+        isbnCol.setMinWidth(130);
         TableColumn readCol = createTableColumn("Luettu", "read");
         
         authorCol.setId("authorCol");

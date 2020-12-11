@@ -53,7 +53,7 @@ public class CreationView {
         // create main layout
         mainLayout = new BorderPane();
         mainLayout.setPadding(new Insets(10));
-        mainLayout.setPrefSize(642,582);
+        mainLayout.setPrefSize(872,582);
 
         // create top bar for search, etc.
         Pane top = getTopBar();
@@ -231,7 +231,7 @@ public class CreationView {
     private Pane getBookCreationLayout() {
         Pane layout = new GridPane();
         ((GridPane) layout).setAlignment(Pos.TOP_CENTER);
-        ((GridPane) layout).setHgap(140);
+        ((GridPane) layout).setHgap(200);
         ((GridPane) layout).setVgap(5);
         for (int i = 0; i < tips.get("Kirja").size(); i++) {
             String infotype = tips.get("Kirja").get(i);
