@@ -59,6 +59,8 @@ public class DeleteBooksAcceptanceTest extends ApplicationTest {
         sovellus.getLogic().getDao().clearDatabase();
         addSomeBooks();
         moveToSearchView();
+        clickOn("#searchsplit");
+        clickOn("#searchsplitbook");
     }
     
     @After

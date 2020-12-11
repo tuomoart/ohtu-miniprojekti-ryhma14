@@ -155,6 +155,7 @@ public class SearchView {
 
     private SplitMenuButton getTipSplitMenu() {
         SplitMenuButton splitMenu = new SplitMenuButton();
+        splitMenu.setId("searchsplit");
         splitMenu.setPrefWidth(345);
         splitMenu.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -163,6 +164,7 @@ public class SearchView {
             }
         });
         MenuItem books = new MenuItem("Kirja");
+        books.setId("searchsplitbook");
         books.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
